@@ -79,8 +79,11 @@
 Изучите сожержимое файла console.tf. Откройте terraform console, выполните следующие задания. Для зачета предоставье необходимые команды и их вывод.
 
 1. Какой командой можно отобразить **второй** элемент списка test_list ?
-2. Какой командой можно отобразить значение ключа admin из map test_map ?
-3. Напишите выражение, результатом которого будет: "John is admin for stage server with 4 vcpu and 8 ram", используйте переменные test_list,test_map,servers
+2. Найдите длину списка test_list с помощью функции length(<имя переменной>)
+3. Какой командой можно отобразить значение ключа admin из map test_map ?
+4. Напишите interpolation выражение, результатом которого будет: "John is admin for production server based on ubuntu-20-04 with X vcpu, Y ram and Z virtual disks", используйте данные из переменных test_list, test_map, servers и функцию length() для подстановки.
+
+В качестве ответа пришлите команду и вывод.
 
 ------
 ### Правила приема работы
