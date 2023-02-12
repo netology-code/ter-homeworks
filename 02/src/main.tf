@@ -10,17 +10,19 @@ terraform {
     token  =  var.token
     cloud_id  = var.cloud_id
     folder_id = var.folder_id
-    zone      = "ru-central1-a"
+    zone      = var.default_zone
  }
 resource "yandex_vpc_network" "develop" {
-  name = "develop"
+  name = var.vpc_name
 }
 resource "yandex_vpc_subnet" "develop" {
-  name           = "develop"
-  zone           = "ru-central1-a"
+  name           = var.vpc_name
+  zone           = var.default_zone
   network_id     = yandex_vpc_network.develop.id
-  v4_cidr_blocks = ["10.0.1.0/24"]
+  v4_cidr_blocks = var.default_cidr
 }
+
+
 data "yandex_compute_image" "ubuntu" {
   family = "ubuntu-2004-lts"
 }
@@ -41,7 +43,13 @@ resource "yandex_compute_instance" "platform" {
     preemptible = true
   }
   network_interface {
-    subnet_id = yandex_vpc_subnet.example.id
+    subnet_id = yandex_vpc_subnet.develop.id
     nat       = true
   }
+
+  metadata = {
+    serial-port-enable = 1
+    ssh-keys           = "ubuntu:${var.vms_ssh_root_key}"
+  }
+
 }
