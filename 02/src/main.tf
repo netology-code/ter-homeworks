@@ -1,17 +1,3 @@
-terraform {
-  required_providers { 
-     yandex = {
-       source = "yandex-cloud/yandex"
-     }
-  }
-    required_version = ">=0.13"
-}
- provider "yandex" {
-    token  =  var.token
-    cloud_id  = var.cloud_id
-    folder_id = var.folder_id
-    zone      = var.default_zone
- }
 resource "yandex_vpc_network" "develop" {
   name = var.vpc_name
 }
@@ -30,9 +16,9 @@ resource "yandex_compute_instance" "platform" {
   name        = "netology-develop-platform-web"
   platform_id = "standard-v1"
   resources {
-    cores  = 2
-    memory = 1
-    core_fraction = 20
+    cores         = 1
+    memory        = 1
+    core_fraction = 5
   }
   boot_disk {
     initialize_params {
