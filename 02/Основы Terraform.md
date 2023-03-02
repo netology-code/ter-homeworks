@@ -11,6 +11,7 @@
 
 1. Зарегистрирован аккаунт в Yandex Cloud. Использован промокод на грант.
 2. установлен инструмент yandex cli
+3. Исходный код для выполнения задания расположен в директории **02/src**.
 
 ------
 
@@ -77,9 +78,8 @@
 1. Какой командой можно отобразить **второй** элемент списка test_list ?
 2. Найдите длину списка test_list с помощью функции length(<имя переменной>)
 3. Какой командой можно отобразить значение ключа admin из map test_map ?
-4. Напишите interpolation выражение, результатом которого будет: "John is admin for production server based on ubuntu-20-04 with X vcpu, Y ram and Z virtual disks", используйте данные из переменных test_list, test_map, servers и функцию length() для подстановки значений.
+4. Напишите interpolation выражение, результатом которого будет: "John is admin for production server based on OS ubuntu-20-04 with X vcpu, Y ram and Z virtual disks", используйте данные из переменных test_list, test_map, servers и функцию length() для подстановки значений.
 
-В качестве ответа пришлите команду и вывод.
 
 ------
 ### Правила приема работы
