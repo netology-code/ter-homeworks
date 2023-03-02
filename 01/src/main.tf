@@ -1,43 +1,38 @@
 terraform {
-  required_providers { 
-      docker = {
-      source = "kreuzwerker/docker"
+  required_providers {
+    docker = {
+      source  = "kreuzwerker/docker"
       version = "~> 3.0.1"
-      }
+    }
   }
-    required_version =   ">=0.13" /*Многострочный комментарий.
+  required_version = ">=0.13" /*Многострочный комментарий.
  Требуемая версия terraform */
 }
 provider "docker" {}
 
 #однострочный комментарий
 
-resource "random_password"  "random_string" {
-  length = 16
-  special = false
-  min_upper = 1
-  min_lower = 1
+resource "random_password" "random_string" {
+  length      = 16
+  special     = false
+  min_upper   = 1
+  min_lower   = 1
   min_numeric = 1
 }
 
-resource "local_file"  "from_random" {
-  content    = random_password.random_string.result
-  filename = "/tmp/test.txt"
+/*
+resource "docker_image" {
+  name         = "nginx:latest"
+  keep_locally = true
 }
 
- /*
-resource  "docker_image"   {
-  name           =  "nginx:latest"
-        keep_locally  = true
-}
+resource "docker_container" "1nginx" {
+  image = docker_image.nginx.image_id
+  name  = "example_${random_password.random_string.result}"
 
-  resource  "docker_container"   "1nginx"   {
-    image =   docker_image.nginx.image_id
-    name    = "example_${random_password.random_string.result}"
-
-      ports {
-      internal = 80
-    external  =  8000
+  ports {
+    internal = 80
+    external = 8000
   }
 }
- */
+*/
