@@ -9,9 +9,9 @@
 Любые вопросы по решению задач задавайте в чате курса.
 
 
-1. [Ввдение в Terraform](01/hw-01.md)
+1. [Ввдение в Terraform](https://github.com/netology-code/ter-homeworks/blob/main/01/%D0%92%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5_%D0%B2_Terraform.md)
 
-2. [Основы Terraform. Yandex cloud]()
+2. [Основы Terraform. Yandex Cloud](02/hw-02.md)
 
 3. []()
 
