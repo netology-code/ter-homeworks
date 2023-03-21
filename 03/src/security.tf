@@ -32,8 +32,8 @@ variable "security_group_ingress" {
 }
 
 
-variable "security_group_eggress" {
-  description = "secrules eggress"
+variable "security_group_egress" {
+  description = "secrules egress"
   type = list(object(
     {
       protocol       = string
@@ -73,7 +73,7 @@ resource "yandex_vpc_security_group" "example" {
   }
 
   dynamic "egress" {
-    for_each = var.security_group_eggress
+    for_each = var.security_group_egress
     content {
       protocol       = lookup(egress.value, "protocol", null)
       description    = lookup(egress.value, "description", null)
