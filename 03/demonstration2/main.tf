@@ -89,7 +89,7 @@ depends_on = [yandex_compute_instance.example]
 
 #Костыль!!! Даем ВМ время на первый запуск. Лучше выполнить это через wait_for port 22 на стороне ansible
  provisioner "local-exec" {
-    command = "sleep 20"
+    command = "sleep 30"
   }
 
 #Запуск ansible-playbook
