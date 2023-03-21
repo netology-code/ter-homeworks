@@ -23,22 +23,21 @@ locals{
 #> type([1,2,3])
 
 #> concat( [ 1,2,3 ], [ 4,5,6 ] )
-#> type(concat( [ 1,2,3 ], [ 4,5,6 ] ))
 
 #> type(tolist( [ 1,2,3 ]) )
 #> type(tolist([true, false]))
 #> type(tolist( [ true,2,3,"a" ]) )
 
-#> merge( { "1": "A " }, { "2": "B" } )
+#> merge( { "1": "A ","2": "B" }, { "3": "C", "4": "D" } )
 
 
 
-#> coalesce("",var.empty,1,"a")
-#> coalesce("",var.empty,"a",1)
-#> coalesce("",var.empty)
+#> coalesce("", var.empty, 1, "a")
+#> coalesce("", var.empty, "a", 1)
+#> coalesce("", var.empty)
 
-#> contains(list("q","w","e"), "w") 
-#> contains(list("q","e"), "w") 
+#> contains(tolist(["q","w","e"]), "w")
+#> contains(tolist(["q","e"]), "w")
 
 #> try(local.test_list[2], "develop")
 #> try(local.test_list[9], "develop")
