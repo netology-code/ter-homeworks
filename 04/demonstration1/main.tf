@@ -39,8 +39,16 @@ module "test-vm" {
   instance_count  = 2
   image_family    = "ubuntu-2004-lts"
   public_ip       = true
-  metadata        = {
-    serial-port-enable = 1
-    ssh-keys           = "ubuntu:${var.public_key}"
+  
+  metadata = {
+      user-data          = data.template_file.cloudinit.rendered #Для демонстрации №3
+      serial-port-enable = 1
   }
+
 }
+
+#Пример передачи cloud-config в ВМ
+data "template_file" "cloudinit" {
+ template = file("./cloud-init.yml")
+}
+

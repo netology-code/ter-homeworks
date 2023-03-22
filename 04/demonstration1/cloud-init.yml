@@ -1,0 +1,14 @@
+#cloud-init.yml
+users:
+ - name: ubuntu
+   groups: sudo
+   shell: /bin/bash
+   sudo: ['ALL=(ALL) NOPASSWD:ALL']
+   ssh-authorized-keys: ssh-ed25519 AAAAC
+package_update: true
+packages_upgrade: true
+packages:
+ - vim
+runcmd:
+ - ufw allow 22
+ - echo "y" | ufw enable
