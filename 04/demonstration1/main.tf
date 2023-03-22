@@ -47,7 +47,7 @@ module "test-vm" {
 
 }
 
-#Пример передачи cloud-config в ВМ
+#Пример передачи cloud-config в ВМ для демонстрации №3
 data "template_file" "cloudinit" {
  template = file("./cloud-init.yml")
 }
