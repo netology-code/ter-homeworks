@@ -63,8 +63,8 @@ variable "my_object" {
 #Пример сложных object:
 
 # object(map(list)) представляет собой переменную типа объекта, где каждое значение является картой списков
-
-variable "user_contacts" {
+# > var.user_contacts1["john"].email[1]  Вот так можно извлечь второй по списку email для пользователя john.
+variable "user_contacts1" {
   type = object(map(list(string)))
   default = {
     john = {
@@ -81,9 +81,9 @@ variable "user_contacts" {
 # map(object(map(list(tuple([string, string, bool]))))) представляет собой переменную типа карты, где каждое значение является объектом, содержащим карты списков кортежей.
 # структуру данных, которая содержит дополнительную информацию о каждом контакте, например, дату последнего обновления контакта и флаг, указывающий, является ли контакт основным (primary).
 
-# > var.user_contacts["john"].email[1].value  Вот так можно извлечь второй по списку email для пользователя john.
+# > var.user_contacts2["john"].email[1].value  Вот так можно извлечь второй по списку email для пользователя john.
 
-variable "user_contacts" {
+variable "user_contacts2" {
   type = map(object(map(list(tuple([string, string, bool])))))
   default = {
     "john" = {
