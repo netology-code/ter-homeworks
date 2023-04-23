@@ -98,3 +98,6 @@ variable "user_contacts" {
     }
   }
 }
+
+#Так же показать на примере первой демонстрации обращение к ресурсам. Можно поискать конкретные значения (id, name, ip)
+#> resource.yandex_compute_instance.example
