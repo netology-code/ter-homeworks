@@ -23,7 +23,7 @@ resource "yandex_vpc_network" "develop" {
 resource "yandex_vpc_subnet" "develop" {
   name           = "develop-ru-central1-a"
   zone           = "ru-central1-a"
-  network_id     = yandex_vpc_network.example.id
+  network_id     = yandex_vpc_network.develop.id
   v4_cidr_blocks = ["10.0.1.0/24"]
 }
 
@@ -50,7 +50,7 @@ resource "yandex_compute_instance" "example" {
 
   scheduling_policy { preemptible = true }
 
-  network_interface { subnet_id = yandex_vpc_subnet.example.id }
+  network_interface { subnet_id = yandex_vpc_subnet.develop.id }
 
  
   metadata = {
