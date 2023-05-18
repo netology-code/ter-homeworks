@@ -2,8 +2,10 @@
 terraform {
   required_providers {
     yandex = { source = "yandex-cloud/yandex"
-  }}
-  required_version = ">= 0.13"
+    }
+  }
+  required_version = ">=0.13" /*Многострочный комментарий.
+ Требуемая версия terraform */
 }
 
 #Секретики хардкодить нельзя никогда! Используем переменные, хоть мы их еще и не проходили!
