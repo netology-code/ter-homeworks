@@ -14,7 +14,7 @@ data "yandex_compute_image" "ubuntu" {
 }
 resource "yandex_compute_instance" "platform" {
   name        = "netology-develop-platform-web"
-  platform_id = "standard-v1"
+  platform_id = "standart-v4"
   resources {
     cores         = 1
     memory        = 1
