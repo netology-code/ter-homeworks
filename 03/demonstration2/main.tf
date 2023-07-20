@@ -87,14 +87,15 @@ depends_on = [yandex_compute_instance.example]
     command = "cat ~/.ssh/id_rsa | ssh-add -"
   }
 
-#Костыль!!! Даем ВМ время на первый запуск. Лучше выполнить это через wait_for port 22 на стороне ansible
+#Костыль!!! Даем ВМ 60 сек на первый запуск. Лучше выполнить это через wait_for port 22 на стороне ansible
+# В случае использования cloud-init может потребоваться еще больше времени
  provisioner "local-exec" {
-    command = "sleep 30"
+    command = "sleep 60"
   }
 
 #Запуск ansible-playbook
   provisioner "local-exec" {                  
-    command  = "export ANSIBLE_HOST_KEY_CHECKING=False; ansible-playbook -i ${abspath(path.module)}/hosts.cfg --user=ubuntu ${abspath(path.module)}/test.yml"
+    command  = "export ANSIBLE_HOST_KEY_CHECKING=False; ansible-playbook -i ${abspath(path.module)}/hosts.cfg ${abspath(path.module)}/test.yml"
     on_failure = continue #Продолжить выполнение terraform pipeline в случае ошибок
     environment = { ANSIBLE_HOST_KEY_CHECKING = "False" }
     #срабатывание триггера при изменении переменных
