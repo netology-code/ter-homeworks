@@ -8,3 +8,4 @@
 
 # own secret vars store.
 personal.auto.tfvars
+virtualbox.box
