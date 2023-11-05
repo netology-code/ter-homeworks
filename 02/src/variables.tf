@@ -43,7 +43,7 @@ variable "vpc_name" {
 variable "common_metadata" {
   type = map(string)
   default = {
-    ssh-keys           = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGq5e3MvyMP52cdWS0Xcg97h3cF5SE2uSVifDBB7QWCX mid@mid-desktop"
+    ssh-keys           = "ubuntu:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGq5e3MvyMP52cdWS0Xcg97h3cF5SE2uSVifDBB7QWCX mid@mid-desktop"
     serial-port-enable = "1"
   }
 }
