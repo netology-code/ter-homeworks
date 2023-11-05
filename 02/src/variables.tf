@@ -1,3 +1,9 @@
+variable "vm_family" {
+  type = string
+  default = "ubuntu-2004-lts"
+  description = "image"
+}
+
 ###cloud vars
 variable "token" {
   type        = string
@@ -31,11 +37,14 @@ variable "vpc_name" {
   description = "VPC network & subnet name"
 }
 
-
 ###ssh vars
 
-variable "vms_ssh_root_key" {
-  type        = string
-  default     = "<your_ssh_ed25519_key>"
-  description = "ssh-keygen -t ed25519"
+# Common metadata
+variable "common_metadata" {
+  type = map(string)
+  default = {
+    ssh-keys           = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGq5e3MvyMP52cdWS0Xcg97h3cF5SE2uSVifDBB7QWCX mid@mid-desktop"
+    serial-port-enable = "1"
+  }
 }
+
