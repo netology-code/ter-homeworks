@@ -12,11 +12,11 @@ resource "yandex_vpc_subnet" "develop" {
 data "yandex_compute_image" "ubuntu" {
   family = "ubuntu-2004-lts"
 }
-resource "yandex_compute_instance" "platform" {
+resource "yandex_compute_instance" "vm-1" {
   name        = "netology-develop-platform-web"
-  platform_id = "standart-v4"
+  platform_id = "standard-v1"
   resources {
-    cores         = 1
+    cores         = 2
     memory        = 1
     core_fraction = 5
   }
@@ -26,7 +26,7 @@ resource "yandex_compute_instance" "platform" {
     }
   }
   scheduling_policy {
-    preemptible = true
+    preemptible = false
   }
   network_interface {
     subnet_id = yandex_vpc_subnet.develop.id
