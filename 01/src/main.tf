@@ -1,14 +1,14 @@
-terraform {
-  required_providers {
-    docker = {
-      source  = "kreuzwerker/docker"
-      version = "~> 3.0.1"
-    }
-  }
-  required_version = ">=1.5.1" /*Многострочный комментарий.
- Требуемая версия terraform */
-}
-provider "docker" {}
+#terraform {
+  #required_providers {
+    #docker = {
+      #source  = "kreuzwerker/docker"
+      #version = "~> 3.0.1"
+    #}
+  #}
+  #required_version = ">=1.5.1" /*Многострочный комментарий.
+ #Требуемая версия terraform */
+#}
+#provider "docker" {}
 
 #однострочный комментарий
 
