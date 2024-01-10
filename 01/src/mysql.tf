@@ -29,7 +29,7 @@ resource "random_password" "MYSQL_PASSWORD" {
 resource "docker_image" "mysql" {
   name         = "mysql:8"
   keep_locally = true
-  context = "context"
+  context = "tcp://158.160.25.132:2375"
 }
 
 resource "docker_container" "mysql_container" {
