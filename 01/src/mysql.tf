@@ -8,7 +8,11 @@ terraform {
   required_version = ">=1.5.1"
 }
 
-provider "docker" {}
+
+provider "docker" {
+  host     = "tcp://158.160.25.132:2375"
+  ssh_opts = ["-o", "StrictHostKeyChecking=no", "-o", "UserKnownHostsFile=/dev/null"]
+}
 
 resource "random_password" "MYSQL_ROOT_PASSWORD" {
   length      = 16
@@ -29,9 +33,6 @@ resource "random_password" "MYSQL_PASSWORD" {
 resource "docker_image" "mysql" {
   name         = "mysql:8"
   keep_locally = true
-  build {
-    context = "context"
-  }
 }
 
 resource "docker_container" "mysql_container" {
