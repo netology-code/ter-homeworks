@@ -7,6 +7,7 @@ terraform {
   }
   required_version = ">=1.5.1"
 }
+
 provider "docker" {}
 
 resource "random_password" "MYSQL_ROOT_PASSWORD" {
@@ -28,21 +29,21 @@ resource "random_password" "MYSQL_PASSWORD" {
 resource "docker_image" "mysql" {
   name         = "mysql:8"
   keep_locally = true
-  context = "context"
 }
 
 resource "docker_container" "mysql_container" {
   image = docker_image.mysql.image_id
-  name  = "hello_world"
-  env = MYSQL_ROOT_PASSWORD="${random_password.MYSQL_ROOT_PASSWORD.result}"
-  env = MYSQL_DATABASE=wordpress
-  env = MYSQL_USER=wordpress
-  env = MYSQL_PASSWORD="${random_password.MYSQL_PASSWORD.result}"
-  env = MYSQL_ROOT_HOST="%"
-
+  name  = "mysql_instance"
+  env = [
+    "MYSQL_ROOT_PASSWORD=${random_password.MYSQL_ROOT_PASSWORD.result}",
+    "MYSQL_DATABASE=wordpress",
+    "MYSQL_USER=wordpress",
+    "MYSQL_PASSWORD=${random_password.MYSQL_PASSWORD.result}",
+    "MYSQL_ROOT_HOST=%"
+  ]
 
   ports {
     internal = 3306
-    external = 127.0.0.1:3306
+    external = 3306
   }
 }
