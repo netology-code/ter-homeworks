@@ -1,6 +1,6 @@
 terraform {
   required_providers {}
-  required_version = ">=0.13"
+  required_version = "=1.5.7"
 }
 
 resource "random_password" "any_uniq_name" {
@@ -11,6 +11,9 @@ resource "local_file" "from_resourse" {
   content  = random_password.any_uniq_name.result
   filename = "/tmp/from_resource.txt"
 }
+
+
+
 
 data "local_file" "version" {
   filename = "/proc/version"
