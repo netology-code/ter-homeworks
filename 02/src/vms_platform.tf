@@ -1,13 +1,14 @@
+#WEB config
 variable "vm_web_" {
   type = object({
     #name         = string
     platform_id  = string
     zone         = string
-    resources = object({
-      cores         = number
-      memory        = number
-      core_fraction = number
-    })
+    #resources = object({
+      #cores         = number
+      #memory        = number
+      #core_fraction = number
+    #})
     scheduling_policy = object({
       preemptible = bool
     })
@@ -22,11 +23,11 @@ variable "vm_web_" {
     #name         = "netology-develop-platform-web"
     platform_id  = "standard-v1"
     zone         = "ru-central1-a"
-    resources = {
-      cores         = 2
-      memory        = 1
-      core_fraction = 5
-    }
+    #resources = {
+      #cores         = 2
+      #memory        = 1
+      #core_fraction = 5
+    #}
     scheduling_policy = {
       preemptible = true
     }
@@ -40,6 +41,7 @@ variable "vm_web_" {
   description = "Configuration WEB"
 }
 
+#DB config
 variable "vm_db_" {
   type = object({
     #name         = string
@@ -128,7 +130,7 @@ variable "instance" {
     db   = "db"
     web  = "web"
   }
-  description = "Instances name"
+  description = "Instances names"
 }
 
 #variable "vms_ssh_public_root_key" {
