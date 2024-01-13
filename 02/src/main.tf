@@ -2,10 +2,6 @@ resource "yandex_vpc_network" "develop" {
   name = var.vpc_name
 }
 
-resource "yandex_vpc_network" "develop-2" {
-  name = var.vpc_name
-}
-
 resource "yandex_vpc_subnet" "develop" {
   name           = var.vpc_name
   zone           = var.default_zone
@@ -14,9 +10,9 @@ resource "yandex_vpc_subnet" "develop" {
 }
 
 resource "yandex_vpc_subnet" "develop-2" {
-  name           = var.vpc_name
+  name           = var.vpc_name_2
   zone           = var.zone_b
-  network_id     = yandex_vpc_network.develop-2.id
+  network_id     = yandex_vpc_network.develop.id
   v4_cidr_blocks = var.default_cidr
 }
 
