@@ -19,7 +19,7 @@ resource "yandex_compute_instance" "platform" {
   zone = "ru-central1-a"
 
   resources {
-    cores         = 1
+    cores         = 2
     memory        = 1
     core_fraction = 5
   }
