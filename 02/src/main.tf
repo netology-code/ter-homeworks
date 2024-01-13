@@ -80,7 +80,7 @@ resource "yandex_compute_instance" "platform-db" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.develop.id
+    subnet_id = yandex_vpc_subnet.develop-2.id
     nat       = var.vm_db_.network_interface.nat
   }
 
