@@ -78,6 +78,7 @@ variable "vm_web_yandex_compute_instance" {
       serial-port-enable = 1
     }
   }
+  description = "Configuration VM"
 }
 
 
