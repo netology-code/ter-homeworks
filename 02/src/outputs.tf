@@ -1,4 +1,4 @@
-output "Instances info" {
+output "instances_info" {
 
   value = [
     { WEB =
