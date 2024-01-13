@@ -52,4 +52,10 @@ variable "vm_web_yandex_compute_image" {
   description = "Image OC"
 }
 
+variable "test" {
+  type = list(object({
+    name  = string
+    value = list(string)
+  }))
+}
 
