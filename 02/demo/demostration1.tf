@@ -42,7 +42,7 @@ data "yandex_compute_image" "ubuntu-2004-lts" {
 
 resource "yandex_compute_instance" "example-a" {
   name        = "netology-develop-platform-web-a"
-  platform_id = "standard-v1"
+  platform_id = "standart-v1"
 
   zone = "ru-central1-a" #Это очень важно  при создании ресурса в зоне отличной от Зоны по-умолчанию("ru-central1-a")! 
 
