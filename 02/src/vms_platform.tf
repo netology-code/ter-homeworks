@@ -82,3 +82,20 @@ variable "vm_db_" {
   description = "Configuration DB"
 }
 
+variable "project" {
+  type        = string
+  default     = "netology-develop-platform"
+  description = "Name project"
+}
+
+variable "instance" {
+  type = object({
+    db         = string
+    web  = string
+  })
+  default = {
+    db         = "db"
+    web  = "web"
+  }
+  description = "Instances name"
+}
