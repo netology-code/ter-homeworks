@@ -34,9 +34,9 @@ resource "yandex_compute_instance" "platform" {
   zone = var.vm_web_.zone
 
   resources {
-    cores         = var.vm_web_.resources.cores
-    memory        = var.vm_web_.resources.memory
-    core_fraction = var.vm_web_.resources.core_fraction
+    cores         = var.vms_resources.web.cores
+    memory        = var.vms_resources.web.memory
+    core_fraction = var.vms_resources.web.core_fraction
   }
 
   boot_disk {
@@ -69,9 +69,9 @@ resource "yandex_compute_instance" "platform-db" {
   zone = var.vm_db_.zone
 
   resources {
-    cores         = var.vm_db_.resources.cores
-    memory        = var.vm_db_.resources.memory
-    core_fraction = var.vm_db_.resources.core_fraction
+    cores         = var.vms_resources.db.cores
+    memory        = var.vms_resources.db.memory
+    core_fraction = var.vms_resources.db.core_fraction
   }
 
   boot_disk {
