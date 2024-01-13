@@ -63,7 +63,7 @@ variable "vm_db_" {
   default = {
     name         = "netology-develop-platform-db"
     platform_id  = "standard-v1"
-    zone         = "ru-central1-b"
+    zone         = "ru-central1-a"
     resources = {
       cores         = 2
       memory        = 2
