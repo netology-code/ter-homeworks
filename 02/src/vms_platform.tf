@@ -45,11 +45,11 @@ variable "vm_db_" {
     name         = string
     platform_id  = string
     zone         = string
-    resources = object({
-      cores         = number
-      memory        = number
-      core_fraction = number
-    })
+    #resources = object({
+      #cores         = number
+      #memory        = number
+      #core_fraction = number
+    #})
     scheduling_policy = object({
       preemptible = bool
     })
@@ -64,11 +64,11 @@ variable "vm_db_" {
     name         = "netology-develop-platform-db"
     platform_id  = "standard-v1"
     zone         = "ru-central1-b"
-    resources = {
-      cores         = 2
-      memory        = 2
-      core_fraction = 20
-    }
+    #resources = {
+      #cores         = 2
+      #memory        = 2
+      #core_fraction = 20
+    #}
     scheduling_policy = {
       preemptible = true
     }
