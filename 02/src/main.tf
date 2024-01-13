@@ -13,15 +13,15 @@ data "yandex_compute_image" "ubuntu" {
   family = var.vm_web_yandex_compute_image
 }
 resource "yandex_compute_instance" "platform" {
-  name        = var.vm_web_yandex_compute_instance.name
-  platform_id = var.vm_web_yandex_compute_instance.platform_id
+  name        = var.vm_web.name
+  platform_id = var.vm_web.platform_id
 
-  zone = var.vm_web_yandex_compute_instance.zone
+  zone = var.vm_web.zone
 
   resources {
-    cores         = var.vm_web_yandex_compute_instance.resources.cores
-    memory        = var.vm_web_yandex_compute_instance.resources.memory
-    core_fraction = var.vm_web_yandex_compute_instance.resources.core_fraction
+    cores         = var.vm_web.resources.cores
+    memory        = var.vm_web.resources.memory
+    core_fraction = var.vm_web.resources.core_fraction
   }
 
   boot_disk {
@@ -31,16 +31,16 @@ resource "yandex_compute_instance" "platform" {
   }
 
   scheduling_policy {
-    preemptible = var.vm_web_yandex_compute_instance.scheduling_policy.preemptible
+    preemptible = var.vm_web.scheduling_policy.preemptible
   }
 
   network_interface {
     subnet_id = yandex_vpc_subnet.develop.id
-    nat       = var.vm_web_yandex_compute_instance.network_interface.nat
+    nat       = var.vm_web.network_interface.nat
   }
 
   metadata = {
-    serial-port-enable = var.vm_web_yandex_compute_instance.metadata.serial-port-enable
+    serial-port-enable = var.vm_web.metadata.serial-port-enable
     ssh-keys           = "ubuntu:${var.vms_ssh_public_root_key}"
   }
 
