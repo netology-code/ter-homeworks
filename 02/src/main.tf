@@ -49,7 +49,7 @@ resource "yandex_compute_instance" "platform" {
 }
 
 #DB
-resource "yandex_compute_instance" "platform" {
+resource "yandex_compute_instance" "platform-db" {
   name        = var.vm_db_.name
   platform_id = var.vm_db_.platform_id
 
