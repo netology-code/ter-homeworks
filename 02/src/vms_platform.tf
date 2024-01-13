@@ -90,11 +90,11 @@ variable "project" {
 
 variable "instance" {
   type = object({
-    db         = string
+    db   = string
     web  = string
   })
   default = {
-    db         = "db"
+    db   = "db"
     web  = "web"
   }
   description = "Instances name"
