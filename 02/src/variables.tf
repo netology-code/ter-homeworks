@@ -33,6 +33,48 @@ variable "vpc_name" {
   description = "VPC network & subnet name"
 }
 
+variable "vm_web_yandex_compute_image" {
+  type        = string
+  default     = "ubuntu-2004-lts"
+  description = "Image OC"
+}
+
+variable "vm_web_yandex_compute_instance" {
+  type = object({
+    name         = string
+    platform_id  = string
+    zone         = string
+    resources = object({
+      cores         = number
+      memory        = number
+      core_fraction = number
+    })
+    scheduling_policy = object({
+      preemptible = bool
+    })
+    network_interface = object({
+      nat = bool
+    })
+
+  })
+  default = {
+    name         = "netology-develop-platform-web"
+    platform_id  = "standard-v1"
+    zone         = "ru-central1-a"
+    resources = {
+      cores         = 2
+      memory        = 1
+      core_fraction = 5
+    }
+    scheduling_policy = {
+      preemptible = true
+    }
+     network_interface = {
+       nat = true
+     }
+  }
+}
+
 
 ###ssh vars
 
