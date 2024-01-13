@@ -53,33 +53,27 @@ variable "vm_web_yandex_compute_image" {
 }
 
 variable "test" {
-  type = list(object({
-    name   = string
-    values = list(string)
-  }))
   default = [
     {
-      name   = ""
-      values = [
-        "",
-        "",
+      dev1 = [
+        "c",
+        "10.0.1.7",
       ]
     },
     {
-      name   = ""
-      values = [
-        "",
-        "",
+      dev2 = [
+        "ssh -o 'StrictHostKeyChecking=no' ubuntu@84.252.140.88",
+        "10.0.2.29",
       ]
     },
     {
-      name   = ""
-      values = [
-        "",
-        "",
+      prod1 = [
+        "ssh -o 'StrictHostKeyChecking=no' ubuntu@51.250.2.101",
+        "10.0.1.30",
       ]
-    }
+    },
   ]
 }
+
 
 
