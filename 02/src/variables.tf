@@ -59,24 +59,24 @@ variable "test" {
   }))
   default = [
     {
-      name   = "dev1"
+      name   = ""
       values = [
-        "c",
-        "10.0.1.7",
+        "",
+        "",
       ]
     },
     {
-      name   = "dev2"
+      name   = ""
       values = [
-        "ssh -o 'StrictHostKeyChecking=no' ubuntu@84.252.140.88",
-        "10.0.2.29",
+        "",
+        "",
       ]
     },
     {
-      name   = "prod1"
+      name   = ""
       values = [
-        "ssh -o 'StrictHostKeyChecking=no' ubuntu@51.250.2.101",
-        "10.0.1.30",
+        "",
+        "",
       ]
     }
   ]
