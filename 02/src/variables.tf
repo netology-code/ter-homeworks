@@ -55,7 +55,9 @@ variable "vm_web_yandex_compute_instance" {
     network_interface = object({
       nat = bool
     })
-
+    metadata = object({
+      serial-port-enable = number
+    })
   })
   default = {
     name         = "netology-develop-platform-web"
@@ -72,6 +74,9 @@ variable "vm_web_yandex_compute_instance" {
      network_interface = {
        nat = true
      }
+    metadata = {
+      serial-port-enable = 1
+    }
   }
 }
 
