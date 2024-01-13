@@ -123,3 +123,21 @@ variable "instance" {
   }
   description = "Instances name"
 }
+
+# SSH
+
+variable "metadata" {
+  type = map
+  default = {
+    serial-port-enable = 1
+    ssh-keys = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJXrG37ahpXCptSBiQG4ukIF6X+Xm6NyY0zlsUlXn0DX root@docker"
+  }
+}
+
+
+
+#variable "vms_ssh_public_root_key" {
+  #type        = string
+  #default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJXrG37ahpXCptSBiQG4ukIF6X+Xm6NyY0zlsUlXn0DX root@docker"
+  #description = "ssh-keygen -t ed25519"
+#}

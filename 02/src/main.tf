@@ -90,8 +90,8 @@ resource "yandex_compute_instance" "platform-db" {
   }
 
   metadata = {
-    serial-port-enable = var.vm_db_.metadata.serial-port-enable
-    ssh-keys           = "ubuntu:${var.vms_ssh_public_root_key}"
+    serial-port-enable = var.metadata.serial-port-enable
+    ssh-keys           = "ubuntu:${var.metadata.ssh-keys}"
   }
 
 }
