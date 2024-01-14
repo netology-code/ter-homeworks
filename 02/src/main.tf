@@ -95,4 +95,4 @@ data "yandex_compute_image" "ubuntu" {
 #    ssh-keys           = "ubuntu:${var.metadata.ssh-keys}"
 #  }
 
-}
+#}
