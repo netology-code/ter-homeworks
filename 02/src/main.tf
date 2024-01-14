@@ -3,9 +3,9 @@ resource "yandex_vpc_network" "develop" {
   name = var.vpc_name
 }
 
-#resource "yandex_vpc_network" "develop-2" {
-#  name = var.vpc_name_2
-#}
+resource "yandex_vpc_network" "develop-2" {
+  name = var.vpc_name_2
+}
 
 #resource "yandex_vpc_subnet" "develop" {
 #  name           = var.vpc_name
@@ -63,36 +63,36 @@ resource "yandex_compute_instance" "platform" {
 }
 #
 ##DB
-#resource "yandex_compute_instance" "platform-db" {
-#  name        = local.db_name
-#  platform_id = var.vm_db_.platform_id
-#
-#  zone = var.vm_db_.zone
-#
-#  resources {
-#    cores         = var.vms_resources.db.cores
-#    memory        = var.vms_resources.db.memory
-#    core_fraction = var.vms_resources.db.core_fraction
-#  }
-#
-#  boot_disk {
-#    initialize_params {
-#      image_id = data.yandex_compute_image.ubuntu.image_id
-#    }
-#  }
-#
-#  scheduling_policy {
-#    preemptible = var.vm_db_.scheduling_policy.preemptible
-#  }
-#
-#  network_interface {
-#    subnet_id = yandex_vpc_subnet.nat_db.id
-#    nat       = true
-#  }
-#
-#  metadata = {
-#    serial-port-enable = var.metadata.serial-port-enable
-#    ssh-keys           = "ubuntu:${var.metadata.ssh-keys}"
-#  }
+resource "yandex_compute_instance" "platform-db" {
+  name        = local.db_name
+  platform_id = var.vm_db_.platform_id
 
-#}
+  zone = var.vm_db_.zone
+
+  resources {
+    cores         = var.vms_resources.db.cores
+    memory        = var.vms_resources.db.memory
+    core_fraction = var.vms_resources.db.core_fraction
+  }
+
+  boot_disk {
+    initialize_params {
+      image_id = data.yandex_compute_image.ubuntu.image_id
+    }
+  }
+
+  scheduling_policy {
+    preemptible = var.vm_db_.scheduling_policy.preemptible
+  }
+
+  network_interface {
+    subnet_id = yandex_vpc_subnet.nat_db.id
+    nat       = true
+  }
+
+  metadata = {
+    serial-port-enable = var.metadata.serial-port-enable
+    ssh-keys           = "ubuntu:${var.metadata.ssh-keys}"
+  }
+
+}
