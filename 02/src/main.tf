@@ -3,9 +3,9 @@ resource "yandex_vpc_network" "develop" {
   name = var.vpc_name
 }
 
-resource "yandex_vpc_network" "develop-2" {
-  name = var.vpc_name_2
-}
+#resource "yandex_vpc_network" "develop-2" {
+#  name = var.vpc_name_2
+#}
 
 #resource "yandex_vpc_subnet" "develop" {
 #  name           = var.vpc_name
