@@ -53,19 +53,30 @@ variable "vm_web_yandex_compute_image" {
 }
 
 #nat
-
-variable "test_nat_gateway" {
+#WEB
+variable "test_nat_gateway_web" {
   type = string
-  default = "test-nat"
+  default = "test-nat-web"
   description = "for nat test"
 }
 
-variable "route_table_name" {
+variable "route_table_name_web" {
   type = string
-  default = "test_table"
+  default = "test_table_web"
 }
 
+#DB
+variable "test_nat_gateway_DB" {
+  type = string
+  default = "test-nat-db"
+  description = "for web"
+}
 
+variable "route_table_name_DB" {
+  type = string
+  default = "test_table_db"
+  description = "for db"
+}
 
 
 
