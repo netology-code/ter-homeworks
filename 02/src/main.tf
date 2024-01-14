@@ -7,7 +7,7 @@ resource "yandex_vpc_network" "develop-2" {
   name = var.vpc_name_2
 }
 
-Resources sub_network without nat
+#Resources sub_network without nat
 resource "yandex_vpc_subnet" "develop" {
   name           = var.vpc_name
   zone           = var.default_zone
@@ -56,7 +56,7 @@ resource "yandex_compute_instance" "platform" {
 #    nat       = false
 #  }
 
-   network for subnet without nat
+   #network for subnet without nat
   network_interface {
     subnet_id = yandex_vpc_subnet.develop.id
     nat       = var.vm_web_.network_interface.nat
@@ -98,7 +98,7 @@ resource "yandex_compute_instance" "platform-db" {
 #    nat       = false
 #  }
 
-  network for subnet without nat
+  #network for subnet without nat
   network_interface {
     subnet_id = yandex_vpc_subnet.develop-2.id
     nat       = var.vm_db_.network_interface.nat
