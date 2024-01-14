@@ -31,9 +31,9 @@ resource "yandex_vpc_route_table" "rt_web" {
 #DB
 resource "yandex_vpc_subnet" "nat_db" {
   folder_id      = var.folder_id
-  name           = var.vpc_name
+  name           = var.vpc_name_2
   v4_cidr_blocks = var.default_cidr
-  zone           = var.default_zone
+  zone           = var.zone_b
   network_id     = yandex_vpc_network.develop-2.id
   route_table_id = yandex_vpc_route_table.rt_db.id
 }
