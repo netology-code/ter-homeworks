@@ -7,20 +7,20 @@ resource "yandex_vpc_network" "develop-2" {
   name = var.vpc_name_2
 }
 
-#Resources sub_network without nat
-#resource "yandex_vpc_subnet" "develop" {
-#  name           = var.vpc_name
-#  zone           = var.default_zone
-#  network_id     = yandex_vpc_network.develop.id
-#  v4_cidr_blocks = var.default_cidr
-#}
+Resources sub_network without nat
+resource "yandex_vpc_subnet" "develop" {
+  name           = var.vpc_name
+  zone           = var.default_zone
+  network_id     = yandex_vpc_network.develop.id
+  v4_cidr_blocks = var.default_cidr
+}
 
-#resource "yandex_vpc_subnet" "develop-2" {
-#  name           = var.vpc_name_2
-#  zone           = var.zone_b
-#  network_id     = yandex_vpc_network.develop-2.id
-#  v4_cidr_blocks = var.default_cidr
-#}
+resource "yandex_vpc_subnet" "develop-2" {
+  name           = var.vpc_name_2
+  zone           = var.zone_b
+  network_id     = yandex_vpc_network.develop-2.id
+  v4_cidr_blocks = var.default_cidr
+}
 
 
 
@@ -51,16 +51,16 @@ resource "yandex_compute_instance" "platform" {
     preemptible = var.vm_web_.scheduling_policy.preemptible
   }
 
-  network_interface {
-    subnet_id = yandex_vpc_subnet.nat_web.id
-    nat       = false
-  }
-
-   #network for subnet without nat
 #  network_interface {
-#    subnet_id = yandex_vpc_subnet.develop.id
-#    nat       = var.vm_web_.network_interface.nat
+#    subnet_id = yandex_vpc_subnet.nat_web.id
+#    nat       = false
 #  }
+
+   network for subnet without nat
+  network_interface {
+    subnet_id = yandex_vpc_subnet.develop.id
+    nat       = var.vm_web_.network_interface.nat
+  }
 
   metadata = {
     serial-port-enable = var.metadata.serial-port-enable
@@ -92,17 +92,17 @@ resource "yandex_compute_instance" "platform-db" {
     preemptible = var.vm_db_.scheduling_policy.preemptible
   }
 
-  #network for subnet with nat
-  network_interface {
-    subnet_id = yandex_vpc_subnet.nat_db.id
-    nat       = false
-  }
-
-  #network for subnet without nat
+#  #network for subnet with nat
 #  network_interface {
-#    subnet_id = yandex_vpc_subnet.develop-2.id
-#    nat       = var.vm_db_.network_interface.nat
+#    subnet_id = yandex_vpc_subnet.nat_db.id
+#    nat       = false
 #  }
+
+  network for subnet without nat
+  network_interface {
+    subnet_id = yandex_vpc_subnet.develop-2.id
+    nat       = var.vm_db_.network_interface.nat
+  }
 
   metadata = {
     serial-port-enable = var.metadata.serial-port-enable
