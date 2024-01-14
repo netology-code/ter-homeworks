@@ -52,7 +52,7 @@ resource "yandex_compute_instance" "platform" {
 
   network_interface {
     subnet_id = yandex_vpc_subnet.nat_web.id
-    nat       = true
+    nat       = false
   }
 
   metadata = {
@@ -87,7 +87,7 @@ resource "yandex_compute_instance" "platform-db" {
 
   network_interface {
     subnet_id = yandex_vpc_subnet.nat_db.id
-    nat       = true
+    nat       = false
   }
 
   metadata = {
