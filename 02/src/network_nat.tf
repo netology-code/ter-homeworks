@@ -18,7 +18,7 @@ resource "yandex_vpc_gateway" "nat_gateway" {
 }
 
 resource "yandex_vpc_route_table" "rt" {
-  name       = test-route-table
+  name       = "test-route-table"
   network_id = data.yandex_vpc_network.net.id
 
   static_route {
