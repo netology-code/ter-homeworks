@@ -80,7 +80,7 @@ variable "route_table_name_DB" {
 
 
 
-
+#8 task
 variable "test" {
   default = [
     {
