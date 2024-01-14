@@ -6,7 +6,7 @@ data "yandex_vpc_network" "net" {
 resource "yandex_vpc_subnet" "nat" {
   folder_id      = var.folder_id
   name           = var.vpc_name
-  v4_cidr_blocks = var.default_cidr
+  v4_cidr_blocks = var.zone_b
   zone           = var.default_zone
   network_id     = data.yandex_vpc_network.net.id
   route_table_id = yandex_vpc_route_table.rt.id
