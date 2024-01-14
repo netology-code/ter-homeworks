@@ -28,39 +28,39 @@ data "yandex_compute_image" "ubuntu" {
 }
 
 #WEB
-#resource "yandex_compute_instance" "platform" {
-#  name        = local.web_name
-#  platform_id = var.vm_web_.platform_id
-#
-#  zone = var.vm_web_.zone
-#
-#  resources {
-#    cores         = var.vms_resources.web.cores
-#    memory        = var.vms_resources.web.memory
-#    core_fraction = var.vms_resources.web.core_fraction
-#  }
-#
-#  boot_disk {
-#    initialize_params {
-#      image_id = data.yandex_compute_image.ubuntu.image_id
-#    }
-#  }
-#
-#  scheduling_policy {
-#    preemptible = var.vm_web_.scheduling_policy.preemptible
-#  }
-#
-#  network_interface {
-#    subnet_id = yandex_vpc_subnet.nat_web.id
-#    nat       = true
-#  }
-#
-#  metadata = {
-#    serial-port-enable = var.metadata.serial-port-enable
-#    ssh-keys           = "ubuntu:${var.metadata.ssh-keys}"
-#  }
-#
-#}
+resource "yandex_compute_instance" "platform" {
+  name        = local.web_name
+  platform_id = var.vm_web_.platform_id
+
+  zone = var.vm_web_.zone
+
+  resources {
+    cores         = var.vms_resources.web.cores
+    memory        = var.vms_resources.web.memory
+    core_fraction = var.vms_resources.web.core_fraction
+  }
+
+  boot_disk {
+    initialize_params {
+      image_id = data.yandex_compute_image.ubuntu.image_id
+    }
+  }
+
+  scheduling_policy {
+    preemptible = var.vm_web_.scheduling_policy.preemptible
+  }
+
+  network_interface {
+    subnet_id = yandex_vpc_subnet.nat_web.id
+    nat       = true
+  }
+
+  metadata = {
+    serial-port-enable = var.metadata.serial-port-enable
+    ssh-keys           = "ubuntu:${var.metadata.ssh-keys}"
+  }
+
+}
 #
 ##DB
 #resource "yandex_compute_instance" "platform-db" {
