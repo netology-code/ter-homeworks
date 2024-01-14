@@ -1,10 +1,11 @@
+
 resource "yandex_vpc_network" "develop" {
   name = var.vpc_name
 }
 
-resource "yandex_vpc_network" "develop-2" {
-  name = var.vpc_name_2
-}
+#resource "yandex_vpc_network" "develop-2" {
+#  name = var.vpc_name_2
+#}
 
 resource "yandex_vpc_subnet" "develop" {
   name           = var.vpc_name
@@ -13,12 +14,12 @@ resource "yandex_vpc_subnet" "develop" {
   v4_cidr_blocks = var.default_cidr
 }
 
-resource "yandex_vpc_subnet" "develop-2" {
-  name           = var.vpc_name_2
-  zone           = var.zone_b
-  network_id     = yandex_vpc_network.develop-2.id
-  v4_cidr_blocks = var.default_cidr
-}
+#resource "yandex_vpc_subnet" "develop-2" {
+#  name           = var.vpc_name_2
+#  zone           = var.zone_b
+#  network_id     = yandex_vpc_network.develop-2.id
+#  v4_cidr_blocks = var.default_cidr
+#}
 
 
 
@@ -85,8 +86,8 @@ resource "yandex_compute_instance" "platform-db" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.develop-2.id
-    nat       = var.vm_db_.network_interface.nat
+    subnet_id = yandex_vpc_subnet.nat.id
+    nat       = false
   }
 
   metadata = {

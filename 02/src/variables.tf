@@ -52,6 +52,17 @@ variable "vm_web_yandex_compute_image" {
   description = "Image OC"
 }
 
+#nat
+
+variable "test_nat" {
+  type = string
+  default = "test-nat"
+  description = "for nat test"
+}
+
+
+
+
 variable "test" {
   default = [
     {
