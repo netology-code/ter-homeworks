@@ -13,12 +13,12 @@ resource "yandex_vpc_subnet" "nat" {
 }
 
 resource "yandex_vpc_gateway" "nat_gateway" {
-  name = var.test_nat
+  name = var.test_nat_gateway
   shared_egress_gateway {}
 }
 
 resource "yandex_vpc_route_table" "rt" {
-  name       = "test-route-table"
+  name       = var.route_table_name
   network_id = data.yandex_vpc_network.net.id
 
   static_route {

@@ -87,7 +87,7 @@ resource "yandex_compute_instance" "platform-db" {
 
   network_interface {
     subnet_id = yandex_vpc_subnet.nat.id
-    nat       = false
+    nat       = true
   }
 
   metadata = {
