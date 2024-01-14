@@ -45,7 +45,7 @@ resource "yandex_vpc_gateway" "nat_gateway_db" {
 
 resource "yandex_vpc_route_table" "rt_db" {
   name       = var.route_table_name_DB
-  network_id = yandex_vpc_network.develop.id
+  network_id = yandex_vpc_network.develop-2.id
 
   static_route {
     destination_prefix = "0.0.0.0/0"
