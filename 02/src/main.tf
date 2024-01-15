@@ -23,14 +23,14 @@ resource "yandex_vpc_subnet" "db" {
 
 
 data "yandex_compute_image" "ubuntu" {
-  family = var.vm_web_image  #family = "ubuntu-2004-lts"
+  family = var.vm_web_image #family = "ubuntu-2004-lts"
 }
 resource "yandex_compute_instance" "platform" {
   name        = var.vm_web_resource[0].instance_name #"netology-develop-platform-web"
-  platform_id = var.vm_web_resource[0].platform #"standard-v1"
+  platform_id = var.vm_web_resource[0].platform      #"standard-v1"
   resources {
-    cores         = var.vm_web_resource[0].instance_cores #2
-    memory        = var.vm_web_resource[0].instance_memory #1
+    cores         = var.vm_web_resource[0].instance_cores         #2
+    memory        = var.vm_web_resource[0].instance_memory        #1
     core_fraction = var.vm_web_resource[0].instance_core_fraction #5
   }
   boot_disk {
@@ -54,17 +54,17 @@ resource "yandex_compute_instance" "platform" {
 }
 
 data "yandex_compute_image" "db" {
-  family = var.vm_db_image 
+  family = var.vm_db_image
 }
 resource "yandex_compute_instance" "platform_db" {
-  name        = var.vm_db_resource[0].instance_name 
-  platform_id = var.vm_db_resource[0].platform 
-  
-  zone = "ru-central1-b"
+  name        = var.vm_db_resource[0].instance_name
+  platform_id = var.vm_db_resource[0].platform
+
+
   resources {
-    cores         = var.vm_db_resource[0].instance_cores 
-    memory        = var.vm_db_resource[0].instance_memory 
-    core_fraction = var.vm_db_resource[0].instance_core_fraction 
+    cores         = var.vm_db_resource[0].instance_cores
+    memory        = var.vm_db_resource[0].instance_memory
+    core_fraction = var.vm_db_resource[0].instance_core_fraction
   }
   boot_disk {
     initialize_params {
@@ -72,11 +72,11 @@ resource "yandex_compute_instance" "platform_db" {
     }
   }
   scheduling_policy {
-    preemptible = var.vm_db_resource[0].preemptible 
+    preemptible = var.vm_db_resource[0].preemptible
   }
   network_interface {
     subnet_id = yandex_vpc_subnet.db.id
-    nat       = var.vm_db_resource[0].public_ip 
+    nat       = var.vm_db_resource[0].public_ip
   }
 
   metadata = {
