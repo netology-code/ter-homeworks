@@ -21,7 +21,7 @@ resource "yandex_compute_instance" "example" {
   name        = "netology-develop-platform-web-${count.index}"
   platform_id = "standard-v1"
 
-  count = 2
+  count = 1
 
   resources {
     cores         = 2
@@ -66,7 +66,7 @@ resource "null_resource" "web_hosts_provision" {
 
   #Добавление ПРИВАТНОГО ssh ключа в ssh-agent
   provisioner "local-exec" {
-    command = "cat ~/.ssh/id_rsa | ssh-add -"
+    command = "cat ~/.ssh/id_ed25519 | ssh-add -"
   }
 
   #Костыль!!! Даем ВМ 60 сек на первый запуск. Лучше выполнить это через wait_for port 22 на стороне ansible

@@ -1,6 +1,6 @@
 variable "env_name" {
   type    = string
-  default = "production"
+  default = "develop"
 }
 
 variable "empty" {
