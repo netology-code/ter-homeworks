@@ -1,4 +1,5 @@
 
+/*
 variable "default_zone2" {
   type        = string
   default     = "ru-central1-b"
@@ -46,3 +47,4 @@ variable "vm_db_resource" {
     }
   ]
 }
+*/

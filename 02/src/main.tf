@@ -9,7 +9,7 @@ resource "yandex_vpc_subnet" "develop" {
 }
 
 
-
+/*
 resource "yandex_vpc_network" "db" {
   name = var.vpc_name2
 }
@@ -19,7 +19,7 @@ resource "yandex_vpc_subnet" "db" {
   network_id     = yandex_vpc_network.db.id
   v4_cidr_blocks = var.default_cidr2
 }
-
+*/
 
 
 data "yandex_compute_image" "ubuntu" {
@@ -53,6 +53,7 @@ resource "yandex_compute_instance" "platform" {
 
 }
 
+/*
 data "yandex_compute_image" "db" {
   family = var.vm_db_image
 }
@@ -60,7 +61,7 @@ resource "yandex_compute_instance" "platform_db" {
   name        = var.vm_db_resource[0].instance_name
   platform_id = var.vm_db_resource[0].platform
 
-
+  zone = "ru-central1-b"
   resources {
     cores         = var.vm_db_resource[0].instance_cores
     memory        = var.vm_db_resource[0].instance_memory
@@ -85,3 +86,4 @@ resource "yandex_compute_instance" "platform_db" {
   }
 
 }
+*/

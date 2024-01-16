@@ -79,6 +79,6 @@ variable "vm_web_resource" {
 
 variable "vms_ssh_root_key" {
   type        = string
-  default     = "ubuntu:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMErtL1mfT6YTofH1zVXVnncxjR6NwcYh4PHErqfjLYo root@buntu2204"
+  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPHfIWgO09HKci17ddP1kBGu0uTuq6Q/kLODWP5hh6Gq eddsa-key-20240115"
   description = "ssh-keygen -t ed25519"
 }
