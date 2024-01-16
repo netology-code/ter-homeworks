@@ -1,5 +1,5 @@
 
-/*
+
 variable "default_zone2" {
   type        = string
   default     = "ru-central1-b"
@@ -22,6 +22,20 @@ variable "vm_db_image" {
   default = "ubuntu-2004-lts"
 }
 
+variable "env1" {
+  type    = string
+  default = "develop"
+}
+
+variable "project1" {
+  type    = string
+  default = "platform"
+}
+
+variable "role1" {
+  type    = string
+  default = "db"
+}
 
 
 variable "vm_db_resource" {
@@ -47,4 +61,4 @@ variable "vm_db_resource" {
     }
   ]
 }
-*/
+

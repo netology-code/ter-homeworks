@@ -4,12 +4,6 @@
 #  description = "OAuth-token; https://cloud.yandex.ru/docs/iam/concepts/authorization/oauth-token"
 #}
 
-variable "domain_name" {
-  description = "The domain name used for FQDN"
-  type        = string
-  default     = "auto.internal" # Replace with your actual domain name or set a default value
-}
-
 variable "cloud_id" {
   type        = string
   default     = "b1gjvjgh8siq871n3ijv"
@@ -44,12 +38,21 @@ variable "vm_web_image" {
   default = "ubuntu-2004-lts"
 }
 
-/*
-variable "vm_resource_name" {
-  type    = list(string)
-  default = ["netology-develop-platform-web", "standard-v1"]  # Add more strings as needed
+variable "env" {
+  type    = string
+  default = "develop"
 }
-*/
+
+variable "project" {
+  type    = string
+  default = "platform"
+}
+
+variable "role" {
+  type    = string
+  default = "web"
+}
+
 
 variable "vm_web_resource" {
   type = list(object({
@@ -79,6 +82,6 @@ variable "vm_web_resource" {
 
 variable "vms_ssh_root_key" {
   type        = string
-  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPHfIWgO09HKci17ddP1kBGu0uTuq6Q/kLODWP5hh6Gq eddsa-key-20240115"
+  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEobaGZUhN3Wprt2ZIyrbuhWPwf0lxWg4dglfJf8yIMf chernov@tp2-shift-w03"
   description = "ssh-keygen -t ed25519"
 }
