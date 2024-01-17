@@ -29,9 +29,9 @@ resource "yandex_compute_instance" "platform" {
   name        = local.web                       #var.vm_web_resource[0].instance_name #"netology-develop-platform-web"
   platform_id = var.vm_web_resource[0].platform #"standard-v1"
   resources {
-    cores         = var.vm_web_resource[0].instance_cores         #2
-    memory        = var.vm_web_resource[0].instance_memory        #1
-    core_fraction = var.vm_web_resource[0].instance_core_fraction #5
+    cores         = local.web_resources.cores         #var.vm_web_resource[0].instance_cores         #2
+    memory        = local.web_resources.memory        #var.vm_web_resource[0].instance_memory        #1
+    core_fraction = local.web_resources.core_fraction #var.vm_web_resource[0].instance_core_fraction #5
   }
   boot_disk {
     initialize_params {
@@ -46,11 +46,13 @@ resource "yandex_compute_instance" "platform" {
     nat       = var.vm_web_resource[0].public_ip #true
   }
 
+  metadata = var.metadata
+  /*
   metadata = {
     serial-port-enable = 1
-    ssh-keys           = "ubuntu:${var.vms_ssh_root_key}"
+    ssh-keys           = var.metadata["ssh-keys"]            #"ubuntu:${var.vms_ssh_root_key}"
   }
-
+*/
 }
 
 
@@ -63,9 +65,9 @@ resource "yandex_compute_instance" "platform_db" {
 
   zone = "ru-central1-b"
   resources {
-    cores         = var.vm_db_resource[0].instance_cores
-    memory        = var.vm_db_resource[0].instance_memory
-    core_fraction = var.vm_db_resource[0].instance_core_fraction
+    cores         = local.db_resources.cores         #var.vm_db_resource[0].instance_cores
+    memory        = local.db_resources.memory        #var.vm_db_resource[0].instance_memory
+    core_fraction = local.db_resources.core_fraction #var.vm_db_resource[0].instance_core_fraction
   }
   boot_disk {
     initialize_params {
@@ -80,10 +82,11 @@ resource "yandex_compute_instance" "platform_db" {
     nat       = var.vm_db_resource[0].public_ip
   }
 
+  metadata = var.metadata
+  /*
   metadata = {
     serial-port-enable = 1
-    ssh-keys           = "ubuntu:${var.vms_ssh_root_key}"
+    ssh-keys           = var.metadata["ssh-keys"]  #"ubuntu:${var.vms_ssh_root_key}"
   }
-
+*/
 }
-

@@ -54,25 +54,41 @@ variable "role" {
 }
 
 
+variable "metadata" {
+  type = object({
+    serial-port-enable = number
+    ssh-keys           = string
+  })
+}
+
+
+variable "vms_resources" {
+  type = map(object({
+    cores         = number
+    memory        = number
+    core_fraction = number
+  }))
+}
+
 variable "vm_web_resource" {
   type = list(object({
-    instance_name          = string
-    instance_cores         = number
-    instance_memory        = number
-    instance_core_fraction = number
-    public_ip              = bool
-    platform               = string
-    preemptible            = bool
+    #instance_name = string
+    #instance_cores         = number
+    #instance_memory        = number
+    #instance_core_fraction = number
+    public_ip   = bool
+    platform    = string
+    preemptible = bool
   }))
   default = [
     {
-      instance_name          = "netology-develop-platform-web"
-      instance_cores         = 2
-      instance_memory        = 1
-      instance_core_fraction = 5
-      public_ip              = true
-      platform               = "standard-v1"
-      preemptible            = true
+      #instance_name = "netology-develop-platform-web"
+      #instance_cores         = 2
+      #instance_memory        = 1
+      #instance_core_fraction = 5
+      public_ip   = true
+      platform    = "standard-v1"
+      preemptible = true
 
     }
   ]
@@ -80,8 +96,10 @@ variable "vm_web_resource" {
 
 ###ssh vars
 
+/*
 variable "vms_ssh_root_key" {
   type        = string
-  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEobaGZUhN3Wprt2ZIyrbuhWPwf0lxWg4dglfJf8yIMf chernov@tp2-shift-w03"
+  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBk+lCwqNyEPCC0Fkk3l3NeTwdRRHLHLwDwvIOO0apvO achernov@tp2-shift-w01"
   description = "ssh-keygen -t ed25519"
 }
+*/

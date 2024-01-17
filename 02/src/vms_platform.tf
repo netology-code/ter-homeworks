@@ -40,25 +40,24 @@ variable "role1" {
 
 variable "vm_db_resource" {
   type = list(object({
-    instance_name          = string
-    instance_cores         = number
-    instance_memory        = number
-    instance_core_fraction = number
-    public_ip              = bool
-    platform               = string
-    preemptible            = bool
+    #instance_name = string
+    #instance_cores         = number
+    #instance_memory        = number
+    #instance_core_fraction = number
+    public_ip   = bool
+    platform    = string
+    preemptible = bool
   }))
   default = [
     {
-      instance_name          = "netology-develop-platform-db"
-      instance_cores         = 2
-      instance_memory        = 2
-      instance_core_fraction = 20
-      public_ip              = true
-      platform               = "standard-v1"
-      preemptible            = true
+      #instance_name = "netology-develop-platform-db"
+      #instance_cores         = 2
+      #instance_memory        = 2
+      #instance_core_fraction = 20
+      public_ip   = true
+      platform    = "standard-v1"
+      preemptible = true
 
     }
   ]
 }
-
