@@ -9,7 +9,6 @@ resource "yandex_vpc_subnet" "develop" {
 }
 
 
-
 resource "yandex_vpc_network" "db" {
   name = var.vpc_name2
 }
