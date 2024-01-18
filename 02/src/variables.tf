@@ -99,7 +99,7 @@ variable "vm_web_resource" {
 /*
 variable "vms_ssh_root_key" {
   type        = string
-  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBk+lCwqNyEPCC0Fkk3l3NeTwdRRHLHLwDwvIOO0apvO achernov@tp2-shift-w01"
+  default     = "...."
   description = "ssh-keygen -t ed25519"
 }
 */
