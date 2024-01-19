@@ -125,6 +125,7 @@ variable "task_3" {
       disk_type     = string
       disk_zone     = string
       disk_image_id = string
+      disk_size     = number
     })
   }))
   default = {
@@ -142,6 +143,7 @@ variable "task_3" {
         disk_type     = "network-hdd"
         disk_zone     = "ru-central1-a"
         disk_image_id = "ubuntu-2004-lts"
+        disk_size     = 1
       }
     }
   }

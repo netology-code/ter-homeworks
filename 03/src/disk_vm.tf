@@ -4,5 +4,6 @@ resource "yandex_compute_disk" "default" {
   type     = var.task_3.vm.disk.disk_type
   zone     = var.task_3.vm.disk.disk_zone
   image_id = var.task_3.vm.disk.disk_image_id
+  size     = var.task_3.vm.disk.disk_size
 }
 
