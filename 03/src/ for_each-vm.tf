@@ -1,4 +1,3 @@
-
 # db
 resource "yandex_compute_instance" "db" {
   for_each = { for idx, vm in var.each_vm : idx => vm }
@@ -22,7 +21,6 @@ resource "yandex_compute_instance" "db" {
   scheduling_policy {
     preemptible = each.value.instance_preemtable
   }
-
 
   network_interface {
     subnet_id = yandex_vpc_subnet.develop.id
