@@ -8,6 +8,7 @@ variable "security_group_ingress" {
       port           = optional(number)
       from_port      = optional(number)
       to_port        = optional(number)
+
   }))
   default = [
     {
@@ -44,7 +45,7 @@ variable "security_group_egress" {
       to_port        = optional(number)
   }))
   default = [
-    { 
+    {
       protocol       = "TCP"
       description    = "разрешить весь исходящий трафик"
       v4_cidr_blocks = ["0.0.0.0/0"]
