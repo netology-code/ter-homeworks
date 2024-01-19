@@ -1,4 +1,3 @@
 locals {
-  db_name = "${var.project}-${var.instance.db}"
-  web_name = "${var.project}-${var.instance.web}"
+  ssh_public_key = file("~/.ssh/vm.pub")
 }
