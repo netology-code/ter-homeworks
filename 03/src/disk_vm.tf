@@ -1,6 +1,6 @@
 resource "yandex_compute_disk" "default" {
   count = 3
-  name     = var.task_3.vm.disk.disk_name
+  name     = "${var.task_3.vm.disk.disk_name}-${count.index + 1}"
   type     = var.task_3.vm.disk.disk_type
   zone     = var.task_3.vm.disk.disk_zone
   image_id = var.task_3.vm.disk.disk_image_id
@@ -39,8 +39,8 @@ resource "yandex_compute_instance" "task_3" {
   dynamic "secondary_disk" {
     for_each = yandex_compute_disk.default
     content {
-      device_name = lookup(secondary_disk.value, "${var.task_3.vm.disk.disk_name}", null)
-      disk_id = lookup(secondary_disk.value, "${yandex_compute_disk.default.id}", null)
+      device_name = "${var.task_3.vm.disk.disk_name}-${secondary_disk.value.name}"
+      disk_id = secondary_disk.value.id
     }
   }
 
