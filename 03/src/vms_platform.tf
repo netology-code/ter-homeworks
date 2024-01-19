@@ -120,12 +120,12 @@ variable "task_3" {
     instance_zone             = string
     instance_preemtable       = bool
     instance_network_nat      = bool
-    disk = {
+    disk = object({
       disk_name     = string
       disk_type     = string
       disk_zone     = string
       disk_image_id = string
-    }
+    })
   }))
   default = {
     vm = {
