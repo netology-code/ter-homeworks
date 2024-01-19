@@ -73,9 +73,9 @@ variable "instance" {
   description = "Instances names"
 }
 
+# var for for_each map meta-argument
 variable "each_vm" {
   type = list(object({
-    instance_count  = number
     instance_name   = string
     instance_cores  = number
     instance_memory = number
@@ -83,15 +83,13 @@ variable "each_vm" {
   default = [
     {
       instance_name   = "main"
-      instance_count  = 1
       instance_cores  = 2
-      instance_memory = 5
+      instance_memory = 2
     },
     {
       instance_name   = "replica"
-      instance_count  = 1
       instance_cores  = 2
-      instance_memory = 5
+      instance_memory = 2
     }
   ]
 }
