@@ -130,7 +130,7 @@ variable "task_3" {
   }))
   default = {
     vm = {
-      instance_name             = "main"
+      instance_name             = "storage"
       instance_cores            = 2
       instance_memory           = 2
       instance_fraction         = 5
