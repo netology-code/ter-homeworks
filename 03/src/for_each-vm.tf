@@ -1,3 +1,4 @@
+
 resource "yandex_compute_instance" "db_vm" {
   for_each = { for vm in var.db_vm : vm.vm_name => vm }
 
@@ -5,31 +6,28 @@ resource "yandex_compute_instance" "db_vm" {
   platform_id = each.value.platform
 
   resources {
-    cores  = each.value.cores
-    memory = each.value.memory
+    cores         = each.value.cores
+    memory        = each.value.memory
+    core_fraction = each.value.core_fraction
   }
 
   boot_disk {
     initialize_params {
-      size = each.value.boot_disk_size
-      type = each.value.boot_disk_type
+      image_id = data.yandex_compute_image.ubuntu-2004-lts.image_id
     }
   }
 
   network_interface {
     subnet_id = yandex_vpc_subnet.develop.id
     nat       = var.db_vm[0].public_ip
-    # Additional network settings go here
-  }
 
-  metadata = {
-    serial-port-enable = 1
-    # Other metadata settings go here
   }
 
   scheduling_policy {
     preemptible = each.value.preemptible
   }
+
+  metadata = var.metadata
 
 }
 

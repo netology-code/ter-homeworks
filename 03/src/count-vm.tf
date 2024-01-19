@@ -1,7 +1,4 @@
 
-data "yandex_compute_image" "ubuntu-2004-lts" {
-  family = "ubuntu-2004-lts"
-}
 resource "yandex_compute_instance" "web" {
   count = var.vm_count
 
@@ -13,6 +10,7 @@ resource "yandex_compute_instance" "web" {
     memory        = 1
     core_fraction = 20
   }
+
 
   boot_disk {
     initialize_params {
@@ -34,3 +32,4 @@ resource "yandex_compute_instance" "web" {
   metadata = var.metadata
 
 }
+

@@ -30,17 +30,17 @@ variable "vm_count" {
 
 variable "db_vm" {
   type = list(object({
-    vm_name       = string
-    cores         = number
-    memory        = number
-    disk          = number
+    vm_name = string
+    cores   = number
+    memory  = number
+    #disk          = number
     core_fraction = number
     #count          = number
-    boot_disk_type = string
-    boot_disk_size = number
-    public_ip      = bool
-    platform       = string
-    preemptible    = bool
+    #boot_disk_type = string
+    #boot_disk_size = number
+    public_ip   = bool
+    platform    = string
+    preemptible = bool
   }))
   default = [
     {
