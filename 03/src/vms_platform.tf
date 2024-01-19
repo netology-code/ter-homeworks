@@ -110,19 +110,39 @@ variable "each_vm" {
 }
 
 # var for 3 task
-variable "vm_and_disk" {
+variable "task_3" {
   type = map(object({
-    disk_name     = string
-    disk_type     = string
-    disk_zone     = string
-    disk_image_id = string
+    instance_name             = string
+    instance_cores            = number
+    instance_memory           = number
+    instance_fraction         = number
+    instance_platform_id      = string
+    instance_zone             = string
+    instance_preemtable       = bool
+    instance_network_nat      = bool
+    disk = {
+      disk_name     = string
+      disk_type     = string
+      disk_zone     = string
+      disk_image_id = string
+    }
   }))
   default = {
-    task_3 = {
-      disk_name     = "disk"
-      disk_type     = "network-hdd"
-      disk_zone     = "ru-central1-a"
-      disk_image_id = "ubuntu-2004-lts"
+    vm = {
+      instance_name             = "main"
+      instance_cores            = 2
+      instance_memory           = 2
+      instance_fraction         = 5
+      instance_platform_id      = "standard-v1"
+      instance_zone             = "ru-central1-a"
+      instance_preemtable       = true
+      instance_network_nat      = true
+      disk = {
+        disk_name     = "disk"
+        disk_type     = "network-hdd"
+        disk_zone     = "ru-central1-a"
+        disk_image_id = "ubuntu-2004-lts"
+      }
     }
   }
 }
