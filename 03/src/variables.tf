@@ -32,3 +32,9 @@ variable "vpc_name" {
   default     = "develop"
   description = "VPC network&subnet name"
 }
+
+variable "vm_web_yandex_compute_image" {
+  type        = string
+  default     = "ubuntu-2004-lts"
+  description = "Image OC"
+}
