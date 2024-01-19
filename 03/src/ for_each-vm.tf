@@ -3,14 +3,14 @@
 resource "yandex_compute_instance" "db" {
   for_each = { for idx, vm in var.each_vm : idx => vm }
   name        = each.value.instance_name
-  platform_id = var.vm_web_.platform_id
+  platform_id = each.value.instance_platform_id
 
-  zone = var.vm_web_.zone
+  zone = each.value.instance_zone
 
   resources {
     cores         = each.value.instance_cores
     memory        = each.value.instance_memory
-    core_fraction = var.vms_resources.web.core_fraction
+    core_fraction = each.value.instance_fraction
   }
 
   boot_disk {
@@ -20,13 +20,13 @@ resource "yandex_compute_instance" "db" {
   }
 
   scheduling_policy {
-    preemptible = var.vm_web_.scheduling_policy.preemptible
+    preemptible = each.value.instance_preemtable
   }
 
 
   network_interface {
     subnet_id = yandex_vpc_subnet.develop.id
-    nat       = var.vm_web_.network_interface.nat
+    nat       = each.value.instance_network_nat
     security_group_ids = [yandex_vpc_security_group.example.id]
   }
 

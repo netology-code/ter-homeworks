@@ -76,20 +76,35 @@ variable "instance" {
 # var for for_each map meta-argument
 variable "each_vm" {
   type = list(object({
-    instance_name   = string
-    instance_cores  = number
-    instance_memory = number
+    instance_name             = string
+    instance_cores            = number
+    instance_memory           = number
+    instance_fraction         = number
+    instance_platform_id      = string
+    instance_zone             = string
+    instance_preemtable       = bool
+    instance_network_nat      = bool
   }))
   default = [
     {
-      instance_name   = "main"
-      instance_cores  = 2
-      instance_memory = 2
+      instance_name             = "main"
+      instance_cores            = 2
+      instance_memory           = 2
+      instance_fraction         = 5
+      instance_platform_id      = "standard-v1"
+      instance_zone             = "ru-central1-a"
+      instance_preemtable       = true
+      instance_network_nat      = true
     },
     {
-      instance_name   = "replica"
-      instance_cores  = 2
-      instance_memory = 2
+      instance_name             = "replica"
+      instance_cores            = 2
+      instance_memory           = 2
+      instance_fraction         = 5
+      instance_platform_id      = "standard-v1"
+      instance_zone             = "ru-central1-a"
+      instance_preemtable       = true
+      instance_network_nat      = true
     }
   ]
 }
