@@ -38,4 +38,5 @@ resource "yandex_compute_instance" "web" {
     ssh-keys           = "ubuntu:${var.metadata.ssh-keys}"
   }
 
+  depends_on = [yandex_compute_instance.db]
 }

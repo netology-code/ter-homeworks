@@ -1,5 +1,5 @@
 
-# WEB
+# db
 resource "yandex_compute_instance" "db" {
   for_each = { for idx, vm in var.each_vm : idx => vm }
   name        = each.value.instance_name
