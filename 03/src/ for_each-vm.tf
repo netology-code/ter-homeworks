@@ -1,9 +1,6 @@
-data "yandex_compute_image" "ubuntu" {
-  family = var.vm_web_yandex_compute_image
-}
 
 # WEB
-resource "yandex_compute_instance" "web" {
+resource "yandex_compute_instance" "db" {
   for_each = { for idx, vm in var.each_vm : idx => vm }
   name        = each.value.instance_name
   platform_id = var.vm_web_.platform_id
