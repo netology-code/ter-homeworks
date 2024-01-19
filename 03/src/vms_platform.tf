@@ -110,19 +110,19 @@ variable "each_vm" {
 }
 
 # var for 3 task
-variable "vm_task_3" {
-  type = list(object({
+variable "vm_and_disk_3_task" {
+  type = map(object({
     disk_name     = string
     disk_type     = string
     disk_zone     = string
     disk_image_id = string
   }))
-  default = [
-    {
-    disk_name     = "disk"
-    disk_type     = "network-hdd"
-    disk_zone     = "ru-central1-a"
-    disk_image_id = "ubuntu-2004-lts"
+  default = {
+    example_vm = {
+      disk_name     = "disk"
+      disk_type     = "network-hdd"
+      disk_zone     = "ru-central1-a"
+      disk_image_id = "ubuntu-2004-lts"
     }
-  ]
+  }
 }
