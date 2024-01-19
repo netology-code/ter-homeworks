@@ -41,7 +41,8 @@ resource "yandex_compute_instance" "web" {
     content {
       device_name = lookup(secondary_disk.value, "${var.task_3.vm.disk.disk_name}", null)
       disk_id = lookup(secondary_disk.value, "${yandex_compute_disk.default.id}", null)
-    }}
+    }
+  }
 
   metadata = {
     serial-port-enable = var.metadata.serial-port-enable
