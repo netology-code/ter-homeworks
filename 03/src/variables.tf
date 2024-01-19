@@ -38,3 +38,4 @@ variable "vm_web_yandex_compute_image" {
   default     = "ubuntu-2004-lts"
   description = "Image OC"
 }
+
