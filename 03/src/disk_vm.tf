@@ -7,7 +7,7 @@ resource "yandex_compute_disk" "default" {
   size     = var.task_3.vm.disk.disk_size
 }
 
-resource "yandex_compute_instance" "web" {
+resource "yandex_compute_instance" "task_3" {
   name        = var.task_3.vm.instance_name
   platform_id = var.task_3.vm.instance_platform_id
 
