@@ -28,7 +28,6 @@ resource "yandex_compute_instance" "task_3" {
     preemptible = var.task_3.vm.instance_preemtable
   }
 
-
   network_interface {
     subnet_id = yandex_vpc_subnet.develop.id
     nat       = var.task_3.vm.instance_network_nat
@@ -47,6 +46,4 @@ resource "yandex_compute_instance" "task_3" {
     serial-port-enable = var.metadata.serial-port-enable
     ssh-keys           = local.ssh_public_key
   }
-
-  depends_on = [yandex_compute_instance.db]
 }
