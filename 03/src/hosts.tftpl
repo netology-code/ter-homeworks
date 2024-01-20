@@ -1,6 +1,6 @@
-%{~ for category in categories ~}
-[${category["name"]}]
-%{~ for resource in category["resources"] ~}
-${resource["name"]}   ansible_host=${resource["network_interface"][0]["nat_ip_address"]}
+%{~ for section, instances in hosts ~}
+[${section}]
+%{~ for i in instances ~}
+${i["name"]}   ansible_host=${i["network_interface"][0]["nat_ip_address"]}
 %{~ endfor ~}
 %{~ endfor ~}
