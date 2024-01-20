@@ -32,7 +32,7 @@ resource "docker_container" "1nginx" {
 
   ports {
     internal = 80
-    external = 8000
+    external = 9090
   }
 }
 */
