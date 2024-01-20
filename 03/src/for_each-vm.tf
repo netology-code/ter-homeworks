@@ -27,7 +27,11 @@ resource "yandex_compute_instance" "db_vm" {
     preemptible = each.value.preemptible
   }
 
-  metadata = var.metadata
+  metadata = {
+    serial-port-enable = 1
+    ssh-keys           = "ubuntu:${local.ssh_public_key}"
+  }
+
+  #metadata = var.metadata
 
 }
-

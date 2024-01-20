@@ -4,6 +4,7 @@ resource "yandex_compute_instance" "web" {
 
   name        = "web${count.index + 1}"
   platform_id = "standard-v1"
+  depends_on  = [yandex_compute_instance.db_vm]
 
   resources {
     cores         = 2
@@ -31,5 +32,5 @@ resource "yandex_compute_instance" "web" {
 
   metadata = var.metadata
 
-}
 
+}

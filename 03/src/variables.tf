@@ -55,9 +55,9 @@ variable "db_vm" {
     },
     {
       vm_name       = "replica"
-      cores         = 1
+      cores         = 4
       memory        = 2
-      core_fraction = 10
+      core_fraction = 5
       public_ip     = true
       platform      = "standard-v1"
       preemptible   = true
