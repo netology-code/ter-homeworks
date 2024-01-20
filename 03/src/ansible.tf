@@ -9,10 +9,3 @@ resource "local_file" "hosts_cfg" {
   })
   filename = "${abspath(path.module)}/hosts.cfg"
 }
-cals {
-  task_3_list = [
-    yandex_compute_instance.task_3.id,
-    yandex_compute_instance.task_3.name,
-    yandex_compute_instance.task_3.type,
-    # Другие свойства, которые вы хотите добавить в список
-  ]
