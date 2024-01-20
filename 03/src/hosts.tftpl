@@ -1,5 +1,5 @@
 %{~ for section, instances in hosts ~}
-[${webservers}]
+[${section}]
 %{~ for i in instances ~}
 ${i["name"]}   ansible_host=${i["network_interface"][0]["nat_ip_address"]}
 %{~ endfor ~}
