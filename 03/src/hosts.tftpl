@@ -5,7 +5,7 @@
 ${i["name"]}   ansible_host=${i["network_interface"][0]["nat_ip_address"]}
 %{~ endfor ~}
 
-%{~ for i in db ~}
+%{~ for i in databases ~}
 
 ${i["name"]}   ansible_host=${i["network_interface"][0]["nat_ip_address"]}
 %{~ endfor ~}
