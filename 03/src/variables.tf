@@ -28,6 +28,12 @@ variable "vm_count" {
   description = "Number of VMs to create"
 }
 
+variable "number_of_drives" {
+  type    = number
+  default = 3
+}
+
+
 variable "db_vm" {
   type = list(object({
     vm_name = string

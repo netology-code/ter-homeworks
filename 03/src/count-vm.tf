@@ -2,7 +2,7 @@
 resource "yandex_compute_instance" "web" {
   count = var.vm_count
 
-  name        = "web${count.index + 1}"
+  name        = "web-${count.index + 1}"
   platform_id = "standard-v1"
   depends_on  = [yandex_compute_instance.db_vm]
 

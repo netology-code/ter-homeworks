@@ -1,0 +1,29 @@
+[webservers]
+
+%{~ if length(webservers) > 0 ~}
+  %{~ for i in webservers ~}
+    ${i["name"]}   ansible_host=${try(i["network_interface"][0]["nat_ip_address"])}   fqdn=${try(i["fqdn"], "N/A")}
+  %{~ endfor ~}
+%{~ else ~}
+  # No webservers defined
+%{~ endif ~}
+
+[databases]
+
+%{~ if length(databases) > 0 ~}
+  %{~ for i in databases ~}
+    ${i["name"]}   ansible_host=${try(i["network_interface"][0]["nat_ip_address"])}   fqdn=${try(i["fqdn"], "N/A")}
+  %{~ endfor ~}
+%{~ else ~}
+  # No databases defined
+%{~ endif ~}
+
+[storage]
+
+%{~ if length(storage) > 0 ~}
+  %{~ for i in storage ~}
+    ${i["name"]}   ansible_host=${try(i["network_interface"][0]["nat_ip_address"])}   fqdn=${try(i["fqdn"], "N/A")}
+  %{~ endfor ~}
+%{~ else ~}
+  # No storage instances defined
+%{~ endif ~}
