@@ -5,9 +5,36 @@
   vars:
     ansible_ssh_user: ubuntu
   become: yes
+
+  pre_tasks:
+    - name: Validating the ssh port is open and
+      wait_for:
+        host: "{{ansible_host}}"
+        port: 22
+        delay: 0
+        timeout: 600
+        state: started
+        msg: "ssh server is not running"
+
   tasks:
     - name: Install Nginx Web Server on Debian Family
       apt:
-        name: nginx
+        name:
+          - nginx
+          - jq
         state: latest
         update_cache: yes
+
+    # cat /tmp/own.pass  | jq
+    - name: save own secret
+      copy:
+        dest: /tmp/own.pass
+        content: "{{ secrets[inventory_hostname]  }}"
+      when: secrets[inventory_hostname] is defined
+
+    # cat /tmp/all.pass  | jq
+    - name: save all secrets
+      copy:
+        dest: /tmp/all.pass
+        content: "{{ secrets }}"
+      when: secrets is defined
