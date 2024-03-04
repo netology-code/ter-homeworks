@@ -95,3 +95,5 @@ CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS  
 
 Образ  docker не удаляется т.к. в описании  ресурса ```docker_image``` явно  указано хранить образ на локальной машине. Согласно  документцации:
 ```    keep_locally (Boolean) If true, then the Docker image won't be deleted on destroy operation. If this is false, it will delete the image from the docker local storage on destroy operation.```
+
+[def]: img/HW01_Docker_ps_approve.png
