@@ -1,19 +1,19 @@
 ### Чек-лист готовности к домашнему заданию
 
-[](img/HW01_Checklist.png)
+![](img/HW01_Checklist.png)
 
 
 
 ### Задание 1
 
 1. Установка необходимых  зависимостей
-    [](img/HW01_Requirements.png)
+    ![](img/HW01_Requirements.png)
 
 2. В фалйе personal.auto.tfvars
 
 3. Содержимое созданного ресурса **random_password**
 
-    [](img/HW01_Random_pass.png)
+    ![](img/HW01_Random_pass.png)
 
 ```bash
 "result": "Jy5FlSyM5LHkBdTP"
@@ -62,7 +62,7 @@ resource "docker_container" "nginx" {
 
 Вывод  команды  ```docker ps```
 
-[](img/HW01_Docker_ps.png)
+![](img/HW01_Docker_ps.png)
 
 ```bash
 [root@terraform01 src]# docker ps
@@ -72,7 +72,7 @@ CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS  
 
 После изменения имени  контейнера  и применения  ```terraform apply --auto-approve``
 
-[](img/HW01_Docker_ps_approve.png)
+![](img/HW01_Docker_ps_approve.png)
 
 Как можно догадаться даже из  дословного  переводе ```auto-approve``` (автоматическое согласование/утверждение) данный ключ применит все изменения без  интерактивного  участия  пользователя. Применять такой ключ не рекомендуется, т.к. в случае такого изменения  при наличии ошибки в коде  можно потерять доступ к созданным ресурсам или даже удалить  их, что особенно критично для продуктивных БД, в которых хранятся пользовательские данные.
     
@@ -94,6 +94,6 @@ CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS  
 ```
 
 Образ  docker не удаляется т.к. в описании  ресурса ```docker_image``` явно  указано хранить образ на локальной машине. Согласно  документцации:
-```    keep_locally (Boolean) If true, then the Docker image won't be deleted on destroy operation. If this is false, it will delete the image from the docker local storage on destroy operation.```
 
-[def]: img/HW01_Docker_ps_approve.png
+```keep_locally (Boolean) If true, then the Docker image won't be deleted on destroy operation. If this is false, it will delete the image from the docker local storage on destroy operation.```
+
