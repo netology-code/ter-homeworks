@@ -152,81 +152,157 @@ resource "yandex_compute_instance" "platform" {
 <details>
   <summary>variables.tf</summary>
 
-    ```bash
-    ###cloud vars
-    variable "cloud_id" {
-    type        = string
-    default     = "b1gjmftgjegm4ag26bp3"
-    description = "https://cloud.yandex.ru/docs/resource-manager/operations/cloud/get-id"
-    }
+```bash
+###cloud vars
+variable "cloud_id" {
+type        = string
+default     = "b1gjmftgjegm4ag26bp3"
+description = "https://cloud.yandex.ru/docs/resource-manager/operations/cloud/get-id"
+}
 
-    variable "folder_id" {
-    type        = string
-    default     = "b1gfqj3kv6rieiisg1p5"
-    description = "https://cloud.yandex.ru/docs/resource-manager/operations/folder/get-id"
-    }
+variable "folder_id" {
+type        = string
+default     = "b1gfqj3kv6rieiisg1p5"
+description = "https://cloud.yandex.ru/docs/resource-manager/operations/folder/get-id"
+}
 
-    variable "default_zone" {
-    type        = string
-    default     = "ru-central1-a"
-    description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
-    }
-    variable "default_cidr" {
-    type        = list(string)
-    default     = ["10.0.1.0/24"]
-    description = "https://cloud.yandex.ru/docs/vpc/operations/subnet-create"
-    }
+variable "default_zone" {
+type        = string
+default     = "ru-central1-a"
+description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
+}
+variable "default_cidr" {
+type        = list(string)
+default     = ["10.0.1.0/24"]
+description = "https://cloud.yandex.ru/docs/vpc/operations/subnet-create"
+}
 
-    variable "vpc_name" {
-    type        = string
-    default     = "develop"
-    description = "VPC network & subnet name"
-    }
+variable "vpc_name" {
+type        = string
+default     = "develop"
+description = "VPC network & subnet name"
+}
 
-    variable "vm_web_compute_image" {
-    type        = string
-    default     = "ubuntu-2004-lts"
-    description = "ubuntu-2004-lts"
-    }
+variable "vm_web_compute_image" {
+type        = string
+default     = "ubuntu-2004-lts"
+description = "ubuntu-2004-lts"
+}
 
-    variable "vm_web_platform" {
-    type        = string
-    default     = "standard-v2"
-    description = "Platform for VM web"
-    }
+variable "vm_web_platform" {
+type        = string
+default     = "standard-v2"
+description = "Platform for VM web"
+}
 
-    ###ssh vars
+###ssh vars
 
-    variable "common_ssh_root_key" {
-    type        = map(string)
-    default     =  {
-        serial-port-enable = 1
-        ssh-keys  = "ubuntu:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIn66AMKG3i2jNcUItP9ZlzKPB2FlL9fCuYMi5AQnTDa root@terraform01"
-        }
-    description = "SSH root key for  all VMs"
+variable "common_ssh_root_key" {
+type        = map(string)
+default     =  {
+    serial-port-enable = 1
+    ssh-keys  = "ubuntu:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIn66AMKG3i2jNcUItP9ZlzKPB2FlL9fCuYMi5AQnTDa root@terraform01"
     }
+description = "SSH root key for  all VMs"
+}
 
-    variable "company" {
-    type        = string
-    default     = "netology"
-    }
+variable "company" {
+type        = string
+default     = "netology"
+}
 
-    variable "environment" {
-    type        = string
-    default     = "develop"
-    }
+variable "environment" {
+type        = string
+default     = "develop"
+}
 
-    variable "project_name" {
-    type        = string
-    default     = "platform"
-    }
+variable "project_name" {
+type        = string
+default     = "platform"
+}
 
-    variable "vm_role" {
-    type        =  list(string)
-    default     =  ["web", "db"]
-    }
-    ```
-  
+variable "vm_role" {
+type        =  list(string)
+default     =  ["web", "db"]
+}
+```  
 </details>
 
 
+<details>
+  <summary>vms_platform.tf</summary>
+  
+```bash
+variable "vm_db_zone_b_cidr" {
+  type        = list(string)
+  default     = ["10.0.2.0/24"]
+  description = "https://cloud.yandex.ru/docs/vpc/operations/subnet-create"
+}
+
+variable "vm_db_zone" {
+  type        = string
+  default     = "ru-central1-b"
+  description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
+}
+
+variable "vm_db_compute_image" {
+  type        = string
+  default     = "ubuntu-2004-lts"
+  description = "ubuntu-2004-lts"
+}
+
+variable "vm_db_platform" {
+  type        = string
+  default     = "standard-v2"
+  description = "Platform for VM db"
+}
+
+###ssh vars
+
+variable "vm_db_vms_ssh_root_key" {
+  type        = string
+  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIn66AMKG3i2jNcUItP9ZlzKPB2FlL9fCuYMi5AQnTDa root@terraform01"
+  description = "ssh-keygen -t ed25519"
+}
+
+
+variable "vm_db_vms_ssh_root_key" {
+  type        = string
+  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIn66AMKG3i2jNcUItP9ZlzKPB2FlL9fCuYMi5AQnTDa root@terraform01"
+  description = "ssh-keygen -t ed25519"
+}
+
+
+variable "vms_resources" {
+  type        = map(map(number))
+  description = "Resources for  VMs"
+  default     = {
+    vm_web_resources = {
+      cores   = 2
+      memory  = 1
+      core_fraction = 5
+    }
+    vm_db_resources = {
+      cores   = 2
+      memory  = 2
+      core_fraction = 20
+    }
+  }
+  ```
+</details>
+
+
+<details>
+  <summary>outputs.tf</summary>
+  
+```bash
+output "test" {
+
+  value = [
+    { vm_web = [yandex_compute_instance.platform.name,yandex_compute_instance.platform.network_interface[0].nat_ip_address, yandex_compute_instance.platform.fqdn ] },
+    { vm_db = [yandex_compute_instance.platform-b.name,yandex_compute_instance.platform-b.network_interface[0].nat_ip_address, yandex_compute_instance.platform-b.fqdn  ] }
+  ]
+}
+```
+  
+</details>
