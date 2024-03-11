@@ -9,7 +9,7 @@ Cкриншот входящих правил «Группы безопасно�
 
 ### Задание 2
 
-Листинг файлов ```count_vm.tf``` и ```for_each-vm.tf```
+Листинг файлов ```count_vm.tf```, ```for_each-vm.tf```, ```variables.tf``` и ```locals.tf```
 
 <details>
   <summary>count_vm.tf</summary>
@@ -206,3 +206,83 @@ locals{
   ```
 </details>
 ------
+
+
+### Задание 3
+
+Листинг файла ```disk_vm.tf```
+
+<details>
+  <summary>disk_vm.tf</summary>
+
+```bash
+resource "yandex_compute_disk" "default" {
+  count = 3
+  name = "disk-${count.index + 1}"
+  type = var.default_resources.disk_type
+  zone = var.default_zone
+  size  = 1
+}
+
+resource "yandex_compute_instance" "storage" {
+  name  = "storage"
+  platform_id = var.default_resources.platform
+
+  resources {
+    cores = var.default_resources.resources.cores
+    memory = var.default_resources.resources.memory
+    core_fraction  = var.default_resources.resources.core_fraction
+  }
+
+  boot_disk {
+    initialize_params {
+      image_id = data.yandex_compute_image.ubuntu-2004-lts.image_id
+      type = var.default_resources.disk_type
+      size = var.default_resources.resources.disk_size
+    }
+  }
+
+  dynamic "secondary_disk" {
+    for_each = {for  disk in yandex_compute_disk.default: disk.name => disk}
+    content {
+     disk_id = secondary_disk.value.id
+     }
+  }
+
+  metadata = local.ssh_settings
+  scheduling_policy { preemptible = true }
+
+  network_interface {
+    subnet_id = yandex_vpc_subnet.develop.id
+    security_group_ids = [yandex_vpc_security_group.example.id]
+    nat       = true
+  }
+  allow_stopping_for_update = true
+```
+</details>
+
+------
+
+
+### Задание 4
+
+Содержимое файла ```ansible.tf```
+
+<details>
+  <summary>disk_vm.tf</summary>
+
+```bash
+resource  "local_file" "hosts" {
+  filename = "${abspath(path.module)}/hosts.cfg"
+  content = templatefile("${abspath(path.module)}/hosts.tftpl",{
+    webservers= [for i in yandex_compute_instance.web: i ]
+    databases=  [for k,v in yandex_compute_instance.database: v ]
+    storages= tolist( [yandex_compute_instance.storage])
+  })
+}
+```
+</details>
+4. Выполните код. Приложите скриншот получившегося файла. 
+
+Для общего зачёта создайте в вашем GitHub-репозитории новую ветку terraform-03. Закоммитьте в эту ветку свой финальный код проекта, пришлите ссылку на коммит.   
+**Удалите все созданные ресурсы**.
