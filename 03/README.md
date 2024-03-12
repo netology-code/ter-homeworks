@@ -269,7 +269,7 @@ resource "yandex_compute_instance" "storage" {
 Содержимое файла ```ansible.tf```
 
 <details>
-  <summary>disk_vm.tf</summary>
+  <summary>ansible.tf</summary>
 
 ```bash
 resource  "local_file" "hosts" {
@@ -282,7 +282,42 @@ resource  "local_file" "hosts" {
 }
 ```
 </details>
-4. Выполните код. Приложите скриншот получившегося файла. 
 
-Для общего зачёта создайте в вашем GitHub-репозитории новую ветку terraform-03. Закоммитьте в эту ветку свой финальный код проекта, пришлите ссылку на коммит.   
-**Удалите все созданные ресурсы**.
+<details>
+  <summary>hosts.tftpl</summary>
+
+```bash
+[webservers]
+%{ for i in webservers ~}
+${i["name"]}   ansible_host=${i["network_interface"][0]["nat_ip_address"]} fqdn=${i["fqdn"]}
+%{endfor }
+[databases]
+%{for i in databases ~}
+${i["name"]}   ansible_host=${i["network_interface"][0]["nat_ip_address"]} fqdn=${i["fqdn"]}
+%{ endfor }
+[storage]
+%{for i in storages ~}
+${i["name"]}   ansible_host=${i["network_interface"][0]["nat_ip_address"]} fqdn=${i["fqdn"]}
+%{ endfor }
+```
+</details>
+
+<details>
+  <summary>hosts.cfg</summary>
+
+```bash
+[webservers]
+netology-develop-platform-web-1   ansible_host=158.160.45.238 fqdn=fhm49gd8jov953ela41v.auto.internal
+netology-develop-platform-web-2   ansible_host=158.160.33.174 fqdn=fhmnm0um26jvbr0gtfh9.auto.internal
+
+[databases]
+main   ansible_host=158.160.105.220 fqdn=fhm30pgvsqvon0uaflcc.auto.internal
+replica   ansible_host=158.160.127.181 fqdn=fhmufosbi6u1j4ft8j2s.auto.internal
+
+[storage]
+storage   ansible_host=62.84.119.230 fqdn=fhm5eqblnrb77vkbu9ib.auto.internal
+```
+</details>
+
+
+![](.img/HW3_TASK4_hosts.png)
