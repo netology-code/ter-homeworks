@@ -191,3 +191,145 @@ variable "zone"{
 </details>
 
 Сгенерированная документация  по написанному модулю   находится [здесь](./src/vpc_dev/Readme.md)
+
+------
+
+### Задание 3
+
+Результат вывода всех  команд ```terraform state``` в консоли
+
+<details>
+  <summary>console output</summary>
+
+```bash
+[root@terraform01 src]# terraform state list
+data.template_file.cloudinit
+module.analytics-vm.data.yandex_compute_image.my_image
+module.analytics-vm.yandex_compute_instance.vm[0]
+module.marketing-vm.data.yandex_compute_image.my_image
+module.marketing-vm.yandex_compute_instance.vm[0]
+module.vpc_dev.yandex_vpc_network.network
+module.vpc_dev.yandex_vpc_subnet.subnet
+[root@terraform01 src]# terraform state rm module.vpc_dev
+Removed module.vpc_dev.yandex_vpc_network.network
+Removed module.vpc_dev.yandex_vpc_subnet.subnet
+Successfully removed 2 resource instance(s).
+[root@terraform01 src]# terraform state rm module.marketing-vm
+Removed module.marketing-vm.data.yandex_compute_image.my_image
+Removed module.marketing-vm.yandex_compute_instance.vm[0]
+Successfully removed 2 resource instance(s).
+[root@terraform01 src]# terraform state rm module.analytics-vm
+Removed module.analytics-vm.data.yandex_compute_image.my_image
+Removed module.analytics-vm.yandex_compute_instance.vm[0]
+Successfully removed 2 resource instance(s).
+[root@terraform01 src]# terraform import module.vpc_dev.yandex_vpc_network.network enpvgell5og3c3bp3s0s
+data.template_file.cloudinit: Reading...
+data.template_file.cloudinit: Read complete after 0s [id=7f522742d8c23602f05628709151aa2824db66252cc90bcb71873d9397d99124]
+module.vpc_dev.yandex_vpc_network.network: Importing from ID "enpvgell5og3c3bp3s0s"...
+module.vpc_dev.yandex_vpc_network.network: Import prepared!
+  Prepared yandex_vpc_network for import
+module.analytics-vm.data.yandex_compute_image.my_image: Reading...
+module.marketing-vm.data.yandex_compute_image.my_image: Reading...
+module.vpc_dev.yandex_vpc_network.network: Refreshing state... [id=enpvgell5og3c3bp3s0s]
+module.marketing-vm.data.yandex_compute_image.my_image: Read complete after 0s [id=fd8c3t86dc563mtmnqce]
+module.analytics-vm.data.yandex_compute_image.my_image: Read complete after 0s [id=fd8c3t86dc563mtmnqce]
+
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+
+[root@terraform01 src]# terraform import module.vpc_dev.yandex_vpc_subnet.subnet e9bardvurbb0qoeal5cb
+data.template_file.cloudinit: Reading...
+data.template_file.cloudinit: Read complete after 0s [id=7f522742d8c23602f05628709151aa2824db66252cc90bcb71873d9397d99124]
+module.analytics-vm.data.yandex_compute_image.my_image: Reading...
+module.marketing-vm.data.yandex_compute_image.my_image: Reading...
+module.vpc_dev.yandex_vpc_subnet.subnet: Importing from ID "e9bardvurbb0qoeal5cb"...
+module.vpc_dev.yandex_vpc_subnet.subnet: Import prepared!
+  Prepared yandex_vpc_subnet for import
+module.vpc_dev.yandex_vpc_subnet.subnet: Refreshing state... [id=e9bardvurbb0qoeal5cb]
+module.marketing-vm.data.yandex_compute_image.my_image: Read complete after 0s [id=fd8c3t86dc563mtmnqce]
+module.analytics-vm.data.yandex_compute_image.my_image: Read complete after 0s [id=fd8c3t86dc563mtmnqce]
+
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+
+[root@terraform01 src]# terraform import module.analytics-vm.yandex_compute_instance.vm[0] fhmjgdqjsurcjlv30k4t
+data.template_file.cloudinit: Reading...
+data.template_file.cloudinit: Read complete after 0s [id=7f522742d8c23602f05628709151aa2824db66252cc90bcb71873d9397d99124]
+module.marketing-vm.data.yandex_compute_image.my_image: Reading...
+module.analytics-vm.data.yandex_compute_image.my_image: Reading...
+module.marketing-vm.data.yandex_compute_image.my_image: Read complete after 0s [id=fd8c3t86dc563mtmnqce]
+module.analytics-vm.data.yandex_compute_image.my_image: Read complete after 0s [id=fd8c3t86dc563mtmnqce]
+module.analytics-vm.yandex_compute_instance.vm[0]: Importing from ID "fhmjgdqjsurcjlv30k4t"...
+module.analytics-vm.yandex_compute_instance.vm[0]: Import prepared!
+  Prepared yandex_compute_instance for import
+module.analytics-vm.yandex_compute_instance.vm[0]: Refreshing state... [id=fhmjgdqjsurcjlv30k4t]
+
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+
+[root@terraform01 src]# terraform import module.marketing-vm.yandex_compute_instance.vm[0] fhmun6mtslrbbjdbiks1
+data.template_file.cloudinit: Reading...
+data.template_file.cloudinit: Read complete after 0s [id=7f522742d8c23602f05628709151aa2824db66252cc90bcb71873d9397d99124]
+module.marketing-vm.data.yandex_compute_image.my_image: Reading...
+module.analytics-vm.data.yandex_compute_image.my_image: Reading...
+module.analytics-vm.data.yandex_compute_image.my_image: Read complete after 0s [id=fd8c3t86dc563mtmnqce]
+module.marketing-vm.data.yandex_compute_image.my_image: Read complete after 0s [id=fd8c3t86dc563mtmnqce]
+module.marketing-vm.yandex_compute_instance.vm[0]: Importing from ID "fhmun6mtslrbbjdbiks1"...
+module.marketing-vm.yandex_compute_instance.vm[0]: Import prepared!
+  Prepared yandex_compute_instance for import
+module.marketing-vm.yandex_compute_instance.vm[0]: Refreshing state... [id=fhmun6mtslrbbjdbiks1]
+
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+
+[root@terraform01 src]# terraform plan
+data.template_file.cloudinit: Reading...
+data.template_file.cloudinit: Read complete after 0s [id=7f522742d8c23602f05628709151aa2824db66252cc90bcb71873d9397d99124]
+module.analytics-vm.data.yandex_compute_image.my_image: Reading...
+module.marketing-vm.data.yandex_compute_image.my_image: Reading...
+module.vpc_dev.yandex_vpc_network.network: Refreshing state... [id=enpvgell5og3c3bp3s0s]
+module.analytics-vm.data.yandex_compute_image.my_image: Read complete after 0s [id=fd8c3t86dc563mtmnqce]
+module.marketing-vm.data.yandex_compute_image.my_image: Read complete after 0s [id=fd8c3t86dc563mtmnqce]
+module.vpc_dev.yandex_vpc_subnet.subnet: Refreshing state... [id=e9bardvurbb0qoeal5cb]
+module.analytics-vm.yandex_compute_instance.vm[0]: Refreshing state... [id=fhmjgdqjsurcjlv30k4t]
+module.marketing-vm.yandex_compute_instance.vm[0]: Refreshing state... [id=fhmun6mtslrbbjdbiks1]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with
+the following symbols:
+  ~ update in-place
+
+Terraform will perform the following actions:
+
+  # module.analytics-vm.yandex_compute_instance.vm[0] will be updated in-place
+  ~ resource "yandex_compute_instance" "vm" {
+      + allow_stopping_for_update = true
+        id                        = "fhmjgdqjsurcjlv30k4t"
+        name                      = "stage-web-stage-0"
+        # (11 unchanged attributes hidden)
+
+        # (6 unchanged blocks hidden)
+    }
+
+  # module.marketing-vm.yandex_compute_instance.vm[0] will be updated in-place
+  ~ resource "yandex_compute_instance" "vm" {
+      + allow_stopping_for_update = true
+        id                        = "fhmun6mtslrbbjdbiks1"
+        name                      = "develop-web-0"
+        # (11 unchanged attributes hidden)
+
+        # (6 unchanged blocks hidden)
+    }
+
+Plan: 0 to add, 2 to change, 0 to destroy.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+```
+</details>
