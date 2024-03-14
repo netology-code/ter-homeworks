@@ -189,3 +189,5 @@ variable "zone"{
 }
 ```
 </details>
+
+Сгенерированная документация  по написанному модулю   находится тут [Readme.md](/ter-homeworks/04/src/vpc_dev/Readme.md)
