@@ -118,3 +118,74 @@ data "template_file" "cloudinit" {
 }
 ```
 </details>
+
+
+------
+
+### Задание 2
+
+Листинг файлов с кодом модуля ```vpc-dev```
+
+<details>
+  <summary>main.tf</summary>
+
+```bash
+terraform {
+  required_providers {
+    yandex = {
+      source = "yandex-cloud/yandex"
+    }
+  }
+  required_version = ">=0.13"
+}
+
+
+resource "yandex_vpc_network" "network" {
+  name = var.env_name
+}
+
+resource "yandex_vpc_subnet" "subnet" {
+  name = "${var.env_name}-${var.zone}"
+  zone = var.zone
+  network_id = yandex_vpc_network.network.id
+  v4_cidr_blocks = var.cidr_block
+}
+```
+</details>
+
+
+<details>
+  <summary>outputs.tf.tf</summary>
+
+```bash
+output "vpc_network"{
+  value       = yandex_vpc_network.network
+  description = "Yandex vpc network"
+}
+output "vpc_subnet"{
+  value       = yandex_vpc_subnet.subnet
+  description = "Yandex vpc subnet"
+}
+```
+</details>
+
+<details>
+  <summary>variables.tf</summary>
+
+```bash
+variable "env_name" {
+  type        = string
+  description = "VPC network&subnet name"
+}
+
+variable "cidr_block"{
+  type        = list(string)
+  default     = ["10.0.1.0/24"]
+}
+
+variable "zone"{
+  type        = string
+  default     = ""
+}
+```
+</details>
