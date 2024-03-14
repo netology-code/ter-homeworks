@@ -190,4 +190,4 @@ variable "zone"{
 ```
 </details>
 
-Сгенерированная документация  по написанному модулю   находится тут [Readme.md](ter-homeworks/blob/main/04/src/vpc_dev/Readme.md)
+Сгенерированная документация  по написанному модулю   находится [здесь](./src/vpc_dev/Readme.md)
