@@ -333,3 +333,18 @@ Plan: 0 to add, 2 to change, 0 to destroy.
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ```
 </details>
+
+
+Скриншоты команд и результат их  вывода
+
+![](.img/HW4_TASK3_state_list.png)
+
+![](.img/HW4_TASK3_module_rm.png)
+
+![](.img/HW4_TASK3_module_vm_rm.png)
+
+![](.img/HW4_TASK3_module_vpc_import.png)
+
+![](.img/HW4_TASK3_module_vm_import.png)
+
+![](.img/HW4_TASK3_terraform_plan.png)
