@@ -1,3 +1,59 @@
+### Задание 1
+
+Скриншот  ЯО с labels  ВМ.
+
+![](.img/HW4_TASK1_vms_labels.png)
+
+Листниг  файлов с кодом и переменными
+
+<details>
+  <summary>cloud-init.yml</summary>
+
+```yaml
+users:
+  - name: ubuntu
+    groups: sudo
+    shell: /bin/bash
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    ssh_authorized_keys:
+      - ${public_key}
+package_update: true
+package_upgrade: false
+packages:
+ - vim
+ - nginx
+runcmd:
+ - systemctl start nginx
+ - systemctl enable nginx
+```
+</details>
+
+
+<details>
+  <summary>locals.tf</summary>
+
+```bash
+locals{
+    ssh-keys  = "${file("~/.ssh/id_ed25519.pub")}"
+  }
+```
+</details>
+
+
+<details>
+  <summary>locals.tf</summary>
+
+```bash
+locals{
+    ssh-keys  = "${file("~/.ssh/id_ed25519.pub")}"
+  }
+```
+</details>
+
+<details>
+  <summary>main.tf</summary>
+
+```bash
 resource "yandex_vpc_network" "develop" {
   name = var.vpc_name
 }
@@ -54,3 +110,5 @@ data "template_file" "cloudinit" {
     public_key = local.ssh-keys
   }
 }
+```
+</details>
