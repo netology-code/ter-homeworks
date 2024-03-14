@@ -4,6 +4,12 @@
 
 ![](.img/HW4_TASK1_vms_labels.png)
 
+Скриншотs  вывода модулей в ```terraform console```
+
+![](.img/HW4_TASK1_module_marketing.png)
+
+![](.img/HW4_TASK1_module_analytics.png)
+
 Листниг  файлов с кодом и переменными
 
 <details>
