@@ -23,7 +23,7 @@
 
 #Преобразование типов данных. 
 # > tostring(42), tostring(true)
-# > toint("42") 
+# > tonumber("42") 
 # > tobool("true")
 # > toset(["apple", "banana", "apple", "orange", "apple", "cherry", "apple"])  Только уникальные!!
 # > tonumber() - преобразует значение в число. Например, tonumber("3.14") вернет число 3.14.
