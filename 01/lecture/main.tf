@@ -1,6 +1,6 @@
 terraform {
   required_providers {}
-  required_version = "=1.5.7"
+  required_version = "~>1.8.4"
 }
 
 resource "random_password" "any_uniq_name" {

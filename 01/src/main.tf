@@ -5,7 +5,7 @@ terraform {
       version = "~> 3.0.1"
     }
   }
-  required_version = ">=0.13" /*Многострочный комментарий.
+  required_version = "~>1.8.4" /*Многострочный комментарий.
  Требуемая версия terraform */
 }
 provider "docker" {}
