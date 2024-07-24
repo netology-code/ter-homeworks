@@ -37,6 +37,15 @@ variable "my_tuple" {
   default = ["hello", 42]
 }
 
+#все значения map станут строками! используйте object!
+#> var.map_is_strings.key3
+#"true" 
+variable "map_is_strings" {
+  type    = map(any)
+  default = {key1="a", key2=2, key3=true} 
+}
+
+
 # > var.my_tuple
 # > var.my_tuple[0]
 
