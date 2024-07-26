@@ -18,57 +18,18 @@ data "yandex_compute_image" "ubuntu-2004-lts" {
   family = "ubuntu-2004-lts"
 }
 
-#создаем 2 идентичные ВМ
-resource "yandex_compute_instance" "example" {
-  depends_on = [yandex_compute_instance.bastion]
-
-  count = 2
-
-  name        = "netology-develop-platform-web-${count.index}"
-  platform_id = "standard-v1"
-
-  resources {
-    cores         = 2
-    memory        = 1
-    core_fraction = 20
-  }
-
-  boot_disk {
-    initialize_params {
-      image_id = data.yandex_compute_image.ubuntu-2004-lts.image_id
-      type     = "network-hdd"
-      size     = 5
-    }
-  }
-
-  metadata = {
-    ssh-keys = "ubuntu:${var.public_key}"
-  }
-
-  scheduling_policy { preemptible = true }
-
-  network_interface {
-    subnet_id = yandex_vpc_subnet.develop.id
-    nat       =length(yandex_compute_instance.bastion)>0 ? false : true
-  }
-  allow_stopping_for_update = true
-}
 
 variable "env"{
   type=string
-  default="production"
+  default="production" #создавать ли бастион
 }
 
 variable "external_acess_bastion"{
   type=bool
-  default=true #false true
+  default=true #false true создавать ли бастион
 }
 
-output "vms" {
-  value={
-    bastion=length(yandex_compute_instance.bastion)>0 ? yandex_compute_instance.bastion.0.network_interface.0.nat_ip_address: null
-  }
-}
+#создаем/не создаем бастион
 resource "yandex_compute_instance" "bastion" {
   count = alltrue([var.env == "production",var.external_acess_bastion]) ? 1 : 0
 
@@ -122,21 +83,48 @@ resource "yandex_compute_instance" "bastion" {
 
 
 
-resource "random_password" "solo" {
-  length = 17
-#> type.random_password.solo  list(object)
+
+
+
+#создаем 2 идентичные ВМ
+resource "yandex_compute_instance" "example" {
+  depends_on = [yandex_compute_instance.bastion]
+
+  count = 2
+
+  name        = "netology-develop-platform-web-${count.index}"
+  platform_id = "standard-v1"
+
+  resources {
+    cores         = 2
+    memory        = 1
+    core_fraction = 20
+  }
+
+  boot_disk {
+    initialize_params {
+      image_id = data.yandex_compute_image.ubuntu-2004-lts.image_id
+      type     = "network-hdd"
+      size     = 5
+    }
+  }
+
+  metadata = {
+    ssh-keys = "ubuntu:${var.public_key}"
+  }
+
+  scheduling_policy { preemptible = true }
+
+  network_interface {
+    subnet_id = yandex_vpc_subnet.develop.id
+    nat       =length(yandex_compute_instance.bastion)>0 ? false : true
+  }
+  allow_stopping_for_update = true
 }
 
-resource "random_password" "count" {
-  count    = length([ for i in yandex_compute_instance.example: i])
-  length = 17
-#> type(random_password.count)  list(object)
+
+output "vms" {
+  value={
+    bastion=length(yandex_compute_instance.bastion)>0 ? yandex_compute_instance.bastion.0.network_interface.0.nat_ip_address: null
+  }
 }
-
-
-resource "random_password" "each" {
-  for_each    = toset([for k, v in yandex_compute_instance.example : v.name ])
-  length = 17
-#> type(random_password.each) object(object)
-}
-
