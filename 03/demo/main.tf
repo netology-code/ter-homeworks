@@ -86,7 +86,7 @@ resource "yandex_compute_instance" "bastion" {
 
 
 
-#создаем 2 идентичные ВМ
+#создаем 2 идентичные ВМ во внутренней или внешней сети в зависимости от бастиона
 resource "yandex_compute_instance" "example" {
   depends_on = [yandex_compute_instance.bastion]
 
