@@ -17,13 +17,13 @@
         search_regex: OpenSSH
 
   tasks:
-    - name: Install Nginx Web Server on Debian Family
-      apt:
-        name:
-          - nginx
-          - jq
-        state: latest
-        update_cache: yes
+    # - name: Install Nginx Web Server on Debian Family
+    #   apt:
+    #     name:
+    #       - nginx
+    #       - jq
+    #     state: latest
+    #     update_cache: yes
 
     # cat /tmp/own.pass  | jq
     - name: save own secret

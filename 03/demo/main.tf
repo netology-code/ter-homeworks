@@ -67,7 +67,6 @@ variable "external_acess_bastion"{
 output "vms" {
   value={
     bastion=length(yandex_compute_instance.bastion)>0 ? yandex_compute_instance.bastion.0.network_interface.0.nat_ip_address: null
-    vm1=length(yandex_compute_instance.example)>0 ? yandex_compute_instance.example.0.network_interface.0.nat_ip_address: null
   }
 }
 resource "yandex_compute_instance" "bastion" {

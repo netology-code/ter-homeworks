@@ -11,4 +11,6 @@ personal.auto.tfvars
 
 
 #ansible
-*.cfg
+hosts.ini
+for.ini
+hosts.yaml

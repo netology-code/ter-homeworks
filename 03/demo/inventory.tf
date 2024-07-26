@@ -11,7 +11,11 @@ resource "local_file" "hosts_for" {
   %{if length(yandex_compute_instance.example) > 0}
   [webservers]
   %{for i in yandex_compute_instance.example }
+  %{if length(yandex_compute_instance.bastion) > 0}
+  ${i["name"]}   ansible_host=${i["network_interface"][0]["ip_address"]}
+  %{else}
   ${i["name"]}   ansible_host=${i["network_interface"][0]["nat_ip_address"]}
+  %{endif}
   %{endfor}
   %{endif}
   %{if length(yandex_compute_instance.bastion) > 0}
