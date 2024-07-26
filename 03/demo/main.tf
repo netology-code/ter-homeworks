@@ -20,6 +20,8 @@ data "yandex_compute_image" "ubuntu-2004-lts" {
 
 #создаем 2 идентичные ВМ
 resource "yandex_compute_instance" "example" {
+  depends_on = [yandex_compute_instance.bastion]
+
   count = 2
 
   name        = "netology-develop-platform-web-${count.index}"
@@ -47,7 +49,7 @@ resource "yandex_compute_instance" "example" {
 
   network_interface {
     subnet_id = yandex_vpc_subnet.develop.id
-    nat       = true
+    nat       =length(yandex_compute_instance.bastion)>0 ? false : true
   }
   allow_stopping_for_update = true
 }
@@ -59,7 +61,7 @@ variable "env"{
 
 variable "external_acess_bastion"{
   type=bool
-  default=false #false true
+  default=true #false true
 }
 
 output "vms" {
@@ -76,17 +78,16 @@ resource "yandex_compute_instance" "bastion" {
         user     = "ubuntu"
         host     = self.network_interface.0.nat_ip_address #можно конечно и yandex_compute_instance.bastion["network_interface"][0]["nat_ip_address"] но не нужно!
         private_key = file("~/.ssh/id_ed25519")
+        timeout     = "120s"
   }
   provisioner "file" {
-     content      = <<-EOT
-     TEST
-     EOT
-     destination = "/tmp/testfile"
-     
+    source            = "./scripts"
+    destination       = "/tmp"
    }
   provisioner "remote-exec" {
-    scripts = [ # This is a list of paths (relative or absolute) to local scripts that will be copied to the remote resource and then executed.
-      "./script.sh",
+    inline = [
+      "chmod +x /tmp/scripts/script.sh",
+      "/tmp/scripts/script.sh"
     ]
    }
 

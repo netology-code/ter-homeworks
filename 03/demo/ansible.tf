@@ -8,7 +8,7 @@ variable "web_provision" {
 resource "null_resource" "web_hosts_provision" {
   count = var.web_provision == true ? 1 : 0 #var.web_provision ? 1 : 0
   #Ждем создания инстанса
-  depends_on = [yandex_compute_instance.example]
+  depends_on = [yandex_compute_instance.example,yandex_compute_instance.bastion]
 
   #Добавление ПРИВАТНОГО ssh ключа в ssh-agent
   provisioner "local-exec" {
