@@ -52,6 +52,74 @@ resource "yandex_compute_instance" "example" {
   allow_stopping_for_update = true
 }
 
+variable "env"{
+  type=string
+  default="production"
+}
+
+variable "external_acess_bastion"{
+  type=bool
+  default=false #false true
+}
+
+output "vms" {
+  value={
+    bastion=length(yandex_compute_instance.bastion)>0 ? yandex_compute_instance.bastion.0.network_interface.0.nat_ip_address: null
+    vm1=length(yandex_compute_instance.example)>0 ? yandex_compute_instance.example.0.network_interface.0.nat_ip_address: null
+  }
+}
+resource "yandex_compute_instance" "bastion" {
+  count = alltrue([var.env == "production",var.external_acess_bastion]) ? 1 : 0
+
+  connection {
+        type     = "ssh"
+        user     = "ubuntu"
+        host     = self.network_interface.0.nat_ip_address #можно конечно и yandex_compute_instance.bastion["network_interface"][0]["nat_ip_address"] но не нужно!
+        private_key = file("~/.ssh/id_ed25519")
+  }
+  provisioner "file" {
+     content      = <<-EOT
+     TEST
+     EOT
+     destination = "/tmp/testfile"
+     
+   }
+  provisioner "remote-exec" {
+    scripts = [ # This is a list of paths (relative or absolute) to local scripts that will be copied to the remote resource and then executed.
+      "./script.sh",
+    ]
+   }
+
+  name        = "bastion"
+  platform_id = "standard-v1"
+
+  resources {
+    cores         = 2
+    memory        = 1
+    core_fraction = 20
+  }
+
+  boot_disk {
+    initialize_params {
+      image_id = data.yandex_compute_image.ubuntu-2004-lts.image_id
+      type     = "network-hdd"
+      size     = 5
+    }
+  }
+
+  metadata = {
+    ssh-keys = "ubuntu:${var.public_key}"
+  }
+
+  scheduling_policy { preemptible = true }
+
+  network_interface {
+    subnet_id = yandex_vpc_subnet.develop.id
+    nat       = true
+  }
+  allow_stopping_for_update = true
+}
+
 
 
 resource "random_password" "solo" {
