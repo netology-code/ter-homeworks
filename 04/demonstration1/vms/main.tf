@@ -31,8 +31,8 @@ module "test-vm" {
   public_ip      = true
 
   labels = { 
-    owner= "Vasya",
-    org = "ooo_roga_and_coputa"
+    owner= "i.ivanov",
+    project = "accounting"
      }
 
   metadata = {
