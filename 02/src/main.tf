@@ -8,14 +8,14 @@ resource "yandex_vpc_network" "develop-db" {
 resource "yandex_vpc_subnet" "develop-web" {
   name           = var.vpc_name-web
   zone           = var.default_zone-web
-  network_id     = yandex_vpc_network.develop.id
-  v4_cidr_blocks = var.default_cidr
+  network_id     = yandex_vpc_network-web.develop.id
+  v4_cidr_blocks = var.default_cidr-web
 }
 resource "yandex_vpc_subnet" "develop-db" {
   name           = var.vpc_name-db
   zone           = var.default_zone-db
-  network_id     = yandex_vpc_network.develop.id
-  v4_cidr_blocks = var.default_cidr
+  network_id     = yandex_vpc_network-db.develop.id
+  v4_cidr_blocks = var.default_cidr-db
 }
 
 data "yandex_compute_image" "ubuntu" {
