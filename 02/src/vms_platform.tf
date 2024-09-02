@@ -62,6 +62,44 @@ variable "vm_web_yandex_compute_instance_resources_core_fraction" {
     default = 5
 }
 
+
+variable "db_default_zone" {
+  type        = string
+  default     = "ru-central1-b"
+  description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
+}
+
+variable "vm_db_yandex_compute_image_family" {
+    type    = string
+    default = "ubuntu-2004-lts"
+}
+
+variable "vm_db_yandex_compute_instance_name" {
+    type    = string
+    default = "netology-develop-platform-web"
+}
+
+variable "vm_db_yandex_compute_instance_platform_id" {
+    type    = string
+    default = "standard-v1"
+}
+
+variable "vm_db_yandex_compute_instance_resources_cores" {
+    type    = number
+    default = 2
+}
+
+variable "vm_db_yandex_compute_instance_resources_memory" {
+    type    = number
+    default = 2
+}
+
+variable "vm_db_yandex_compute_instance_resources_core_fraction" {
+    type    = number
+    default = 20
+}
+
+
 ###ssh vars
 variable "vms_ssh_root_key" {
   type        = string
