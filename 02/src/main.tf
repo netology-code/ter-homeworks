@@ -12,7 +12,7 @@ data "yandex_compute_image" "ubuntu" {
   family = var.vm_web_yandex_compute_image_family
 }
 
-resource "yandex_compute_instance" "platform" {
+resource "yandex_compute_instance" "platform-web" {
   name        = var.vm_web_yandex_compute_instance_name
   platform_id = var.vm_web_yandex_compute_instance_platform_id
   resources {
@@ -38,7 +38,7 @@ resource "yandex_compute_instance" "platform" {
   }
 }
 
-resource "yandex_compute_instance" "platform" {
+resource "yandex_compute_instance" "platform-db" {
   name        = var.vm_db_yandex_compute_instance_name
   platform_id = var.vm_db_yandex_compute_instance_platform_id
   zone        = "ru-central1-b"
