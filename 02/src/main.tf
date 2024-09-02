@@ -1,7 +1,7 @@
 resource "yandex_vpc_network" "develop" {
   name = var.vpc_name
 }
-resource "yandex_vpc_subnet" "developweb" {
+resource "yandex_vpc_subnet" "develop-web" {
   name           = var.vpc_name
   zone           = var.default_zone-web
   network_id     = yandex_vpc_network.develop.id
