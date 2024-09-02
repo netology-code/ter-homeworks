@@ -1,6 +1,10 @@
-resource "yandex_vpc_network" "develop" {
-  name = var.vpc_name
+resource "yandex_vpc_network" "develop-web" {
+  name = var.vpc_name-web
 }
+resource "yandex_vpc_network" "develop-db" {
+  name = var.vpc_name-db
+}
+
 resource "yandex_vpc_subnet" "develop-web" {
   name           = var.vpc_name
   zone           = var.default_zone-web
