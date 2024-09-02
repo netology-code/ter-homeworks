@@ -36,14 +36,9 @@ variable "default_cidr-db" {
   description = "https://cloud.yandex.ru/docs/vpc/operations/subnet-create"
 }
 
-variable "vpc_name-web" {
+variable "vpc_name" {
   type        = string
-  default     = "develop-web"
-  description = "VPC network & subnet name"
-}
-variable "vpc_name-db" {
-  type        = string
-  default     = "develop-db"
+  default     = "develop"
   description = "VPC network & subnet name"
 }
 
