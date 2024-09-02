@@ -41,6 +41,7 @@ resource "yandex_compute_instance" "platform" {
 resource "yandex_compute_instance" "platform" {
   name        = var.vm_db_yandex_compute_instance_name
   platform_id = var.vm_db_yandex_compute_instance_platform_id
+  zone        = "ru-central1-b"
   resources {
     cores         = var.db_web_yandex_compute_instance_resources_cores
     memory        = var.db_web_yandex_compute_instance_resources_memory
