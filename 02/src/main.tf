@@ -5,13 +5,13 @@ resource "yandex_vpc_network" "develop" {
 resource "yandex_vpc_subnet" "develop-web" {
   name           = var.vpc_name
   zone           = var.default_zone-web
-  network_id     = yandex_vpc_network.develop-web.id
+  network_id     = yandex_vpc_network.develop.id
   v4_cidr_blocks = var.default_cidr-web
 }
 resource "yandex_vpc_subnet" "develop-db" {
   name           = var.vpc_name
   zone           = var.default_zone-db
-  network_id     = yandex_vpc_network.develop-db.id
+  network_id     = yandex_vpc_network.develop.id
   v4_cidr_blocks = var.default_cidr-db
 }
 
