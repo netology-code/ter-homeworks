@@ -43,9 +43,9 @@ resource "yandex_compute_instance" "platform-db" {
   platform_id = var.vm_db_yandex_compute_instance_platform_id
   zone        = "ru-central1-b"
   resources {
-    cores         = var.db_web_yandex_compute_instance_resources_cores
-    memory        = var.db_web_yandex_compute_instance_resources_memory
-    core_fraction = var.db_web_yandex_compute_instance_resources_core_fraction
+    cores         = var.vm_db_yandex_compute_instance_resources_cores
+    memory        = var.vm_db_yandex_compute_instance_resources_memory
+    core_fraction = var.vm.db_yandex_compute_instance_resources_core_fraction
   }
   boot_disk {
     initialize_params {
