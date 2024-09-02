@@ -31,6 +31,37 @@ variable "vpc_name" {
   description = "VPC network & subnet name"
 }
 
+
+variables "vm_web_yandex_compute_image_family" {
+    type    = string
+    default = "ubuntu-2004-lts"
+}
+
+variables "vm_web_yandex_compute_instance_name" {
+    type    = string
+    default = "netology-develop-platform-web"
+}
+
+variables "vm_web_yandex_compute_instance_platform_id" {
+    type    = string
+    default = "standard-v1"
+}
+
+variables "vm_web_yandex_compute_instance_resources_cores" {
+    type    = string
+    default = 2
+}
+
+variables "vm_web_yandex_compute_instance_resources_memory"" {
+    type    = string
+    default = 1
+}
+
+variables "vm_web_yandex_compute_instance_resources_core_fraction"" {
+    type    = string
+    default = 5
+}
+
 ###ssh vars
 variable "vms_ssh_root_key" {
   type        = string
