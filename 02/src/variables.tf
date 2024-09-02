@@ -32,33 +32,33 @@ variable "vpc_name" {
 }
 
 
-variables "vm_web_yandex_compute_image_family" {
+variable "vm_web_yandex_compute_image_family" {
     type    = string
     default = "ubuntu-2004-lts"
 }
 
-variables "vm_web_yandex_compute_instance_name" {
+variable "vm_web_yandex_compute_instance_name" {
     type    = string
     default = "netology-develop-platform-web"
 }
 
-variables "vm_web_yandex_compute_instance_platform_id" {
+variable "vm_web_yandex_compute_instance_platform_id" {
     type    = string
     default = "standard-v1"
 }
 
-variables "vm_web_yandex_compute_instance_resources_cores" {
-    type    = string
+variable "vm_web_yandex_compute_instance_resources_cores" {
+    type    = number
     default = 2
 }
 
-variables "vm_web_yandex_compute_instance_resources_memory"" {
-    type    = string
+variable "vm_web_yandex_compute_instance_resources_memory" {
+    type    = number
     default = 1
 }
 
-variables "vm_web_yandex_compute_instance_resources_core_fraction"" {
-    type    = string
+variable "vm_web_yandex_compute_instance_resources_core_fraction" {
+    type    = number
     default = 5
 }
 
