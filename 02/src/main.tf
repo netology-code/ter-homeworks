@@ -45,7 +45,7 @@ resource "yandex_compute_instance" "platform-db" {
   resources {
     cores         = var.vm_db_yandex_compute_instance_resources_cores
     memory        = var.vm_db_yandex_compute_instance_resources_memory
-    core_fraction = var.vm.db_yandex_compute_instance_resources_core_fraction
+    core_fraction = var.vm_db_yandex_compute_instance_resources_core_fraction
   }
   boot_disk {
     initialize_params {
