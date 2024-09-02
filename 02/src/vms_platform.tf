@@ -63,12 +63,6 @@ variable "vm_web_yandex_compute_instance_resources_core_fraction" {
 }
 
 
-variable "db_default_zone" {
-  type        = string
-  default     = "ru-central1-b"
-  description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
-}
-
 variable "vm_db_yandex_compute_image_family" {
     type    = string
     default = "ubuntu-2004-lts"
