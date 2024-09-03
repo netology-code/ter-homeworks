@@ -11,13 +11,13 @@
 #}
 
 output "netology_develop_platform_db_instance_name" { 
-  value = yandex_compute_instance.vm_db_yandex_compute_instance_name.name
+  value = yandex_compute_instance.vm_db_yandex_compute_instance.name
 }
 
 output "netology_develop_platform_db_fqdn" {
-  value = yandex_compute_instance.vm_db_yandex_compute_instance_name.fqdn
+  value = yandex_compute_instance.vm_db_yandex_compute_instance.fqdn
 }
 
 output "netology_develop_platform_db_external_ip" {
-  value = yandex_compute_instance.vm_db_yandex_compute_instance_name.network_interface.0.nat_ip_address
+  value = yandex_compute_instance.vm_db_yandex_compute_instance.network_interface.0.nat_ip_address
 }
