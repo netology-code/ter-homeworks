@@ -1,7 +1,9 @@
-output "platform_web_instance_name" { 
-  value = yandex_compute_instance.platform-web.name
-}
+output "develop" { 
+  value = [
+    { "Platform WEB instance_name: yandex_compute_instance.platform-web.name" }
+  ]
 
+/*
 output "platform_web_fqdn" {
   value = yandex_compute_instance.platform-web.fqdn
 }
@@ -20,4 +22,6 @@ output "platform_db_fqdn" {
 
 output "platform_db_external_ip" {
   value = yandex_compute_instance.platform-db.network_interface.0.nat_ip_address
+*/
+
 }
