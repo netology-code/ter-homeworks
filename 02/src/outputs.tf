@@ -1,5 +1,5 @@
 output "instance_name" { 
-  value = yandex_compute_instance.platform-web.name
+  value = yandex_compute_instance.vm_*.name
 }
 
 output "fqdn" {
