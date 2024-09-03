@@ -54,9 +54,18 @@ variable "vm_yandex_compute_image_family" {
     default = "ubuntu-2004-lts"
 }
 
+variable "project" {
+    type    = string
+    default = "netology"
+}
+variable "env" {
+    type    = string
+    default = "develop"
+}
+
 variable "vm_web_yandex_compute_instance_name" {
     type    = string
-    default = "netology-develop-platform-web"
+    default = "${local.name}-platform-web"
 }
 variable "vm_web_yandex_compute_instance_platform_id" {
     type    = string
