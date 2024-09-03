@@ -129,14 +129,16 @@ variable "vm_db_yandex_compute_instance_resources_core_fraction" {
 */
 
 variable "metadata" {
-  type = tuple ([
-    number
-    string
-  ])
-  default = [
-    serial-port-enable = 1
-    ssh-keys           = "ubuntu:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJbFQwlXpyF5D6x8yiptgTG/Are3CfQ94MRINvltKRs2 root@nt.ksob.lan"
-  ] 
+  type = map(object({
+    serial-port-enable = number
+    ssh-keys           =  string
+  }))  
+  default = {
+    "vm" = {
+      serial-port-enable = 1
+      ssh-keys = "ubuntu:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJbFQwlXpyF5D6x8yiptgTG/Are3CfQ94MRINvltKRs2 root@nt.ksob.lan"
+    }  
+  }
   description = "metadata"
 }
 
