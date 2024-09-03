@@ -1,5 +1,5 @@
 output "instance_name" { 
-  value = yandex_compute_instance.*.name
+  value = yandex_compute_instance.name
 }
 
 output "fqdn" {
