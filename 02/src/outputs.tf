@@ -2,22 +2,22 @@ output "platform_web_instance_name" {
   value = yandex_compute_instance.platform-web.name
 }
 
-#output "netology_develop_platform_web_fqdn" {
-#  value = yandex_compute_instance.vm_web_yandex_compute_instance_name.fqdn
-#}
+output "platform_web_fqdn" {
+  value = yandex_compute_instance.platform-web.fqdn
+}
 
-#output "netology_develop_platform_web_external_ip" {
-#  value = yandex_compute_instance.vm_web_yandex_compute_instance_name.network_interface.0.nat_ip_address
-#}
+output "platform_web_external_ip" {
+  value = yandex_compute_instance.platform-web.network_interface.0.nat_ip_address
+}
 
-output "instance_name" { 
+output "platform_db_instance_name" { 
   value = yandex_compute_instance.platform-db.name
 }
 
-output "fqdn" {
+output "platform_db_fqdn" {
   value = yandex_compute_instance.platform-db.fqdn
 }
 
-output "external_ip" {
+output "platform_db_external_ip" {
   value = yandex_compute_instance.platform-db.network_interface.0.nat_ip_address
 }
