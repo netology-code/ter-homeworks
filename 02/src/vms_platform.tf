@@ -14,23 +14,33 @@ variable "folder_id" {
   description = "https://cloud.yandex.ru/docs/resource-manager/operations/folder/get-id"
 }
 
-variable "default_zone-web" {
+variable "name_zone-a" {
+  type        = string
+  default     = "develop-ru-central1-a"
+  description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
+}
+variable "default_zone-a" {
   type        = string
   default     = "ru-central1-a"
   description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
 }
-variable "default_zone-db" {
-  type        = string
-  default     = "ru-central1-b"
-  description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
-}
-
-variable "default_cidr-web" {
+variable "default_cidr-a" {
   type        = list(string)
   default     = ["10.0.1.0/24"]
   description = "https://cloud.yandex.ru/docs/vpc/operations/subnet-create"
 }
-variable "default_cidr-db" {
+
+variable "name_zone-b" {
+  type        = string
+  default     = "develop-ru-central1-b"
+  description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
+}
+variable "default_zone-b" {
+  type        = string
+  default     = "ru-central1-b"
+  description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
+}
+variable "default_cidr-b" {
   type        = list(string)
   default     = ["10.0.2.0/24"]
   description = "https://cloud.yandex.ru/docs/vpc/operations/subnet-create"
