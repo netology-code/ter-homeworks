@@ -2,17 +2,17 @@ resource "yandex_vpc_network" "develop" {
   name = var.vpc_name
 }
 
-resource "yandex_vpc_subnet" "develop-web" {
-  name           = develop-web
-  zone           = var.default_zone-web
+resource "yandex_vpc_subnet" "develop-a" {
+  name           = var.name.zone-a
+  zone           = var.default_zone-a
   network_id     = yandex_vpc_network.develop.id
-  v4_cidr_blocks = var.default_cidr-web
+  v4_cidr_blocks = var.default_cidr-zone-a
 }
-resource "yandex_vpc_subnet" "develop-db" {
-  name           = develo-db
-  zone           = var.default_zone-db
+resource "yandex_vpc_subnet" "develop-b" {
+  name           = var.name.zone-b
+  zone           = var.default_zone-b
   network_id     = yandex_vpc_network.develop.id
-  v4_cidr_blocks = var.default_cidr-db
+  v4_cidr_blocks = var.default_cidr-zone-b
 }
 
 data "yandex_compute_image" "ubuntu" {
@@ -22,6 +22,7 @@ data "yandex_compute_image" "ubuntu" {
 resource "yandex_compute_instance" "platform-web" {
   name        = var.vm_web_yandex_compute_instance_name
   platform_id = var.vm_web_yandex_compute_instance_platform_id
+  zone        = var.default_zone-a
   resources {
     cores         = var.vm_web_yandex_compute_instance_resources_cores
     memory        = var.vm_web_yandex_compute_instance_resources_memory
@@ -36,7 +37,7 @@ resource "yandex_compute_instance" "platform-web" {
     preemptible = true
   }
   network_interface {
-    subnet_id = yandex_vpc_subnet.develop-web.id
+    subnet_id = yandex_vpc_subnet.develop-a.id
     nat       = true
   }
   metadata = {
@@ -48,7 +49,7 @@ resource "yandex_compute_instance" "platform-web" {
 resource "yandex_compute_instance" "platform-db" {
   name        = var.vm_db_yandex_compute_instance_name
   platform_id = var.vm_db_yandex_compute_instance_platform_id
-  zone        = "ru-central1-b"
+  zone        = var.default_zone-b
   resources {
     cores         = var.vm_db_yandex_compute_instance_resources_cores
     memory        = var.vm_db_yandex_compute_instance_resources_memory
@@ -63,7 +64,7 @@ resource "yandex_compute_instance" "platform-db" {
     preemptible = true
   }
   network_interface {
-    subnet_id = yandex_vpc_subnet.develop-db.id
+    subnet_id = yandex_vpc_subnet.develop-b.id
     nat       = true
   }
   metadata = {
