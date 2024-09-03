@@ -67,5 +67,7 @@ resource "yandex_compute_instance" "platform-db" {
     subnet_id = yandex_vpc_subnet.develop-b.id
     nat       = true
   }
-  metadata = var.metadata
+  metadata = {
+    var.metadata
+  }  
 }
