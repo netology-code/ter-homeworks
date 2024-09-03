@@ -1,6 +1,6 @@
 output "develop" { 
   value = [
-    { "Platform WEB instance_name: ${yandex_compute_instance.platform-web.name}" }
+    { "Platform WEB instance_name:" }
   ]
 }
 
