@@ -1,6 +1,7 @@
 output "develop" { 
   value = [
-    { external_ip = [yandex_compute_instance.platform-web.name] }
+    { external_name_web = yandex_compute_instance.platform-web.name },
+    { external_name_db  = yandex_compute_instance.platform-db.name }
   ]
 }
 
