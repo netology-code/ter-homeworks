@@ -68,7 +68,7 @@ resource "yandex_compute_instance" "platform-db" {
     nat       = true
   }
   metadata = {
-    serial-port-enable = var.vm.metadata.serial-port-enable
-    ssh-keys           = var.vm.metadata.ssh-keys
+    serial-port-enable = var.metadata.vm.serial-port-enable
+    ssh-keys           = var.metadata.vm.ssh-keys
   }
 }
