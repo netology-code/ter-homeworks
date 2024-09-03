@@ -1,4 +1,4 @@
-output "instance_name" { 
+output "platform_web_instance_name" { 
   value = yandex_compute_instance.platform-web.name
 }
 
