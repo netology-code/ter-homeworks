@@ -71,14 +71,14 @@ variable "vms_resources" {
   }))
   default = {
     "web" = {
-      cores    = 2
-      memory   = 1
-      fraction = 5
+      cores         = 2
+      memory        = 1
+      core_fraction = 5
     }
     "db" = {
-      cores    = 2
-      memory   = 2
-      fraction = 20
+      cores         = 2
+      memory        = 2
+      core_fraction = 20
     }
   }
 }
