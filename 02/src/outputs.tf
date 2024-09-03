@@ -1,11 +1,11 @@
 output "instance_name" { 
-  value = yandex_compute_instance.*.name
+  value = yandex_compute_instance.vm.*.name
 }
 
 output "fqdn" {
-  value = yandex_compute_instance.*.hostname
+  value = yandex_compute_instance.vm.*.hostname
 }
 
 output "external_ip" {
-  value = yandex_vpc_address.*.external_ipv4_address.0.address
+  value = yandex_compute_instance.vm.*.network_interface.[0].nat_ip_address
 }
