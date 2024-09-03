@@ -1,6 +1,6 @@
 output "develop" { 
   value = [
-    { "Platform WEB instance_name:" }
+    { external_ip = ["Platform WEB instance_name:"] }
   ]
 }
 
