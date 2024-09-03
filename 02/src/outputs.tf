@@ -1,7 +1,7 @@
 output "develop" { 
   value = [
     { instance_name = [yandex_compute_instance.platform-web.name, yandex_compute_instance.platform-db.name] },
-    { external_ip = [yandex_compute_instance.platform-web.network_interface.0.nat_ip_addres, yandex_compute_instance.platform-db.network_interface.0.nat_ip_addres] },
+    { external_ip = [yandex_compute_instance.platform-web.network_interface.0.nat_ip_address, yandex_compute_instance.platform-db.network_interface.0.nat_ip_address] },
     { fqdn = [yandex_compute_instance.platform-web.fqdn, yandex_compute_instance.platform-db.fqdn] }
   ]
 }
