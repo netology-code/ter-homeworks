@@ -11,11 +11,11 @@
 #}
 
 output "instance_name" { 
-  value = yandex_compute_instance.platform-*.name
+  value = yandex_compute_instance.platform-db.name
 }
 
 output "fqdn" {
-  value = yandex_compute_instance.platform-*.fqdn
+  value = yandex_compute_instance.platform-db.fqdn
 }
 
 #output "netology_develop_platform_db_external_ip" {
