@@ -65,9 +65,9 @@ variable "env" {
 
 variable "vms_resources" {
   type = map(object({
-    cores    = number
-    memory   = number
-    fraction = number
+    cores         = number
+    memory        = number
+    core_fraction = number
   }))
   default = {
     "web" = {
