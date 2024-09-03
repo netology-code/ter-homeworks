@@ -63,6 +63,26 @@ variable "env" {
     default = "develop"
 }
 
+variable "vms_resources" {
+  type = map(object({
+    cores    = number
+    memory   = number
+    fraction = number
+  }))
+  default = {
+    "web" = {
+      cores    = 2
+      memory   = 1
+      fraction = 5
+    }
+    "db" = {
+      cores    = 2
+      memory   = 2
+      fraction = 20
+    }
+  }
+}
+
 variable "vm_web_yandex_compute_instance_name" {
     type    = string
     default = "netology-develop-platform-web"
@@ -71,7 +91,8 @@ variable "vm_web_yandex_compute_instance_platform_id" {
     type    = string
     default = "standard-v1"
 }
-variable "vm_web_yandex_compute_instance_resources_cores" {
+
+/*variable "vm_web_yandex_compute_instance_resources_cores" {
     type    = number
     default = 2
 }
@@ -83,6 +104,7 @@ variable "vm_web_yandex_compute_instance_resources_core_fraction" {
     type    = number
     default = 5
 }
+*/
 
 variable "vm_db_yandex_compute_instance_name" {
     type    = string
@@ -92,7 +114,7 @@ variable "vm_db_yandex_compute_instance_platform_id" {
     type    = string
     default = "standard-v1"
 }
-variable "vm_db_yandex_compute_instance_resources_cores" {
+/*variable "vm_db_yandex_compute_instance_resources_cores" {
     type    = number
     default = 2
 }
@@ -104,7 +126,7 @@ variable "vm_db_yandex_compute_instance_resources_core_fraction" {
     type    = number
     default = 20
 }
-
+*/
 
 ###ssh vars
 variable "vms_ssh_root_key" {
