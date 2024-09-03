@@ -128,19 +128,23 @@ variable "vm_db_yandex_compute_instance_resources_core_fraction" {
 }
 */
 
-###ssh vars
-
 variable "metadata" {
-  type = map(any)
-  default = {
+  type = tuple ([
+    serial-port-enable = number
+    ssh-keys           = string
+  ])
+  default = [
     serial-port-enable = 1
     ssh-keys           = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJbFQwlXpyF5D6x8yiptgTG/Are3CfQ94MRINvltKRs2 root@nt.ksob.lan"
-  }  
+  ] 
   description = "metadata"
 }
 
-#variable "vms_ssh_root_key" {
-#  type        = string
-#  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJbFQwlXpyF5D6x8yiptgTG/Are3CfQ94MRINvltKRs2 root@nt.ksob.lan"
-#  description = "ssh-keygen -t ed25519"
-#}
+/*
+###ssh vars
+variable "vms_ssh_root_key" {
+  type        = string
+  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJbFQwlXpyF5D6x8yiptgTG/Are3CfQ94MRINvltKRs2 root@nt.ksob.lan"
+  description = "ssh-keygen -t ed25519"
+}
+*/
