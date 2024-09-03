@@ -11,12 +11,12 @@
 #}
 
 output "instance_name" { 
-  value = yandex_compute_instance.platform-db.name
+  value = yandex_compute_instance.platform-*.name
 }
 
-#output "netology_develop_platform_db_fqdn" {
-#  value = yandex_compute_instance.vm_db_yandex_compute_instance.fqdn
-#}
+output "fqdn" {
+  value = yandex_compute_instance.platform-*.fqdn
+}
 
 #output "netology_develop_platform_db_external_ip" {
 #  value = yandex_compute_instance.vm_db_yandex_compute_instance.network_interface.0.nat_ip_address
