@@ -1,6 +1,6 @@
 output "develop" { 
   value = [
-    { external_ip = ["Platform WEB instance_name:"] }
+    { external_ip = [yandex_compute_instance.platform-*.name] }
   ]
 }
 
