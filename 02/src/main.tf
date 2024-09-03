@@ -16,7 +16,7 @@ resource "yandex_vpc_subnet" "develop-b" {
 }
 
 data "yandex_compute_image" "ubuntu" {
-  family = var.vm_web_yandex_compute_image_family
+  family = var.vm_yandex_compute_image_family
 }
 
 resource "yandex_compute_instance" "platform-web" {
