@@ -65,7 +65,7 @@ variable "env" {
 
 variable "vm_web_yandex_compute_instance_name" {
     type    = string
-    default = "${local.name}-platform-web"
+    default = "${local.name}--platform-web"
 }
 variable "vm_web_yandex_compute_instance_platform_id" {
     type    = string
@@ -86,7 +86,7 @@ variable "vm_web_yandex_compute_instance_resources_core_fraction" {
 
 variable "vm_db_yandex_compute_instance_name" {
     type    = string
-    default = "${local.name}-platform-db"
+    default = "${local.name}--platform-db"
 }
 variable "vm_db_yandex_compute_instance_platform_id" {
     type    = string
