@@ -1,9 +1,9 @@
 output "instance_name" { 
-  value = yandex_compute_instance.name.*
+  value = yandex_compute_instance.platform-web.name
 }
 
 output "fqdn" {
-  value = yandex_compute_instance.platform-web.hostname
+  value = yandex_compute_instance.platform-web.fqdn
 }
 
 output "external_ip" {
