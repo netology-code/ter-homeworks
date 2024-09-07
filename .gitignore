@@ -15,3 +15,5 @@ personal.auto.tfvars
 terraform.tfvars
 
 tfplan
+
+**/.DS_Store
