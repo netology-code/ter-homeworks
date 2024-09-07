@@ -5,7 +5,7 @@ terraform {
       version = "~> 3.0.1"
     }
   }
-  required_version = "~>1.8.4" /*Многострочный комментарий.
+  required_version = "~>1.9.5" /* Многострочный комментарий.
  Требуемая версия terraform */
 }
 provider "docker" {}
@@ -20,19 +20,18 @@ resource "random_password" "random_string" {
   min_numeric = 1
 }
 
-/*
-resource "docker_image" {
+
+resource "docker_image" "nginx" {
   name         = "nginx:latest"
   keep_locally = true
 }
 
-resource "docker_container" "1nginx" {
+resource "docker_container" "hello_world" {
   image = docker_image.nginx.image_id
-  name  = "example_${random_password.random_string_FAKE.resulT}"
+  name  = "example_${random_password.random_string.result}"
 
   ports {
     internal = 80
     external = 9090
   }
 }
-*/
