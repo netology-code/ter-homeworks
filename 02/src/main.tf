@@ -10,15 +10,16 @@ resource "yandex_vpc_subnet" "develop" {
 
 
 data "yandex_compute_image" "ubuntu" {
-  family = "ubuntu-2004-lts"
+  family = var.vm_web_platform_family
 }
 resource "yandex_compute_instance" "platform" {
-  name        = "netology-develop-platform-web"
-  platform_id = "standart-v4"
+  name        = local.web_name
+  platform_id = var.vms["web"]["platform_id"]
+  
   resources {
-    cores         = 1
-    memory        = 1
-    core_fraction = 5
+    cores         = var.vms["web"].resources["core"]
+    memory        = var.vms["web"].resources["memory"]
+    core_fraction = var.vms["web"].resources["core_fraction"]
   }
   boot_disk {
     initialize_params {
@@ -26,16 +27,16 @@ resource "yandex_compute_instance" "platform" {
     }
   }
   scheduling_policy {
-    preemptible = true
+    preemptible = var.vms["web"].scheduling_policy["preemptible"]
   }
   network_interface {
     subnet_id = yandex_vpc_subnet.develop.id
-    nat       = true
+    nat       = var.vms["web"].network_interface["nat"]
   }
 
   metadata = {
-    serial-port-enable = 1
-    ssh-keys           = "ubuntu:${var.vms_ssh_root_key}"
+    serial-port-enable = var.vms["web"].metadata["serial-port-enable"]
+    ssh-keys           = "${var.vms["web"].metadata["ssh-user"]}:${var.vms_ssh_root_key}"
   }
 
 }
