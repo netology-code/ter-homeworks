@@ -1,8 +1,8 @@
 ###cloud vars
-variable "token" {
+/*variable "token" {
   type        = string
   description = "OAuth-token; https://cloud.yandex.ru/docs/iam/concepts/authorization/oauth-token"
-}
+}*/
 
 variable "cloud_id" {
   type        = string
@@ -29,4 +29,81 @@ variable "vpc_name" {
   type        = string
   default     = "develop"
   description = "VPC network&subnet name"
+}
+
+variable "vms_db" {
+  type = map(object({
+    name        = string
+    platform_id = string
+    resources   = object({
+      core = number
+      memory = number
+      core_fraction = number 
+    })
+    boot_disk = object({
+      type = string
+      size = number
+    })
+    scheduling_policy = object({
+      preemptible = bool
+    })
+    network_interface = object({
+      nat = bool
+    })
+    metadata = object({
+      serial-port-enable = number
+      ssh-user = string
+    })
+    true_flg = bool
+  }))
+  default = {
+      "db-1" = {
+        name = "db-master"
+        platform_id = "standard-v1"
+        resources = {
+          core=2
+          memory=2
+          core_fraction=20
+        }
+        boot_disk = {
+          type = "network-hdd"
+          size = 10
+        }
+        scheduling_policy = {
+          preemptible = true
+        }
+        network_interface = {
+          nat = true
+        }
+        metadata = {
+          serial-port-enable = 1
+          ssh-user  = "ubuntu"
+        }
+        true_flg = true 
+      }
+      "db-2" = {
+        name = "db-slave"
+        platform_id = "standard-v1"
+        resources = {
+          core=2
+          memory=2
+          core_fraction=5
+        }
+        boot_disk = {
+          type = "network-hdd"
+          size = 5
+        }
+        scheduling_policy = {
+          preemptible = true
+        }
+        network_interface = {
+          nat = true
+        }
+        metadata = {
+          serial-port-enable = 1
+          ssh-user  = "ubuntu"
+        }
+        true_flg = true 
+      }
+  }
 }
