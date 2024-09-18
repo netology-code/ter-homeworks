@@ -1,8 +1,8 @@
 ###cloud vars
-variable "token" {
+/*variable "token" {
   type        = string
   description = "OAuth-token; https://cloud.yandex.ru/docs/iam/concepts/authorization/oauth-token"
-}
+}*/
 
 variable "cloud_id" {
   type        = string
@@ -33,11 +33,11 @@ variable "vpc_name" {
 
 ###common vars
 
-variable "vms_ssh_root_key" {
+/*variable "vms_ssh_root_key" {
   type        = string
   default     = "your_ssh_ed25519_key"
   description = "ssh-keygen -t ed25519"
-}
+}*/
 
 ###example vm_web var
 variable "vm_web_name" {
@@ -53,5 +53,42 @@ variable "vm_db_name" {
   description = "example vm_db_ prefix"
 }
 
+variable "vms" {
+  type = map(object({
+    env_name  = string
+    instance_name = string
+    instance_count = number
+    image_family = string
+    public_ip = bool
+    serial-port-enable = number
+  }))
+  default = {
+    "marketing" = {
+      env_name = "marketing"
+      instance_name = "web"
+      instance_count = 1
+      image_family = "ubuntu-2004-lts"
+      public_ip = true
+      serial-port-enable = 1
+    },
+    "analytic" = {
+      env_name = "analytic"
+      instance_name = "web"
+      instance_count = 1
+      image_family = "ubuntu-2004-lts"
+      public_ip = true
+      serial-port-enable = 1
+    }
+  }
+}
 
-
+variable "s3_dev_mod" {
+  type = object({
+    bucket_name = string
+    max_size = number
+  })
+  default = {
+    bucket_name = "bender-dev-bucket"
+    max_size = 1024 * 1024 * 1024 # 1GB 
+  }
+}
