@@ -1,0 +1,17 @@
+#cloud-config
+users:
+  - name: ubuntu
+    groups: sudo
+    shell: /bin/bash
+    sudo: ["ALL=(ALL) NOPASSWD:ALL"]
+    ssh_authorized_keys:
+      - ${ssh_public_key}
+package_update: true
+package_upgrade: false
+packages:
+  - vim
+runcmd:
+  - apt-get update
+  - apt-get install -y nginx
+  - systemctl enable --no-block nginx 
+  - systemctl start --no-block nginx 
