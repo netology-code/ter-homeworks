@@ -51,7 +51,8 @@ resource "yandex_compute_instance" "bastion" {
     ]
    }
 
-  name        = "bastion"
+  name        = "bastion"  #Имя ВМ в облачной консоли
+  hostname    = "bastion" #формирует FDQN имя хоста, без hostname будет сгенрировано случаное имя.
   platform_id = "standard-v1"
 
   resources {
@@ -92,7 +93,8 @@ resource "yandex_compute_instance" "example" {
 
   count = 2
 
-  name        = "netology-develop-platform-web-${count.index}"
+  name        = "netology-develop-platform-web-${count.index}" #Имя ВМ в облачной консоли
+  hostname    = "netology-develop-platform-web-${count.index}" #формирует FDQN имя хоста, без hostname будет сгенрировано случаное имя.
   platform_id = "standard-v1"
 
   resources {
