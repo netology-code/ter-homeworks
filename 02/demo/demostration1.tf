@@ -17,7 +17,6 @@ resource "yandex_vpc_subnet" "prod-a" {
 }
 
 
-
 #создаем облачную подсеть zone A
 resource "yandex_vpc_subnet" "develop-a" {
   name           = "develop-ru-central1-a"
@@ -36,27 +35,28 @@ resource "yandex_vpc_subnet" "develop-b" {
 
 
 #считываем данные об образе ОС
-data "yandex_compute_image" "ubuntu-2004-lts" {
-  family = "ubuntu-2004-lts"
+data "yandex_compute_image" "ubuntu-2204-lts" {
+  family = "ubuntu-2204-lts"
 }
 
 resource "yandex_compute_instance" "example-a" {
   name        = "netology-develop-platform-web-a"
-  platform_id = "standard-v1"
+  hostname    = "netology-develop-platform-web-a"
+  platform_id = "standard-v3"
 
   zone = "ru-central1-a" #Это очень важно  при создании ресурса в зоне отличной от Зоны по-умолчанию("ru-central1-a")! 
 
   resources {
     cores         = 2
     memory        = 1
-    core_fraction = 5
+    core_fraction = 20
   }
 
   boot_disk {
     initialize_params {
-      image_id = data.yandex_compute_image.ubuntu-2004-lts.image_id
+      image_id = data.yandex_compute_image.ubuntu-2204-lts.image_id
       type     = "network-hdd"
-      size     = 5
+      size     = 10
     }
   }
 
@@ -78,20 +78,20 @@ resource "yandex_compute_instance" "example-a" {
 
 resource "yandex_compute_instance" "example-b" {
   name        = "netology-develop-platform-web-b"
-  platform_id = "standard-v1"
+  platform_id = "standard-v3"
 
   zone = "ru-central1-b" #Это очень важно  при создании ресурса в зоне отличной от Зоны по-умолчанию("ru-central1-a")! 
   resources {
     cores         = 2
     memory        = 1
-    core_fraction = 5
+    core_fraction = 20
   }
 
   boot_disk {
     initialize_params {
-      image_id = data.yandex_compute_image.ubuntu-2004-lts.image_id
+      image_id = data.yandex_compute_image.ubuntu-2204-lts.image_id
       type     = "network-hdd"
-      size     = 5
+      size     = 10
     }
   }
 
@@ -115,21 +115,21 @@ resource "yandex_compute_instance" "example-b" {
 
 resource "yandex_compute_instance" "prod-example-a" {
   name        = "netology-prod-platform-web-a"
-  platform_id = "standard-v1"
+  platform_id = "standard-v3"
 
   zone = "ru-central1-a" #Это очень важно  при создании ресурса в зоне отличной от Зоны по-умолчанию("ru-central1-a")! 
 
   resources {
     cores         = 2
     memory        = 1
-    core_fraction = 5
+    core_fraction = 20
   }
 
   boot_disk {
     initialize_params {
-      image_id = data.yandex_compute_image.ubuntu-2004-lts.image_id
+      image_id = data.yandex_compute_image.ubuntu-2204-lts.image_id
       type     = "network-hdd"
-      size     = 5
+      size     = 10
     }
   }
 

@@ -42,7 +42,7 @@ variable "my_tuple" {
 #"true" 
 variable "map_is_strings" {
   type    = map(any)
-  default = {key1="a", key2=2, key3=true} 
+  default = { key1 = "a", key2 = 2, key3 = true }
 }
 
 
@@ -58,7 +58,7 @@ variable "my_object" {
     "person1" = {
       name = "John"
       age  = 30
-    }
+    },
     "person2" = {
       name = "Jane"
       age  = 25
