@@ -28,8 +28,7 @@ resource "docker_image" {
 */
 resource "docker_container" "nginx" {
   image = docker_image.nginx.image_id
-  name  = "example"
-  # name  = "example_${random_password.random_string_FAKE.resulT}"
+  name  = "example_${random_password.random_string_FAKE.resulT}"
 
   ports {
     internal = 80
