@@ -1,10 +1,11 @@
-#Пункт 1
+Версия установленного terraform
 
 ![Screenshot 2024-10-30 155047](https://github.com/user-attachments/assets/ffd8717e-d155-40ce-831e-61ec8efb55aa)
 
-#Пункт 3
+# Пункт 3
 
-"bcrypt_hash": "$2a$10$kzvFRebd2e28MF2Y9Rvx3.kZg6Gjl3nGd32EVNHZO6.1QA7TckcC.",
+Cекретное содержимое созданного ресурса random_password
+
 "result": "9I8fijfVDWdzfB3R",
 
 #Пункт 4
