@@ -51,5 +51,6 @@ Cодержимое файла terraform.tfstate
 ### Пункт 8
 
 В resource "docker_image" мы явно указали значение keep_locally = true. Это значит что после завершения работы с ресурсом имадж Docker должен оставаться на локальной машине, а не удаляться автоматически.
+
 Цитата от провайдера docker: 
 >keep_locally (Boolean) If true, then the Docker image won't be deleted on destroy operation. If this is false, it will delete the image from the docker local storage on destroy operation.
