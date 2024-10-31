@@ -26,6 +26,12 @@ resource "docker_image" {
   keep_locally = true
 }
 */
+
+resource "docker_image" "my_image" {
+  name         = "nginx:latest"
+  keep_locally = true
+}
+
 resource "docker_container" "nginx" {
   image = docker_image.nginx.image_id
   name  = "example_${random_password.random_string.result}"
