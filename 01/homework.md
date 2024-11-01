@@ -58,3 +58,9 @@ Cодержимое файла terraform.tfstate
 
 Цитата от провайдера docker: 
 >keep_locally (Boolean) If true, then the Docker image won't be deleted on destroy operation. If this is false, it will delete the image from the docker local storage on destroy operation.
+
+## Задание 2
+
+[Рабочий код main.tf (ссылка на github)](https://github.com/gaidarvu/ter-homeworks/blob/main/01/src/main.tf)
+
+![alt text](image-3.png)
