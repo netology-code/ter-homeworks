@@ -61,6 +61,6 @@ Cодержимое файла terraform.tfstate
 
 ## Задание 2
 
-[Рабочий код main.tf (ссылка на github)](https://github.com/gaidarvu/ter-homeworks/blob/main/01/src/main.tf)
+[Финальный код main.tf (ссылка на github)](https://github.com/gaidarvu/ter-homeworks/blob/main/01/src/main.tf)
 
 ![alt text](image-3.png)
