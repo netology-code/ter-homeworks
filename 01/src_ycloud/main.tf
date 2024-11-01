@@ -11,6 +11,7 @@ terraform {
 provider "docker" {
   host     = "ssh://gaidar@130.193.44.141:22"
   ssh_opts = ["-o", "StrictHostKeyChecking=no", "-o", "UserKnownHostsFile=/dev/null"]
+  ssh_key = file("~/.ssh/id_rsa")
 }
 
 #однострочный комментарий
