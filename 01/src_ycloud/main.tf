@@ -38,13 +38,13 @@ resource "docker_image" "mysql" {
 resource "docker_container" "mysql" {
   image = docker_image.mysql.image_id
   name  = "mysql"
-  env = [
-  - "MYSQL_ROOT_PASSWORD=${random_password.root_pwd.result}",
-  - "MYSQL_DATABASE=wordpress",
-  - "MYSQL_USER=wordpress",
-  - "MYSQL_PASSWORD=${random_password.user_pwd.result}",
-  - "MYSQL_ROOT_HOST="%""
-  ]
+  env = {
+    MYSQL_ROOT_PASSWORD = "${random_password.root_pwd.result}"
+    MYSQL_DATABASE = wordpress
+    MYSQL_USER = wordpress
+    MYSQL_PASSWORD = "${random_password.user_pwd.result}"
+    MYSQL_ROOT_HOST = "%"
+  }
 
   ports {
     internal = 3306
