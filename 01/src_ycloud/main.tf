@@ -10,6 +10,10 @@ terraform {
 provider "docker" {
   host     = "ssh://gaidar@130.193.44.141:22"
   ssh_opts = ["-o", "StrictHostKeyChecking=no", "-o", "UserKnownHostsFile=/dev/null"]
+  /*
+  авторизация по ключу, ключ прибит в ~/.ssh/id_rsa
+  на облачной тачке пользователь добавлен в группу docker
+ */
 }
 
 resource "random_password" "root_pwd" {
