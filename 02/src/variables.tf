@@ -28,11 +28,17 @@ variable "vpc_name" {
   description = "VPC network & subnet name"
 }
 
+provider "yandex" {
+  # token                    = "auth_token_here"
+  cloud_id                 = "b1gebvnp4l01pjj94h8g"
+  folder_id                = "b1gll1nj110e9uebdvrq"
+  zone                     = "ru-central1-a"
+}
 
 ###ssh vars
 
 variable "vms_ssh_root_key" {
   type        = string
-  default     = "<your_ssh_ed25519_key>"
+  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEF1s4DWFbHRG8VeGu9PXvAdkLp7SPsbklk63Soan+RC"
   description = "ssh-keygen -t ed25519"
 }
