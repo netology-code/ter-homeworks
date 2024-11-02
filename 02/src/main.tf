@@ -14,15 +14,19 @@ data "yandex_compute_image" "ubuntu" {
 }
 resource "yandex_compute_instance" "platform" {
   name        = "netology-develop-platform-web"
-  platform_id = "standart-v4"
+  hostname    = "netology-develop-platform-web"
+  platform_id = "standard-v3"
+  zone        = var.default_zone
   resources {
-    cores         = 1
+    cores         = 2
     memory        = 1
-    core_fraction = 5
+    core_fraction = 20
   }
   boot_disk {
     initialize_params {
       image_id = data.yandex_compute_image.ubuntu.image_id
+      type     = "network-hdd"
+      size     = 10
     }
   }
   scheduling_policy {
