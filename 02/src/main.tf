@@ -19,8 +19,9 @@ data "yandex_compute_image" "ubuntu" {
 }
 
 resource "yandex_compute_instance" "platform" {
-  name        = var.vm_web_yandex_compute_instance_name
-  hostname    = var.vm_web_yandex_compute_instance_name
+  # name        = var.vm_web_yandex_compute_instance_name
+  name        = local.test[0].vm-web
+  hostname    = local.test[0].vm-web
   platform_id = var.vm_web_yandex_compute_instance_platform_id
   zone        = var.vm_web_zone
   resources {
@@ -50,8 +51,9 @@ resource "yandex_compute_instance" "platform" {
 }
 
 resource "yandex_compute_instance" "platform2" {
-  name        = var.vm_db_yandex_compute_instance_name
-  hostname    = var.vm_db_yandex_compute_instance_name
+  # name        = var.vm_db_yandex_compute_instance_name
+  name        = local.test[1].vm-db
+  hostname    = local.test[1].vm-db
   platform_id = var.vm_db_yandex_compute_instance_platform_id
   zone        = var.vm_db_zone
   resources {
