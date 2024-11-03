@@ -29,17 +29,17 @@ variable "vm_db_yandex_compute_instance_platform_id" {
   description = "Platform type of VM"
 }
 
-variable "vm_db_resources" {
-  type        = object({ cores = number, memory = number, core_fraction = number })
-  default     = { cores = 2, memory = 2, core_fraction = 20 }
-  description = "Resources of yandex compute image"
-}
+# variable "vm_db_resources" {
+#   type        = object({ cores = number, memory = number, core_fraction = number })
+#   default     = { cores = 2, memory = 2, core_fraction = 20 }
+#   description = "Resources of yandex compute image"
+# }
 
-variable "vm_db_initialize_params" {
-  type        = object({ type = string, size = number })
-  default     = { type = "network-hdd", size = 10 }
-  description = "Params for yandex VM disk"
-}
+# variable "vm_db_initialize_params" {
+#   type        = object({ type = string, size = number })
+#   default     = { type = "network-hdd", size = 10 }
+#   description = "Params for yandex VM disk"
+# }
 
 variable "vm_db_scheduling_policy" {
     type      = bool

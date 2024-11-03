@@ -48,17 +48,17 @@ variable "vm_web_yandex_compute_instance_platform_id" {
   description = "Platform type of VM"
 }
 
-variable "vm_web_resources" {
-  type        = object({ cores = number, memory = number, core_fraction = number })
-  default     = { cores = 2, memory = 1, core_fraction = 5 }
-  description = "Resources of yandex compute image"
-}
+# variable "vm_web_resources" {
+#   type        = object({ cores = number, memory = number, core_fraction = number })
+#   default     = { cores = 2, memory = 1, core_fraction = 5 }
+#   description = "Resources of yandex compute image"
+# }
 
-variable "vm_web_initialize_params" {
-  type        = object({ type = string, size = number })
-  default     = { type = "network-hdd", size = 10 }
-  description = "Params for yandex VM disk"
-}
+# variable "vm_web_initialize_params" {
+#   type        = object({ type = string, size = number })
+#   default     = { type = "network-hdd", size = 10 }
+#   description = "Params for yandex VM disk"
+# }
 
 variable "vm_web_scheduling_policy" {
     type      = bool
@@ -83,10 +83,43 @@ variable "vm_web_zone" {
 #   zone                     = "ru-central1-a"
 # }
 
+variable "vm_resources" {
+  type = map(object({
+    cores         = number
+    memory        = number
+    core_fraction = number
+    type          = string
+    size          = number
+  }))
+  default = {
+    "web" = {
+      cores         = 2
+      memory        = 1
+      core_fraction = 5
+      type          = "network-hdd"
+      size          = 10
+    },
+    "db" = {
+      cores         = 2
+      memory        = 2
+      core_fraction = 20
+      type          = "network-hdd"
+      size          = 10
+    }
+  }
+}
+
+
 ###ssh vars
 
-variable "vms_ssh_root_key" {
-  type        = string
-  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEF1s4DWFbHRG8VeGu9PXvAdkLp7SPsbklk63Soan+RC"
-  description = "ssh-keygen -t ed25519"
+# variable "vms_ssh_root_key" {
+#   type        = string
+#   default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEF1s4DWFbHRG8VeGu9PXvAdkLp7SPsbklk63Soan+RC"
+#   description = "ssh-keygen -t ed25519"
+# }
+
+variable "metadata" {
+  type        = object({ serial-port-enable = number, ssh-keys = string })
+  default     = { serial-port-enable = 1, ssh-keys = "ubuntu:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEF1s4DWFbHRG8VeGu9PXvAdkLp7SPsbklk63Soan+RC" }
+  description = "Common ssh params"
 }
