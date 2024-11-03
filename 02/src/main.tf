@@ -10,31 +10,31 @@ resource "yandex_vpc_subnet" "develop" {
 
 
 data "yandex_compute_image" "ubuntu" {
-  family = "ubuntu-2004-lts"
+  family = var.vm_web_yandex_compute_image
 }
 resource "yandex_compute_instance" "platform" {
-  name        = "netology-develop-platform-web"
-  hostname    = "netology-develop-platform-web"
-  platform_id = "standard-v2"
+  name        = var.vm_web_yandex_compute_instance_name
+  hostname    = var.vm_web_yandex_compute_instance_name
+  platform_id = var.vm_web_yandex_compute_instance_platform_id
   zone        = var.default_zone
   resources {
-    cores         = 2
-    memory        = 1
-    core_fraction = 5
+    cores         = var.vm_web_resources.cores
+    memory        = var.vm_web_resources.memory
+    core_fraction = var.vm_web_resources.core_fraction
   }
   boot_disk {
     initialize_params {
       image_id = data.yandex_compute_image.ubuntu.image_id
-      type     = "network-hdd"
-      size     = 10
+      type     = var.vm_web_initialize_params.type
+      size     = var.vm_web_initialize_params.size
     }
   }
   scheduling_policy {
-    preemptible = true
+    preemptible = var.vm_web_scheduling_policy
   }
   network_interface {
     subnet_id = yandex_vpc_subnet.develop.id
-    nat       = true
+    nat       = var.vm_web_network_interface
   }
 
   metadata = {

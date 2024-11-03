@@ -30,6 +30,46 @@ variable "vpc_name" {
   description = "VPC network & subnet name"
 }
 
+variable "vm_web_yandex_compute_image"{
+  type        = string
+  default     = "ubuntu-2004-lts"
+  description = "Image name for VM"
+}
+
+variable "vm_web_yandex_compute_instance_name" {
+  type        = string
+  default     = "netology-develop-platform-web"
+  description = "Name and hostname for VM"
+}
+
+variable "vm_web_yandex_compute_instance_platform_id" {
+  type        = string
+  default     = "standard-v2"
+  description = "Platform type of VM"
+}
+
+variable "vm_web_resources" {
+  type        = object({ cores = number, memory = number, core_fraction = number })
+  default     = { cores = 2, memory = 1, core_fraction = 5 }
+  description = "Resources of yandex compute image"
+}
+
+variable "vm_web_initialize_params" {
+  type        = object({ type = string, size = number })
+  default     = { type = "network-hdd", size = 10 }
+  description = "Params for yandex VM disk"
+}
+
+variable "vm_web_scheduling_policy" {
+    type      = bool
+    default   = true
+}
+variable "vm_web_network_interface" {
+    type      = bool
+    default   = true
+}
+
+
 # provider "yandex" {
 #   token                    = "auth_token_here"
 #   cloud_id                 = "b1gebvnp4l01pjj94h8g"
