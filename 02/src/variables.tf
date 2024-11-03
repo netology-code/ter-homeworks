@@ -69,6 +69,12 @@ variable "vm_web_network_interface" {
     default   = true
 }
 
+variable "vm_web_zone" {
+  type        = string
+  default     = "ru-central1-a"
+  description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
+}
+
 
 # provider "yandex" {
 #   token                    = "auth_token_here"
