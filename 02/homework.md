@@ -30,45 +30,4 @@
 
 ![alt text](image.png)
 
-### Пункт 2
-
-
-### Пункт 3
-
-
-### Пункт 4
-
-
-### Пункт 5
-
-[Исправленный код (ссылка на github)](https://github.com/gaidarvu/ter-homeworks/blob/main/01/src/main.tf)
-
-![alt text](image.png)
-
-### Пункт 6
-
-
-![alt text](image-1.png)
-
-### Пункт 7
-
-```js
-{
-  "version": 4,
-  "terraform_version": "1.9.8",
-  "serial": 11,
-  "lineage": "8eb799a7-e4ab-2dad-4396-1f2911fa3e5f",
-  "outputs": {},
-  "resources": [],
-  "check_results": null
-}
-```
-
-### Пункт 8
-
-
-## Задание 2
-
-[Финальный код main.tf (ссылка на github)](https://github.com/gaidarvu/ter-homeworks/blob/main/01/src_ycloud/main.tf)
-
-![alt text](image-3.png)
+[Финальный код (ссылка на github repo)](https://github.com/gaidarvu/ter-homeworks/tree/main/02/src)
