@@ -1,7 +1,3 @@
-### Версия установленного terraform
-
-![Screenshot 2024-10-30 155047](https://github.com/user-attachments/assets/ffd8717e-d155-40ce-831e-61ec8efb55aa)
-
 ## Задание 1
 
 Словарь с переменными provider "yandex" из variables.tf конфликтует с provider "yandex" из providers.tf. Пришлось перенести переменные из этого словаря в variable "cloud_id", variable "folder_id", variable "default_zone", которые обозначены выше и требуют ввести переменную из консоли во время выполнения кода. Сам словарь provider "yandex" закомментировал.
@@ -23,6 +19,12 @@
 ```
 
 Для авторизации закомментировал token и сгенерировал authorized_key.json
+
+![alt text](image.png)
+
+![alt text](image-1.png)
+
+Параметры preemptible = true и core_fraction=5 в процессе обучения могут пригодиться для экономии средств, которых должно хватить на весь срок обучения. Урезая параметры процессора и выставляя прерывание виртуалке мы получаем идеальный вариант для обучения. Делать постоянные terraform apply и затем через какое-то время terraform destroy на производительных тачках расточительно
 
 ### Пункт 2
 
