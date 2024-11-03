@@ -31,7 +31,7 @@ variable "vpc_name" {
 }
 
 # provider "yandex" {
-#   # token                    = "auth_token_here"
+#   token                    = "auth_token_here"
 #   cloud_id                 = "b1gebvnp4l01pjj94h8g"
 #   folder_id                = "b1gll1nj110e9uebdvrq"
 #   zone                     = "ru-central1-a"

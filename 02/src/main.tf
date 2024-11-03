@@ -15,12 +15,12 @@ data "yandex_compute_image" "ubuntu" {
 resource "yandex_compute_instance" "platform" {
   name        = "netology-develop-platform-web"
   hostname    = "netology-develop-platform-web"
-  platform_id = "standard-v3"
+  platform_id = "standard-v2"
   zone        = var.default_zone
   resources {
     cores         = 2
     memory        = 1
-    core_fraction = 20
+    core_fraction = 5
   }
   boot_disk {
     initialize_params {
