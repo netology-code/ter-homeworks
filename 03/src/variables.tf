@@ -30,3 +30,55 @@ variable "vpc_name" {
   default     = "develop"
   description = "VPC network&subnet name"
 }
+
+variable "vm_web_yandex_compute_image"{
+  type        = string
+  default     = "ubuntu-2004-lts"
+  description = "Image name for VM"
+}
+
+variable "vm_web_yandex_compute_instance_platform_id" {
+  type        = string
+  default     = "standard-v2"
+  description = "Platform type of VM"
+}
+
+variable "vm_web_scheduling_policy" {
+    type      = bool
+    default   = true
+}
+
+variable "vm_web_network_interface" {
+    type      = bool
+    default   = true
+}
+
+variable "vm_resources" {
+  type = map(object({
+    cores         = number
+    memory        = number
+    core_fraction = number
+    type          = string
+    size          = number
+  }))
+  default = {
+    "web" = {
+      cores         = 2
+      memory        = 1
+      core_fraction = 5
+      type          = "network-hdd"
+      size          = 10
+    }
+  }
+}
+
+variable "serial-port" {
+  type        = number
+  default     = 1
+  description = "Common ssh params"
+}
+
+variable "ssh-key" {
+  type        = string
+  description = "Common ssh params"
+}
