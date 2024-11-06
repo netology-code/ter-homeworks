@@ -1,6 +1,6 @@
 ## Задание 1
 
-Словарь с переменными provider "yandex" из variables.tf конфликтует с provider "yandex" из providers.tf. Пришлось перенести переменные из этого словаря в variable "cloud_id", variable "folder_id", variable "default_zone", которые обозначены выше и требуют ввести переменную из консоли во время выполнения кода. Сам словарь provider "yandex" закомментировал.
+cloud_id и folder_id обозначил в personal.auto.tfvars
 
 В boot_disk всё-же указал размер и тип создаваемого диска, чтобы не создавал по умолчанию.
 
