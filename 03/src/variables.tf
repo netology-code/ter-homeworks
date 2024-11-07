@@ -72,6 +72,10 @@ variable "vm_resources" {
   }
 }
 
+variable "each_vm" {
+  type = list(object({  vm_name=string, cpu=number, ram=number, core_fraction=number, type=string, disk_volume=number }))
+}
+
 variable "serial-port" {
   type        = number
   default     = 1

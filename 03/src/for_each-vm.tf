@@ -1,4 +1,4 @@
-resource "yandex_compute_instance" "web" {
+resource "yandex_compute_instance" "db" {
   count             = 2
   name              = "web-${count.index + 1}"
   hostname          = "web-${count.index + 1}"
