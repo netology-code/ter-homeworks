@@ -120,3 +120,21 @@ variable "ssh-key" {
   type        = string
   description = "Common ssh params"
 }
+
+variable "disk_size" {
+  type        = number
+  default     = 1
+  description = "HDD size (GB)"
+}
+
+variable "disk_type" {
+  type        = string
+  default     = "network-hdd"
+  description = "HDD type"
+}
+
+variable "storage_vm_name" {
+  type        = string
+  default     = "storage"
+  description = "Name of Storage VM"
+}
