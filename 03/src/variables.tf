@@ -73,7 +73,41 @@ variable "vm_resources" {
 }
 
 variable "each_vm" {
-  type = list(object({  vm_name=string, cpu=number, ram=number, core_fraction=number, type=string, disk_volume=number }))
+  type = map(object({
+    platform_id=string
+    vm_name=string
+    cpu=number
+    ram=number
+    core_fraction=number
+    type=string
+    disk_volume=number
+    network_interface=bool
+    scheduling_policy=bool
+    }))
+  default = {
+    "main" = {
+      platform_id="standard-v2"
+      vm_name="main"
+      cpu=2
+      ram=1
+      core_fraction=5
+      type="network-hdd"
+      disk_volume=10
+      network_interface=true
+      scheduling_policy=true
+    }
+    "replica" = {
+      platform_id="standard-v3"
+      vm_name="replica"
+      cpu=4
+      ram=2
+      core_fraction=20
+      type="network-hdd"
+      disk_volume=20
+      network_interface=true
+      scheduling_policy=true      
+    }
+  }
 }
 
 variable "serial-port" {

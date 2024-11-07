@@ -1,28 +1,28 @@
 resource "yandex_compute_instance" "db" {
-  count             = 2
-  name              = "web-${count.index + 1}"
-  hostname          = "web-${count.index + 1}"
-  platform_id       = var.vm_web_yandex_compute_instance_platform_id
+  for_each = var.each_vm
+  name              = each.value.vm_name
+  hostname          = each.value.vm_name
+  platform_id       = each.value.platform_id
   zone              = var.default_zone
   resources {
-    cores           = var.vm_resources.web.cores
-    memory          = var.vm_resources.web.memory
-    core_fraction   = var.vm_resources.web.core_fraction
+    cores           = each.value.cpu
+    memory          = each.value.ram
+    core_fraction   = each.value.core_fraction
   }
   boot_disk {
     initialize_params {
       image_id      = data.yandex_compute_image.ubuntu.image_id
-      type          = var.vm_resources.web.type
-      size          = var.vm_resources.web.size
+      type          = each.value.type
+      size          = each.value.disk_volume
     }
   }
   scheduling_policy {
-    preemptible     = var.vm_web_scheduling_policy
+    preemptible     = each.value.scheduling_policy
   }
   network_interface {
     subnet_id       = yandex_vpc_subnet.develop.id
     security_group_ids = [yandex_vpc_security_group.example.id]
-    nat             = var.vm_web_network_interface
+    nat             = each.value.network_interface
   }
   metadata = {
     serial-port-enable = var.serial-port
