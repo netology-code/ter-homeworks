@@ -6,7 +6,12 @@
 
 ![alt text](image-2.png)
 
-## Задание 4
+## Задание 2
+
+![alt text](image-4.png)
+
+
+## Задание 3
 
 
 
