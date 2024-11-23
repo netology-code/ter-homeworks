@@ -1,6 +1,6 @@
 ## Задание 1
 
-# TFLint
+### TFLint
 
 ```tflint
 Warning: Module source "git::https://github.com/udjin10/yandex_compute_instance.git?ref=main" uses a default branch as ref (main) (terraform_module_pinned_source)
@@ -25,7 +25,7 @@ Warning: Missing version constraint for provider "yandex" in `required_providers
    5:     }
 ```
 
-# Checkov
+### Checkov
 
 ```checkov
 Check: CKV_TF_1: "Ensure Terraform module sources use a commit hash"
