@@ -18,6 +18,9 @@ terraform {
   skip_credentials_validation = true
   skip_requesting_account_id  = true
   skip_s3_checksum            = true
+
+  dynamodb_endpoint = "https://docapi.serverless.yandexcloud.net/ru-central1/b1gebvnp4l01pjj94h8g/etnkv8m3sqd6cfnpkg00"
+  dynamodb_table = "tfstate-lock"
   }
 }
 
