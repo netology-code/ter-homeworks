@@ -54,9 +54,9 @@ Check: CKV_YC_11: "Ensure security group is assigned to network interface."
 
 ## Задание 2
 
-![alt text](image-4.png)
+![alt text](image.png)
 
-[Документация terraform-docs (ссылка на github repo)](https://github.com/gaidarvu/ter-homeworks/blob/terraform-04/04/src/spec.md)
+![alt text](image-1.png)
 
 ## Задание 3
 
