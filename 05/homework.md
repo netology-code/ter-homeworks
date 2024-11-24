@@ -66,6 +66,6 @@ Check: CKV_YC_11: "Ensure security group is assigned to network interface."
 
 ## Задание 3
 
-Смотрим модули, цепляем id модулей, которые будем удалять и удаляем
+[Pull Request terraform-hotfix --> terraform-05](https://github.com/gaidarvu/ter-homeworks/pull/1)
 
 [Финальный код (ссылка на github repo)](https://github.com/gaidarvu/ter-homeworks/tree/terraform-05/04/src)
