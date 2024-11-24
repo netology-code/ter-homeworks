@@ -34,8 +34,7 @@ variable "vms_ssh_root_key" {
   description = "ssh-keygen -t ed25519"
 }
 
-
-
+### Проверка IP адресов
 
 variable "ip_addr" {
   type=string

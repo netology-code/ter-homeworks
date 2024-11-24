@@ -78,5 +78,7 @@ Check: CKV_YC_11: "Ensure security group is assigned to network interface."
 ### Проверка на regex()
 ![alt text](image-6.png)
 
+[Файл variables.tf с используемыми переменными (в низу)](https://github.com/gaidarvu/ter-homeworks/blob/terraform-05/04/src/variables.tf)
+
 ## Итог
 [Финальный код (ссылка на ветку terraform-05)](https://github.com/gaidarvu/ter-homeworks/tree/terraform-05/04/src)
