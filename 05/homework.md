@@ -68,4 +68,15 @@ Check: CKV_YC_11: "Ensure security group is assigned to network interface."
 
 [Pull Request terraform-hotfix --> terraform-05](https://github.com/gaidarvu/ter-homeworks/pull/1)
 
+## Задание 4
+
+### Проверка на cidrhost()
+![alt text](image-5.png)
+
+![alt text](image-7.png)
+
+### Проверка на regex()
+![alt text](image-6.png)
+
+## Итог
 [Финальный код (ссылка на ветку terraform-05)](https://github.com/gaidarvu/ter-homeworks/tree/terraform-05/04/src)
