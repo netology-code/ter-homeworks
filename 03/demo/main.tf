@@ -19,39 +19,39 @@ data "yandex_compute_image" "ubuntu-2004-lts" {
 }
 
 
-variable "env"{
-  type=string
-  default="production" #создавать ли бастион
+variable "env" {
+  type    = string
+  default = "production" #создавать ли бастион
 }
 
-variable "external_acess_bastion"{
-  type=bool
-  default=true #false true создавать ли бастион
+variable "external_acess_bastion" {
+  type    = bool
+  default = false #false true создавать ли бастион
 }
 
 #создаем/не создаем бастион
 resource "yandex_compute_instance" "bastion" {
-  count = alltrue([var.env == "production",var.external_acess_bastion]) ? 1 : 0
+  count = alltrue([var.env == "production", var.external_acess_bastion]) ? 1 : 0
 
   connection {
-        type     = "ssh"
-        user     = "ubuntu"
-        host     = self.network_interface.0.nat_ip_address #можно конечно и yandex_compute_instance.bastion["network_interface"][0]["nat_ip_address"] но не нужно!
-        private_key = file("~/.ssh/id_ed25519")
-        timeout     = "120s"
+    type        = "ssh"
+    user        = "ubuntu"
+    host        = self.network_interface.0.nat_ip_address #можно конечно и yandex_compute_instance.bastion["network_interface"][0]["nat_ip_address"] но не нужно!
+    private_key = file("~/.ssh/id_ed25519")
+    timeout     = "120s"
   }
   provisioner "file" {
-    source            = "./scripts"
-    destination       = "/tmp"
-   }
+    source      = "./scripts"
+    destination = "/tmp"
+  }
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/scripts/script.sh",
       "/tmp/scripts/script.sh"
     ]
-   }
+  }
 
-  name        = "bastion"  #Имя ВМ в облачной консоли
+  name        = "bastion" #Имя ВМ в облачной консоли
   hostname    = "bastion" #формирует FDQN имя хоста, без hostname будет сгенрировано случаное имя.
   platform_id = "standard-v1"
 
@@ -119,14 +119,14 @@ resource "yandex_compute_instance" "example" {
 
   network_interface {
     subnet_id = yandex_vpc_subnet.develop.id
-    nat       =length(yandex_compute_instance.bastion)>0 ? false : true
+    nat       = length(yandex_compute_instance.bastion) > 0 ? false : true
   }
   allow_stopping_for_update = true
 }
 
 
 output "vms" {
-  value={
-    bastion=length(yandex_compute_instance.bastion)>0 ? yandex_compute_instance.bastion.0.network_interface.0.nat_ip_address: null
+  value = {
+    bastion = length(yandex_compute_instance.bastion) > 0 ? yandex_compute_instance.bastion.0.network_interface.0.nat_ip_address : null
   }
 }
