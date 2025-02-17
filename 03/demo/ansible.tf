@@ -12,7 +12,7 @@ resource "null_resource" "web_hosts_provision" {
 
   #Добавление ПРИВАТНОГО ssh ключа в ssh-agent
   provisioner "local-exec" {
-    command    = "> ~/.ssh/known_hosts &&eval $(ssh-agent) && cat ~/.ssh/id_ed25519 | ssh-add -"
+    command    = "eval $(ssh-agent) && cat ~/.ssh/id_ed25519 | ssh-add -"
     on_failure = continue #Продолжить выполнение terraform pipeline в случае ошибок
 
   }
