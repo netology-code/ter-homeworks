@@ -94,10 +94,8 @@ terraform destroy
 
 11. Объясните, почему при этом не был удалён docker-образ **nginx:latest**. Ответ **ОБЯЗАТЕЛЬНО НАЙДИТЕ В ПРЕДОСТАВЛЕННОМ КОДЕ**, а затем **ОБЯЗАТЕЛЬНО ПОДКРЕПИТЕ** строчкой из документации [**terraform провайдера docker**](https://docs.comcloud.xyz/providers/kreuzwerker/docker/latest/docs).  (ищите в классификаторе resource docker_image )
 
-У нас в коде docker_image, а что бы удалялось, необходимо использовать docker_registry_image.
-Если я все верно понял из документации:
-https://docs.comcloud.xyz/providers/kreuzwerker/docker/latest/docs/resources/registry_image
-https://docs.comcloud.xyz/providers/kreuzwerker/docker/latest/docs/resources/image
+keep_locally = true
+keep_locally (Boolean) If true, then the Docker image won't be deleted on destroy operation. If this is false, it will delete the image from the docker local storage on destroy operation.
 
 
 
