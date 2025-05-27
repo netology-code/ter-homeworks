@@ -10,10 +10,13 @@
 ### Чек-лист готовности к домашнему заданию
 
 1. Скачайте и установите **Terraform** версии >=1.8.4 . Приложите скриншот вывода команды ```terraform --version```.
+![изображение](https://github.com/user-attachments/assets/93e53616-1160-41c1-88ca-6fb492b17ed9)
 
 
 2. Скачайте на свой ПК этот git-репозиторий. Исходный код для выполнения задания расположен в директории **01/src**.
 3. Убедитесь, что в вашей ОС установлен docker.
+
+![изображение](https://github.com/user-attachments/assets/9dce0b7f-8b63-4967-8337-33dd9ca3d1c4)
 
 
 
@@ -46,24 +49,55 @@ personal.auto.tfvars (personal имя *.auto.tfvars  расширение)
 
 5. Раскомментируйте блок кода, примерно расположенный на строчках 29–42 файла **main.tf**.
 Выполните команду ```terraform validate```. Объясните, в чём заключаются намеренно допущенные ошибки. Исправьте их.
+![изображение](https://github.com/user-attachments/assets/0c94ec18-38ed-4bcf-ad9c-cbe16a7d2b81)
+
+1) Не указан параметр from ("from_resourse"  уникальное имя)
+2) Описание не может начинаться с числа
+3. Не верно был указан 2-й параметр (берется из П.1  уникальное имя) image = docker_image.from_resourse.image_id
+4) name  = "example_${random_password.random_string.result}" убрал лишнее
 
 7. Выполните код. В качестве ответа приложите: исправленный фрагмент кода и вывод команды ```docker ps```.
 
+
+![изображение](https://github.com/user-attachments/assets/dbce5875-8209-412c-98fe-a2add278a717)
+
+
+![изображение](https://github.com/user-attachments/assets/6917cb2b-37c9-4363-8c58-954f05802f8b)
+
+
+
 8. Замените имя docker-контейнера в блоке кода на ```hello_world```. Не перепутайте имя контейнера и имя образа. Мы всё ещё продолжаем использовать name = "nginx:latest". Выполните команду ```terraform apply -auto-approve```.
 Объясните своими словами, в чём может быть опасность применения ключа  ```-auto-approve```. Догадайтесь или нагуглите зачем может пригодиться данный ключ? В качестве ответа дополнительно приложите вывод команды ```docker ps```.
- 
+![изображение](https://github.com/user-attachments/assets/d1fdce65-9915-4c4f-ad1d-2d0d6f8175de)
+
+Применение скрипта, который удаляет предыдущие наработки без ручного подтверждения, может быть случайным и привести к потере данных.
+Интернет сообщает, что данный ключ может пригодиться для автоматизации процессов, например, в конвейерах CI/CD. 
 
 
 
 
 10. Уничтожьте созданные ресурсы с помощью **terraform**. Убедитесь, что все ресурсы удалены. Приложите содержимое файла **terraform.tfstate**.
 terraform destroy
+![изображение](https://github.com/user-attachments/assets/29141c16-a0b8-4cc1-9509-669e560c312b)
 
+{
+  "version": 4,
+  "terraform_version": "1.12.1",
+  "serial": 36,
+  "lineage": "ace2637d-630a-67f8-d48f-febe127bc077",
+  "outputs": {},
+  "resources": [],
+  "check_results": null
+}
 
 
 
 11. Объясните, почему при этом не был удалён docker-образ **nginx:latest**. Ответ **ОБЯЗАТЕЛЬНО НАЙДИТЕ В ПРЕДОСТАВЛЕННОМ КОДЕ**, а затем **ОБЯЗАТЕЛЬНО ПОДКРЕПИТЕ** строчкой из документации [**terraform провайдера docker**](https://docs.comcloud.xyz/providers/kreuzwerker/docker/latest/docs).  (ищите в классификаторе resource docker_image )
 
+У нас в коде docker_image, а что бы удалялось, необходимо использовать docker_registry_image.
+Если я все верно понял из документации:
+https://docs.comcloud.xyz/providers/kreuzwerker/docker/latest/docs/resources/registry_image
+https://docs.comcloud.xyz/providers/kreuzwerker/docker/latest/docs/resources/image
 
 
 
