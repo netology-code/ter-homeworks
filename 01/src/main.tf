@@ -20,19 +20,19 @@ resource "random_password" "random_string" {
   min_numeric = 1
 }
 
-/*
-resource "docker_image" {
+
+resource "docker_image" "from_resourse" {
   name         = "nginx:latest"
   keep_locally = true
 }
 
-resource "docker_container" "1nginx" {
-  image = docker_image.nginx.image_id
-  name  = "example_${random_password.random_string_FAKE.resulT}"
+resource "docker_container" "nginx" {
+  image = docker_image.from_resourse.image_id
+  name  = "example_${random_password.random_string.result}"
 
   ports {
     internal = 80
     external = 9090
   }
 }
-*/
+
