@@ -110,8 +110,26 @@ keep_locally (Boolean) If true, then the Docker image won't be deleted on destro
 ### Задание 2*
 
 1. Создайте в облаке ВМ. Сделайте это через web-консоль, чтобы не слить по незнанию токен от облака в github(это тема следующей лекции). Если хотите - попробуйте сделать это через terraform, прочитав документацию yandex cloud. Используйте файл ```personal.auto.tfvars``` и гитигнор или иной, безопасный способ передачи токена!
+
+Создал вручную
+![изображение](https://github.com/user-attachments/assets/6b5a9ebe-bdf3-4f81-9edf-912ab5b28878)
+
+
 2. Подключитесь к ВМ по ssh и установите стек docker.
+
+Подключился используя ssh ключ и парольнцю фразу
+![изображение](https://github.com/user-attachments/assets/a2048e8b-6a57-4c5d-ac73-891627050004)
+
+
 3. Найдите в документации docker provider способ настроить подключение terraform на вашей рабочей станции к remote docker context вашей ВМ через ssh.
+
+Тут нужна помощь!!!
+Пробовал различные варианты. Валидацию скрипт проходит, но при применении ошибка:
+![изображение](https://github.com/user-attachments/assets/0c98bce4-8530-4e02-9369-af6d77e3850e)
+
+
+
+
 4. Используя terraform и  remote docker context, скачайте и запустите на вашей ВМ контейнер ```mysql:8``` на порту ```127.0.0.1:3306```, передайте ENV-переменные. Сгенерируйте разные пароли через random_password и передайте их в контейнер, используя интерполяцию из примера с nginx.(```name  = "example_${random_password.random_string.result}"```  , двойные кавычки и фигурные скобки обязательны!) 
 ```
     environment:
