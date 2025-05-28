@@ -9,16 +9,8 @@ terraform {
 }
 
 provider "docker" {
-  host = "ssh://user@158.160.141.7:22"
-  ssh_opts = ["-i", "/root/.ssh/id_rsa",]
- # pub_key = ["-i", "/root/.ssh/id_rsa",]
-}
-
-
-
-variable "pub_key" {
-  type = string
-  default = "/root/.ssh/id_rsa.pub"
+  host = "ssh://user@84.201.181.8:22"
+    ssh_opts = ["-i", "~/.ssh/id_rsa",]
 }
 
 resource "random_password" "mysql_root_password" {
