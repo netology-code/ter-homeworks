@@ -123,11 +123,10 @@ keep_locally (Boolean) If true, then the Docker image won't be deleted on destro
 
 3. Найдите в документации docker provider способ настроить подключение terraform на вашей рабочей станции к remote docker context вашей ВМ через ssh.
 
-Тут нужна помощь!!!
-Пробовал различные варианты. Валидацию скрипт проходит, но при применении ошибка:
-![изображение](https://github.com/user-attachments/assets/0c98bce4-8530-4e02-9369-af6d77e3850e)
+Убрать пароль с приватного ключа ->  ssh-keygen -p -P 1qaz2wsX! -N "" -f ~/.ssh/id_rsa
+Добавить пользователя (Даже root) в группу docker  -> gpasswd -a $USER docker
 
-![изображение](https://github.com/user-attachments/assets/f030c68a-1267-46ec-9751-0f5b3486dd06)
+![изображение](https://github.com/user-attachments/assets/60dd5950-0274-4fdf-901f-0d718fc2b1eb)
 
 
 
@@ -142,6 +141,70 @@ keep_locally (Boolean) If true, then the Docker image won't be deleted on destro
 ```
 
 6. Зайдите на вашу ВМ , подключитесь к контейнеру и проверьте наличие секретных env-переменных с помощью команды ```env```. Запишите ваш финальный код в репозиторий.
+![изображение](https://github.com/user-attachments/assets/d267fbe5-688e-442f-a561-66c365112c67)
+
+terraform {
+  required_providers {
+    docker = {
+      source  = "kreuzwerker/docker"
+      version = "~> 3.0.1"
+    }
+  }
+  required_version = ">=1.8.4"
+}
+
+provider "docker" {
+  host = "ssh://user@84.201.181.8:22"
+    ssh_opts = ["-i", "~/.ssh/id_rsa",]
+}
+
+resource "random_password" "mysql_root_password" {
+  length      = 16
+  special     = false
+  min_upper   = 1
+  min_lower   = 1
+  min_numeric = 1
+}
+
+resource "random_password" "mysql_password" {
+  length      = 16
+  special     = false
+  min_upper   = 1
+  min_lower   = 1
+  min_numeric = 1
+}
+
+
+resource "docker_image" "mysql" {
+  name         = "mysql:8"
+  keep_locally = true
+}
+
+
+resource "docker_container" "mysql" {
+  image = docker_image.mysql.image_id
+  name  = "mysql_8"
+
+  ports {
+    internal = 3306
+    external = 3306
+    ip       = "127.0.0.1"
+  }
+
+  env = ["MYSQL_ROOT_PASSWORD=${random_password.mysql_root_password.result}",
+         "MYSQL_DATABASE=wordpress",
+         "MYSQL_USER=wordpress",
+         "MYSQL_PASSWORD=${random_password.mysql_password.result}",
+         "MYSQL_ROOT_HOST=%"]
+  
+   restart = "always"
+  }
+
+
+
+
+
+
 
 ### Задание 3*
 1. Установите [opentofu](https://opentofu.org/)(fork terraform с лицензией Mozilla Public License, version 2.0) любой версии
