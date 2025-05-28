@@ -143,6 +143,10 @@ keep_locally (Boolean) If true, then the Docker image won't be deleted on destro
 6. Зайдите на вашу ВМ , подключитесь к контейнеру и проверьте наличие секретных env-переменных с помощью команды ```env```. Запишите ваш финальный код в репозиторий.
 ![изображение](https://github.com/user-attachments/assets/d267fbe5-688e-442f-a561-66c365112c67)
 
+код:
+https://github.com/olegveselov1984/ter-homeworks/blob/25d9dd5c49aea3718e3eba8c2eda5d87909c66d0/01/01.1/main.tf
+
+
 terraform {
   required_providers {
     docker = {
