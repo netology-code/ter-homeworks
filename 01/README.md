@@ -127,6 +127,7 @@ keep_locally (Boolean) If true, then the Docker image won't be deleted on destro
 Пробовал различные варианты. Валидацию скрипт проходит, но при применении ошибка:
 ![изображение](https://github.com/user-attachments/assets/0c98bce4-8530-4e02-9369-af6d77e3850e)
 
+![изображение](https://github.com/user-attachments/assets/f030c68a-1267-46ec-9751-0f5b3486dd06)
 
 
 
