@@ -30,6 +30,8 @@ variable "vpc_name" {
   description = "VPC network & subnet name"
 }
 
+
+
 ##ssh vars
 
 variable "vms_ssh_root_key" {
