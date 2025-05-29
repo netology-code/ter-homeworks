@@ -54,7 +54,7 @@ resource "yandex_compute_instance" "platform" {
 resource "yandex_compute_instance" "platform2" {
   name        = "${var.vm_db_netology-develop-platform-db}"
   platform_id = "${var.vm_db_standard-v3}"
-  zone        = "ru-central1-b"   #var.default_zone-b
+  zone        = "${var.default_zone-b}"   #var.default_zone-b
   resources {
     cores         = "${var.vm_db_cores}"
     memory        = "${var.vm_db_memory}"
