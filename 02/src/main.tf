@@ -1,5 +1,5 @@
 resource "yandex_vpc_network" "develop" {
-  name = var.vpc_name
+  name = var.vpc_name_def
 }
 
 resource "yandex_vpc_subnet" "develop" {

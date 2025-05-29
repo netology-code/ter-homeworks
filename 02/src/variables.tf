@@ -26,11 +26,15 @@ variable "default_cidr" {
 
 variable "vpc_name" {
   type        = string
-  default     = "develop"
+  default     = "net-ru-central1-a"
   description = "VPC network & subnet name"
 }
 
-
+variable "vpc_name_def" {
+  type        = string
+  default     = "net-main"
+  description = "VPC network & subnet name"
+}
 
 ##ssh vars
 

@@ -44,24 +44,6 @@ variable "vm_web_core_fraction" {
 }
 
 #############################################################
-#variable "vpc_name-b" {
-#  type        = string
-#  default     = "develop-b"
-#  description = "VPC network & subnet name"
-#}
-
-#variable "default_zone-b" {
-#  type        = string
-#  default     = "ru-central1-b"
-#  description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
-#}
-
-#variable "vm_db_ru-central1-b" {
-#  type        = string
-#  default     = "ru-central1-b"
-#  description = "ru-central1-b"
-#}
-
 
 variable "vm_db_ubuntu-2004-lts" {
   type        = string
@@ -108,7 +90,7 @@ variable "default_zone-b" {
 
 variable "vpc_name-b" {
   type        = string
-  default     = "ru-central1-b"
+  default     = "net-ru-central1-b"
   description = "VPC network & subnet name"
 }
 
