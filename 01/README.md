@@ -123,7 +123,7 @@ keep_locally (Boolean) If true, then the Docker image won't be deleted on destro
 
 3. Найдите в документации docker provider способ настроить подключение terraform на вашей рабочей станции к remote docker context вашей ВМ через ssh.
 
-Убрать пароль с приватного ключа ->  ssh-keygen -p -P 1qaz2wsX! -N "" -f ~/.ssh/id_rsa
+Убрать пароль с приватного ключа ->  ssh-keygen -p -P *** -N "" -f ~/.ssh/id_rsa
 Добавить пользователя (Даже root) в группу docker  -> gpasswd -a $USER docker
 
 ![изображение](https://github.com/user-attachments/assets/60dd5950-0274-4fdf-901f-0d718fc2b1eb)
