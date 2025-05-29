@@ -37,8 +37,21 @@
 В качестве решения приложите:
 
 - скриншот ЛК Yandex Cloud с созданной ВМ, где видно внешний ip-адрес;
+
+![image](https://github.com/user-attachments/assets/c4d036f3-50ea-4369-97e5-a53d2a711a52)
+
+
 - скриншот консоли, curl должен отобразить тот же внешний ip-адрес;
+
+![image](https://github.com/user-attachments/assets/29f3537f-3c7c-408f-87b7-3bb0afb3cf6f)
+
 - ответы на вопросы.
+
+preemptible = true выключение через 24 часа
+core_fraction=5   гарантированный % доступности.  в яндексе он 20
+platform_id = "standard-v3"  опечатка и не бывает 4 версии
+cores         = 2   в яндексе минималка 2
+core_fraction = 20   в яндексе минималка 20
 
 
 ### Задание 2
@@ -61,6 +74,8 @@
 2. Примените изменения.
 
 В качестве решения приложите вывод значений ip-адресов команды ```terraform output```.
+
+![image](https://github.com/user-attachments/assets/3914bb89-53df-41a2-b785-228475546077)
 
 
 ### Задание 5
