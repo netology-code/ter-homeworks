@@ -23,11 +23,13 @@ data "yandex_compute_image" "ubuntu" {
 resource "yandex_compute_instance" "platform" {
   name        = "${local.name-web1}"
   platform_id = "${var.vm_web_standard-v3}"
-  resources {
-    cores         = "${var.vm_web_cores}"
-    memory        = "${var.vm_web_memory}"
-    core_fraction = "${var.vm_web_core_fraction}"
-  }
+  resources   = "${local.resources-web1}"
+  
+  #resources {
+  #  cores         = "${var.vm_web_cores}"
+  #  memory        = "${var.vm_web_memory}"
+  #  core_fraction = "${var.vm_web_core_fraction}"
+  #}
   boot_disk {
     initialize_params {
       image_id = data.yandex_compute_image.ubuntu.image_id
@@ -55,11 +57,13 @@ resource "yandex_compute_instance" "platform2" {
   name        = "${local.name-db1}"
   platform_id = "${var.vm_db_standard-v3}"
   zone        = "${var.default_zone-b}"   #var.default_zone-b
-  resources {
-    cores         = "${var.vm_db_cores}"
-    memory        = "${var.vm_db_memory}"
-    core_fraction = "${var.vm_db_core_fraction}"
-  }
+  resources   = "${local.resources-db1}"
+  
+  #resources {
+  #  cores         = "${var.vm_db_cores}"
+  #  memory        = "${var.vm_db_memory}"
+  #  core_fraction = "${var.vm_db_core_fraction}"
+  #}
   boot_disk {
     initialize_params {
       image_id = data.yandex_compute_image.ubuntu.image_id

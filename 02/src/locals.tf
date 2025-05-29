@@ -26,20 +26,20 @@ name-web1 = "netology-develop-platform-${var.role.name-web2.name}${var.role.name
 variable "vms_resources"  {
   type = map(object({
 #  type = list(object({
-    instance_name   = string
+#    instance_name   = string
     cores = number
     memory = number
     core_fraction = number
   }))
 default = {
     "resources-web1" = {
-    instance_name = "web1"
+#    instance_name = "web1"
     cores = 2
     memory = 1
     core_fraction = 20
     },
     "resources-db1" =  {
-    instance_name = "db1"
+ #   instance_name = "db1"
     cores = 2
     memory = 2
     core_fraction = 20
@@ -47,7 +47,10 @@ default = {
   }
 }
 
-
+locals {
+resources-web1 = "${var.vms_resources.resources-web1}"
+resources-db1 = "${var.vms_resources.resources-db1}"
+}
 
 
 
