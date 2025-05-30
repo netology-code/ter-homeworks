@@ -23,24 +23,12 @@ data "yandex_compute_image" "ubuntu" {
 resource "yandex_compute_instance" "platform" {
   name        = "${local.name-web1}"
   platform_id = "${var.vm_web_standard-v3}"
-  #resources   = "${local.resources-web1}"
-  #  resources {
-  ##      resources =      "${local.resources-web1}"
-  #}
     resources {
     cores         = "${local.resources-web1.cores}"
     memory        = "${local.resources-web1.memory}"
     core_fraction = "${local.resources-web1.core_fraction}"
   }
   
-  
-  
-  
-  #resources {
-  #  cores         = "${var.vm_web_cores}"
-  #  memory        = "${var.vm_web_memory}"
-  #  core_fraction = "${var.vm_web_core_fraction}"
-  #}
   boot_disk {
     initialize_params {
       image_id = data.yandex_compute_image.ubuntu.image_id
@@ -56,20 +44,16 @@ resource "yandex_compute_instance" "platform" {
 
   metadata = {
     serial-port-enable = 1
-    ssh-keys           = "ubuntu:${var.vms_ssh_root_key}"
-   #ssh-keygen -t ed25519  На ed25519 переконфигурирую после сдачи ДЗ, а то половину уже сделал.
+        ssh-keys           = "${local.ssh-key}"
   }
-
 }
 ###########
 
 resource "yandex_compute_instance" "platform2" {
-#  name        = "${var.vm_db_netology-develop-platform-db}"
   name        = "${local.name-db1}"
   platform_id = "${var.vm_db_standard-v3}"
-  zone        = "${var.default_zone-b}"   #var.default_zone-b
-  #resources   = "${local.resources-db1}"
-  
+  zone        = "${var.default_zone-b}"   
+
   resources {
     cores         = "${local.resources-db1.cores}"
     memory        = "${local.resources-db1.memory}"
@@ -90,11 +74,8 @@ resource "yandex_compute_instance" "platform2" {
 
   metadata = {
     serial-port-enable = 1
-    ssh-keys           = "ubuntu:${var.vms_ssh_root_key}"
+    ssh-keys           = "${local.ssh-key}"
+ #       ssh-keys           = "ubuntu:${var.vms_ssh_root_key}"
    #ssh-keygen -t ed25519  На ed25519 переконфигурирую после сдачи ДЗ, а то половину уже сделал.
   }
-
 }
-
-
-#####

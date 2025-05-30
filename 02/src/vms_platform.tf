@@ -13,11 +13,11 @@ variable "default_cidr-b" {
 }
 
 
-variable "vm_web_netology-develop-platform-web" {
-  type        = string
-  default     = "netology-develop-platform-web"
-  description = "netology-develop-platform-web"
-}
+#variable "vm_web_netology-develop-platform-web" {
+#  type        = string
+#  default     = "netology-develop-platform-web"
+#  description = "netology-develop-platform-web"
+#}
 
 variable "vm_web_standard-v3" {
   type        = string
@@ -25,23 +25,23 @@ variable "vm_web_standard-v3" {
   description = "standard-v3"
 }
 
-variable "vm_web_cores" {
-  type        = number
-  default     = "2"
-  description = "cores"
-}
+#variable "vm_web_cores" {
+#  type        = number
+#  default     = "2"
+#  description = "cores"
+#}
 
-variable "vm_web_memory" {
-  type        = number
-  default     = "1"
-  description = "vm_web_memory"
-}
+#variable "vm_web_memory" {
+#  type        = number
+#  default     = "1"
+#  description = "vm_web_memory"
+#}
 
-variable "vm_web_core_fraction" {
-  type        = number
-  default     = "20"
-  description = "core_fraction"
-}
+#variable "vm_web_core_fraction" {
+#  type        = number
+#  default     = "20"
+#  description = "core_fraction"
+#}
 
 #############################################################
 
@@ -51,11 +51,11 @@ variable "vm_db_ubuntu-2004-lts" {
   description = "ubuntu-2004-lts"
 }
 
-variable "vm_db_netology-develop-platform-db" {
-  type        = string
-  default     = "netology-develop-platform-db"
-  description = "netology-develop-platform-db"
-}
+#variable "vm_db_netology-develop-platform-db" {
+#  type        = string
+#  default     = "netology-develop-platform-db"
+#  description = "netology-develop-platform-db"
+#}
 
 variable "vm_db_standard-v3" {
   type        = string
@@ -63,23 +63,23 @@ variable "vm_db_standard-v3" {
   description = "standard-v3"
 }
 
-variable "vm_db_cores" {
-  type        = number
-  default     = "2"
-  description = "cores"
-}
+#variable "vm_db_cores" {
+#  type        = number
+#  default     = "2"
+#  description = "cores"
+#}
 
-variable "vm_db_memory" {
-  type        = number
-  default     = "2"
-  description = "vm_db_memory"
-}
+#variable "vm_db_memory" {
+#  type        = number
+#  default     = "2"
+#  description = "vm_db_memory"
+#}
 
-variable "vm_db_core_fraction" {
-  type        = number
-  default     = "20"
-  description = "core_fraction"
-}
+#variable "vm_db_core_fraction" {
+#  type        = number
+#  default     = "20"
+#  description = "core_fraction"
+#}
 
 
 variable "default_zone-b" {
