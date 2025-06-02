@@ -4,7 +4,7 @@ data "yandex_compute_image" "ubuntu-2004-lts" {
 }
 
 resource "yandex_compute_instance" "example" {
-#  depends_on = [yandex_compute_instance.bastion]
+  depends_on = [yandex_compute_instance.root]
 
   count = 2
 

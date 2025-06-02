@@ -35,33 +35,10 @@ variable "vpc_name" {
 
 variable "public_key" {
   type    = string
-  default = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJzqKwUDlLQy+gsAc6as6WUmctThf3uqdlHZPSRwn4OF"
+#  default = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJzqKwUDlLQy+gsAc6as6WUmctThf3uqdlHZPSRwn4OF"
+  default = "~/.ssh/id_rsa_2048.pub"
 }
 
 variable "each_vm" {
-  type = list(object({  vm_name=string, cpu=number, ram=number, disk_volume=number }))
+  type = list(object({  vm_name=string, cpu=number, ram=number, disk_volume=number, core_fraction=number }))
 }
-
-# variable "each_vm" {
-#   type = list(object({
-#     vm_name = string,
-#     cpu  = number,
-#     ram  = number,
-#     disk_volume = number
-#   }))
-# }
-
-# each_vm = [
-#   {
-#     vm_name = "main"
-#     cpu  = 2
-#     ram  = 2
-#     disk_volume = 5
-#   },
-#   {
-#     vm_name = "replica"
-#     cpu  = 2
-#     ram  = 2
-#     disk_volume = 5
-#   }
-# ]
