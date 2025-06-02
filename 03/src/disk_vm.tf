@@ -12,19 +12,20 @@ resource "yandex_compute_disk" "disk" {
 
 
 resource "yandex_compute_instance" "storage" {
-  name        = "storage"
-  platform_id = "standard-v1"
+  name        = var.storage_disk_vm
+  hostname    = var.storage_disk_vm
+  platform_id = var.platform_id
     resources {
-    cores         = 2
-    memory        = 1
-    core_fraction = 5
+    cores         = var.cores_disk_vm
+    memory        = var.memory_disk_vm
+    core_fraction = var.core_fraction_disk_vm
   }
   
   boot_disk {
     initialize_params {
       image_id = data.yandex_compute_image.ubuntu-2004-lts.image_id
       type     = "network-hdd"
-      size     = 5
+      size     = var.boot_disk_disk_vm
     }
   }
 #     secondary_disk {

@@ -4,7 +4,7 @@ resource "yandex_compute_instance" "root" {
 
   name        = "${var.each_vm[count.index].vm_name}"
   hostname    = "${var.each_vm[count.index].vm_name}" 
-  platform_id = "standard-v1"
+  platform_id = var.platform_id
 
   resources {
     cores         = "${var.each_vm[count.index].cpu}"
