@@ -44,7 +44,7 @@ variable "each_vm" {
   type = list(object({  vm_name=string, cpu=number, ram=number, disk_volume=number, core_fraction=number }))
 }
 ###########################3
-variable "storage_disk_vm" {
+variable "name_disk_vm" {
   type        = string
   default     = "storage"
 }

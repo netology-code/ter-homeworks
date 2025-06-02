@@ -5,6 +5,7 @@ resource "yandex_compute_disk" "disk" {
   name     = "disk0${count.index+1}"
   type     = "network-hdd"
   zone     = "ru-central1-a"
+  size     = 1
  # disk_id = yandex_compute_disk.disk.id
  # image_id = "yandex_compute_disk.disk.${count.index+1}"
  }
@@ -12,8 +13,8 @@ resource "yandex_compute_disk" "disk" {
 
 
 resource "yandex_compute_instance" "storage" {
-  name        = var.storage_disk_vm
-  hostname    = var.storage_disk_vm
+  name        = var.name_disk_vm
+  hostname    = var.name_disk_vm
   platform_id = var.platform_id
     resources {
     cores         = var.cores_disk_vm
