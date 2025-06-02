@@ -48,6 +48,9 @@ variable "each_vm" {
 5. Используйте функцию file в local-переменной для считывания ключа ~/.ssh/id_rsa.pub и его последующего использования в блоке metadata, взятому из ДЗ 2.
 6. Инициализируйте проект, выполните код.
 
+![image](https://github.com/user-attachments/assets/451ffd20-e477-4627-af3e-47b0f53eae52)
+
+
 ------
 
 ### Задание 3
