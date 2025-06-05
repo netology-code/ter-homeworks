@@ -46,6 +46,9 @@
 
 ![image](https://github.com/user-attachments/assets/0ddbc0fe-9541-4842-8c22-bc71e51243e5)
 
+![image](https://github.com/user-attachments/assets/60e9825c-65b1-4c77-8902-246053506ab0)
+
+
 4. Замените ресурсы yandex_vpc_network и yandex_vpc_subnet созданным модулем. Не забудьте передать необходимые параметры сети из модуля vpc в модуль с виртуальной машиной.
 5. Сгенерируйте документацию к модулю с помощью terraform-docs.
  
