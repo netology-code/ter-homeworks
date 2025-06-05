@@ -85,7 +85,7 @@ module "vpc_dev" {
 
 ![image](https://github.com/user-attachments/assets/d9f4215b-cf9b-425a-ae23-308f5009273d)
 
-![image](https://github.com/user-attachments/assets/3514161d-3ed8-47f2-9ad7-22322e56849f)
+![image](https://github.com/user-attachments/assets/a658d69a-1b2a-4e99-9838-66d16bbbb18f)
 
 
 
