@@ -65,10 +65,29 @@ module "vpc_dev" {
 
 ### Задание 3
 1. Выведите список ресурсов в стейте.
+![image](https://github.com/user-attachments/assets/785a55ee-779b-4334-a537-541c19910251)
+
+
+
 2. Полностью удалите из стейта модуль vpc.
 3. Полностью удалите из стейта модуль vm.
+![image](https://github.com/user-attachments/assets/3de3e89f-9bb8-4ae4-9735-a8b14886a6f6)
+![image](https://github.com/user-attachments/assets/9012a842-c964-4e0f-83e0-1c081afdfe9d)
+
+
+
 4. Импортируйте всё обратно. Проверьте terraform plan. Значимых(!!) изменений быть не должно.
 Приложите список выполненных команд и скриншоты процессы.
+
+![image](https://github.com/user-attachments/assets/be11b20b-a39c-46ce-80ad-b63f2ae1d98b)
+
+![image](https://github.com/user-attachments/assets/4040ebc2-e25e-42ce-ac7c-8108fc3cf8ea)
+
+![image](https://github.com/user-attachments/assets/d9f4215b-cf9b-425a-ae23-308f5009273d)
+
+![image](https://github.com/user-attachments/assets/3514161d-3ed8-47f2-9ad7-22322e56849f)
+
+
 
 ## Дополнительные задания (со звёздочкой*)
 
