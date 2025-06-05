@@ -26,6 +26,14 @@
 Воспользуйтесь [**примером**](https://grantorchard.com/dynamic-cloudinit-content-with-terraform-file-templates/). Обратите внимание, что ssh-authorized-keys принимает в себя список, а не строку.
 3. Добавьте в файл cloud-init.yml установку nginx.
 4. Предоставьте скриншот подключения к консоли и вывод команды ```sudo nginx -t```, скриншот консоли ВМ yandex cloud с их метками. Откройте terraform console и предоставьте скриншот содержимого модуля. Пример: > module.marketing_vm
+
+![image](https://github.com/user-attachments/assets/0983e315-4d00-4f1f-9a12-e215a060f5d2)
+
+![image](https://github.com/user-attachments/assets/1e0fefdd-d426-41d3-a511-ae3e533d7c56)
+
+![image](https://github.com/user-attachments/assets/3ce17a22-3443-4f16-82d7-73bd382e8098)
+
+
 ------
 В случае использования MacOS вы получите ошибку "Incompatible provider version" . В этом случае скачайте remote модуль локально и поправьте в нем версию template провайдера на более старую.
 ------
