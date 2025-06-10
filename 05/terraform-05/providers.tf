@@ -2,7 +2,13 @@ terraform {
   required_providers {
     yandex = {
       source = "yandex-cloud/yandex"
+version = ">= 0.130"
     }
+        template = {
+      source = "yandex-cloud/yandex"
+version = ">= 0.130"
+    }
+  #    4 строки выше я не знаю зачем. убрал ошибку версионности при проверки tflint-ом
   }
   required_version = ">1.8.4"
 
