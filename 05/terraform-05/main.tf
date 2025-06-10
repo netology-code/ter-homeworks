@@ -9,7 +9,7 @@
 #   zone           = "ru-central1-a"
 #   network_id     = yandex_vpc_network.develop.id
 #   v4_cidr_blocks = ["10.0.1.0/24"]
-# }
+# }!!!!!!!!!!!!!!!!!!nnenenenwe!!!!!!!!!!!!!!!!!!!!!!!
 
 module "vpc-dev" {
   source       = "./vpc-dev"
