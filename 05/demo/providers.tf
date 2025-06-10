@@ -8,9 +8,9 @@
 # aws_secret_access_key = YCMBzZ3...
 
 
-#For terraform >=1.6<=1.8.5
+#For terraform >=1.6<=1.9.8
 terraform {
-  required_version = "1.8.4"
+  required_version = ">1.8.4"
 
   backend "s3" {
     
