@@ -80,10 +80,35 @@ Code lines for this resource are too many. Please use IDE of your choice to revi
 
 1. Возьмите ваш GitHub-репозиторий с **выполненным ДЗ 4** в ветке 'terraform-04' и сделайте из него ветку 'terraform-05'.
 2. Повторите демонстрацию лекции: настройте YDB, S3 bucket, yandex service account, права доступа и мигрируйте state проекта в S3 с блокировками. Предоставьте скриншоты процесса в качестве ответа.
-3. Закоммитьте в ветку 'terraform-05' все изменения.
-4. Откройте в проекте terraform console, а в другом окне из этой же директории попробуйте запустить terraform apply.
-5. Пришлите ответ об ошибке доступа к state.
-6. Принудительно разблокируйте state. Пришлите команду и вывод.
+![image](https://github.com/user-attachments/assets/9cd2074e-0cc2-4348-b989-acbe7ddd70e6)
+![image](https://github.com/user-attachments/assets/5a25ce05-93e9-4ef7-9f86-b87c5d7c0817)
+Локально:
+![image](https://github.com/user-attachments/assets/4a9cd206-29ab-46ef-b014-5db63b62803c)
+Бакет:
+![image](https://github.com/user-attachments/assets/0f9f1fff-c3a4-44ac-865e-69d2621f8fb3)
+![image](https://github.com/user-attachments/assets/20b30c80-94c5-493a-8429-b1be8f15ad1c)
+
+![image](https://github.com/user-attachments/assets/9bc8ea31-3ca0-4295-a0e9-083519879a50)
+![image](https://github.com/user-attachments/assets/7733a320-eee0-4113-a653-14303a81d8f3)
+![image](https://github.com/user-attachments/assets/8eff0895-cb5a-48ac-bb4b-e5b832bda17f)
+![image](https://github.com/user-attachments/assets/824ffb7c-46ad-4876-ad8b-d11d8058e46f)
+![image](https://github.com/user-attachments/assets/6dd6acd8-20e1-4e0c-ad89-15f5e6061be3)
+![image](https://github.com/user-attachments/assets/686c3e4f-0253-4bcb-aa84-11eaff297342)
+
+
+
+
+
+
+
+
+
+
+
+4. Закоммитьте в ветку 'terraform-05' все изменения.
+5. Откройте в проекте terraform console, а в другом окне из этой же директории попробуйте запустить terraform apply.
+6. Пришлите ответ об ошибке доступа к state.
+7. Принудительно разблокируйте state. Пришлите команду и вывод.
 
 
 ------
