@@ -31,14 +31,46 @@
 - из [ДЗ к лекции 4](https://github.com/netology-code/ter-homeworks/tree/main/04/src),
 - из [демо к лекции 4](https://github.com/netology-code/ter-homeworks/tree/main/04/demonstration1).
 2. Проверьте код с помощью tflint и checkov. Вам не нужно инициализировать этот проект.
+При создании файла .tflint.hcl и указании там кода (вывод информации более сжатый):
+_________________________________________________________
+tflint {
+  required_version = ">= 0.50"
+}
 
+config {
+  format = "compact"
+  plugin_dir = "~/.tflint.d/plugins"
+  call_module_type = "local"
+}
 
+# plugin "aws" {
+#   enabled = true
+#   version = "0.4.0"
+#   source  = "github.com/terraform-linters/tflint-ruleset-aws"
+# }
 
+rule "terraform_required_version" {
+  enabled = false
+}
+_________________________________________________________
 
+TFLINT каталог vms и src. Дудли удалил.
 
+main.tf:22:20: Warning - Module source "git::https://github.com/udjin10/yandex_compute_instance.git?ref=main" uses a default branch as ref (main) (terraform_module_pinned_source)
+ссылка на верку main без указания версионности. Может сломаться при изменении версии
+providers.tf:3:14: Warning - Missing version constraint for provider "yandex" in `required_providers` (terraform_required_providers)
+У провайдера не указана версия. Может сломаться при изменении версии
+variables.tf:50:1: Warning - variable "vm_db_name" is declared but not used (terraform_unused_declarations)
+переменная заявлена но не используется
 
+Check: CKV_TF_2: "Ensure Terraform module sources use a tag with a version number"
+не указана версия. Может сломаться при изменении версии		
 
+Check: CKV_TF_1: "Ensure Terraform module sources use a commit hash"
+необходимо указать URL Git с хэшем фиксации	
 
+Code lines for this resource are too many. Please use IDE of your choice to review the file.
+Слишком длинный путь. Нужно сократить		
   
 3. Перечислите, какие **типы** ошибок обнаружены в проекте (без дублей).
 
