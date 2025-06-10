@@ -7,8 +7,6 @@ terraform {
   required_version = ">1.8.4"
 
 
-
-
 backend "s3" {
     
     shared_credentials_files = ["~/.aws/credentials"]
@@ -22,6 +20,13 @@ backend "s3" {
 
     # access_key                  = "..."          #Только для примера! Не хардкодим секретные данные!
     # secret_key                  = "..."          #Только для примера! Не хардкодим секретные данные!
+# cat ~/.aws/config 
+# [default]
+# region=ru-central1
+# cat ~/.aws/credentials 
+# [default]
+# aws_access_key_id = YCAJEK...  !!!!!!!!!!!!!!!
+# aws_secret_access_key = YCMBzZ3...!!!!!!!!!!!!!!!!!!imenno tak!!!!!!!!!!!
 
 
     skip_region_validation      = true
