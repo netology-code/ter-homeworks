@@ -41,10 +41,17 @@ module "example-vm" {
   }
 }
 
+# data "template_file" "cloudinit" {
+#   template = file("./cloud-init.yml")
+#    vars = {
+#      ssh_public_key = var.ssh_public_key
+#    }
+# }
+
+
 data "template_file" "cloudinit" {
   template = file("./cloud-init.yml")
    vars = {
      ssh_public_key = var.ssh_public_key
    }
 }
-
