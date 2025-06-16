@@ -6,6 +6,7 @@ resource "local_file" "hosts_templatefile" {
   filename = "${abspath(path.module)}/hosts.ini"
 }
 
+
 resource "local_file" "hosts_for" {
   content =  <<-EOT
   %{if length(yandex_compute_instance.example) > 0}

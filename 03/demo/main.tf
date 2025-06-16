@@ -26,7 +26,7 @@ variable "env" {
 
 variable "external_acess_bastion" {
   type    = bool
-  default = false #false true создавать ли бастион
+  default = true #false true создавать ли бастион
 }
 
 #создаем/не создаем бастион

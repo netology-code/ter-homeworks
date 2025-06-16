@@ -55,7 +55,7 @@ locals {
 #> merge( { "1": "A ","2": "B" }, { "3": "C", "4": "D" } )
 
 
-#> flatten( [  ["1", "2" , ["Q","W"]]  ,   [ "3","4", ["E","R"]]   ] )
+#> flatten( [  ["1", "2" , [["1"],"Q","W"]]  ,   [ "3","4", ["E","R"]]   ] )
 
 #>  slice([  "ru-central1-a",  "ru-central1-b",  "ru-central1-c",  "ru-central1-d",],0,3)
 
