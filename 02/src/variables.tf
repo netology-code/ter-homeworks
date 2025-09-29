@@ -28,11 +28,29 @@ variable "vpc_name" {
   description = "VPC network & subnet name"
 }
 
+variable "vm_web_name" {
+  type        = string
+  default     = "netology-develop-platform-web"
+  description = "yandex compute instance name"
+}
+
+variable "vm_web_platform_id" {
+  type        = string
+  default     = "standard-v1" #standart-v4 error
+  description = "yandex compute instance platform id"
+}
+
+variable "vm_web_resources_cores" {
+  type        = number
+  default     = 1
+  description = "yandex compute instance cores number"
+}
+
 
 ###ssh vars
 
 variable "vms_ssh_root_key" {
   type        = string
-  default     = "<your_ssh_ed25519_key>"
+  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFdYmU9HIi9D5Ca76K2FhkgXilzCCBx+JEDgeCpQjjP2 decimal@DESKTOP-LLH62I7"
   description = "ssh-keygen -t ed25519"
 }
