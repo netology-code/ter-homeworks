@@ -20,19 +20,29 @@ resource "random_password" "random_string" {
   min_numeric = 1
 }
 
-/*
-resource "docker_image" {
+
+resource "docker_image" "nginx" {
   name         = "nginx:latest"
   keep_locally = true
 }
 
-resource "docker_container" "1nginx" {
+resource "docker_container" "nginx_container" {
   image = docker_image.nginx.image_id
-  name  = "example_${random_password.random_string_FAKE.resulT}"
+  name  = "example_${random_password.random_string.result}"
 
   ports {
     internal = 80
     external = 9090
   }
 }
+/*
+Ключ -auto-approve опасен тем, что автоматически подтверждает выполнение плана без запроса подтверждения от пользователя. Это может привести к:
+
+Непреднамеренным изменениям - если план содержит ошибки или нежелательные изменения, они будут применены без возможности отмены
+
+Потере данных - при удалении ресурсов или изменении критической инфраструктуры
+
+Простоям сервисов - при замене работающих контейнеров или изменении конфигурации
+
+Финансовым потерям - в облачных средах может создать ненужные ресурсы
 */

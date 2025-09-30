@@ -22,35 +22,56 @@ variable "default_cidr" {
   description = "https://cloud.yandex.ru/docs/vpc/operations/subnet-create"
 }
 
+
 variable "vpc_name" {
   type        = string
   default     = "develop"
   description = "VPC network & subnet name"
 }
 
-variable "vm_web_name" {
+variable "nat_route_table_name" {
   type        = string
-  default     = "netology-develop-platform-web"
-  description = "yandex compute instance name"
+  default     = "route-table"
+  description = "nat route table name"
 }
 
-variable "vm_web_platform_id" {
+variable "nat_gateway_name" {
   type        = string
-  default     = "standard-v1" #standart-v4 error
-  description = "yandex compute instance platform id"
+  default     = "nat-gateway"
+  description = "nat gateway name"
 }
-
-variable "vm_web_resources_cores" {
-  type        = number
-  default     = 1
-  description = "yandex compute instance cores number"
-}
-
 
 ###ssh vars
 
-variable "vms_ssh_root_key" {
-  type        = string
-  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFdYmU9HIi9D5Ca76K2FhkgXilzCCBx+JEDgeCpQjjP2 decimal@DESKTOP-LLH62I7"
-  description = "ssh-keygen -t ed25519"
+# variable "vms_ssh_root_key" {
+#   type        = string
+#   description = "ssh-keygen -t ed25519"
+# }
+
+variable vms_resources  {
+  description = "resources for VMs"
+  default = {
+    web = {
+      cores=2
+      memory=1
+      core_fraction=5
+    }
+    db = {
+      cores=2
+      memory=2
+      core_fraction=20
+    }
+  }
+
+}
+
+variable "vms_metadata" {
+  default = {
+    serial-port-enable = 1
+    ssh-keys           = "ubuntu:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFdYmU9HIi9D5Ca76K2FhkgXilzCCBx+JEDgeCpQjjP2 decimal@DESKTOP-LLH62I7"
+  }
+}
+
+variable "test" {
+  type = list(map(list(string)))
 }
