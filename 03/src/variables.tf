@@ -61,6 +61,7 @@ variable "vm_db_configs" {
   description = "VMs DB configs"
   default = {
     main = {
+      name        = "main"
       cores       = 2
       memory      = 2
       disk_size   = 15
@@ -71,6 +72,7 @@ variable "vm_db_configs" {
       }
     }
     replica = {
+      name        = "replica"
       cores       = 4
       memory      = 4
       disk_size   = 10
@@ -88,6 +90,7 @@ variable "vm_db_configs" {
 variable "vm_storage_configs" {
   description = "VMs disk storage configs"
   default = {
+      name        = "storage"
       cores       = 2
       memory      = 2
       disk_size   = 10

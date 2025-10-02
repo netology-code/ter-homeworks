@@ -7,7 +7,8 @@ resource "yandex_compute_disk" "storage_disks" {
 }
 
 resource "yandex_compute_instance" "storage" {
-    name = "storage"
+
+    name = var.vm_storage_configs.name
 
     platform_id = var.vm_storage_configs.platform_id
     zone = var.default_zone
