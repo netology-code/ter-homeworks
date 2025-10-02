@@ -1,0 +1,20 @@
+%{if length(webservers) > 0 ~}
+[webservers]
+%{ for instance in webservers ~}
+${instance.name} ansible_host=${try(instance.network_interface[0].nat_ip_address, null)} fqdn=${try(instance.fqdn, null)}
+%{ endfor ~}
+%{ endif ~}
+
+%{if length(webservers) > 0 ~}
+[databases]
+%{ for instance in databases ~}
+${instance.name} ansible_host=${try(instance.network_interface[0].nat_ip_address, null)} fqdn=${try(instance.fqdn, null)}
+%{ endfor ~}
+%{ endif ~}
+
+%{if length(storage) > 0 ~}
+[storage]
+%{ for instance in storage ~}
+${instance.name} ansible_host=${try(instance.network_interface[0].nat_ip_address, null)} fqdn=${try(instance.fqdn, null)}
+%{ endfor ~}
+%{ endif ~}
