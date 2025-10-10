@@ -3,37 +3,37 @@
 ## Задание 1
 
 sudo nginx:  
-![alt text](image-2.png)  
-![alt text](image-3.png)
+![alt text](./images/image-2.png)  
+![alt text](./images/image-3.png)
 
 console cloud:  
-![alt text](image-1.png)
+![alt text](./images/image-1.png)
 
 terraform output:  
-![alt text](image.png)
+![alt text](./images/image.png)
 
 ## Задание 2
 
 ## Задание 3
 
 terraform state list:  
-![alt text](image-4.png)
+![alt text](./images/image-4.png)
 
 terraform state rm 'module.vpc_develop':  
-![alt text](image-5.png)
+![alt text](./images/image-5.png)
 
 terraform state rm 'module.marketing-vm', terraform state rm 'module.analytics-vm':  
-![alt text](image-6.png)
+![alt text](./images/image-6.png)
 
 import vpc modules:  
-![alt text](image-7.png)  
+![alt text](./images/image-7.png)  
 
 import vm instances:  
-![alt text](image-8.png)  
-![alt text](image-9.png)  
+![alt text](./images/image-8.png)  
+![alt text](./images/image-9.png)  
 
 terraform plan:  
-![alt text](image-10.png)
+![alt text](./images/image-10.png)
 
 
 ## Задание 4
@@ -41,7 +41,7 @@ terraform plan:
 Результат terraform plan:
 
 часть вывода с vpc (в яндекс нет зоны ru-central1-с, apply вываливался с ошибкой. Заменил на ru-central1-d):  
-![alt text](image-11.png)
+![alt text](./images/image-11.png)
 
 Для передачи id в инстансы vm заведен output в модуле vpc
 
@@ -59,7 +59,7 @@ module "mysql-managed" {
 }
 ```
 
-![alt text](image-14.png)
+![alt text](./images/image-14.png)
 
 кластер с 1 хостом:
 
@@ -73,23 +73,23 @@ module "mysql-managed" {
 }
 ```
 
-![alt text](image-13.png)
+![alt text](./images/image-13.png)
 
 ресурсы db и user:
-![alt text](image-15.png)
+![alt text](./images/image-15.png)
 
 Вывод из cli yandex cloud:
-![alt text](image-17.png)
+![alt text](./images/image-17.png)
 
 Два хоста:
-![alt text](image-18.png)
+![alt text](./images/image-18.png)
 
 ## Задание 6
 
 ## Задание 7
 
 секрет из vault:  
-![alt text](image-12.png)
+![alt text](./images/image-12.png)
 
 сектрет записал:  
 
@@ -104,6 +104,6 @@ resource "vault_generic_secret" "vault_my_example"{
 }
 ```
 
-![alt text](image-16.png)
+![alt text](./images/image-16.png)
 
 ## Задание 8
