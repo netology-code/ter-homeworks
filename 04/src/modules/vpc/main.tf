@@ -21,12 +21,3 @@ resource "yandex_vpc_subnet" "subnet" {
   v4_cidr_blocks = [var.subnets[count.index].cidr]
 
 }
-
-# module "s3" {
-#   source = "github.com/terraform-yc-modules/terraform-yc-s3"
-
-#   bucket_name = "bucket-netology-ter-05-decimal"
-#   versioning = {
-#     enabled = true
-#   }
-# }

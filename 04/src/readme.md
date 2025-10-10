@@ -107,3 +107,11 @@ resource "vault_generic_secret" "vault_my_example"{
 ![alt text](./images/image-16.png)
 
 ## Задание 8
+
+Сделано.
+
+Разделенные модули:
+![alt text](./images/image-111.png)
+
+Terraform lock state:
+![alt text](./images/image-222.png)

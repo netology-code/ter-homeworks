@@ -4,20 +4,18 @@ terraform {
       source = "yandex-cloud/yandex"
     }
   }
-  required_version = "~>1.8.4"
-
   backend "s3" {
     endpoints = {
       s3 = "https://storage.yandexcloud.net"
       dynamodb = "https://docapi.serverless.yandexcloud.net/ru-central1/b1gt80gaili3c9dsg6oe/etnkifqvr09s2al3snta"
-    }  
+    }   
     bucket     = "netology-bucket-04"
     region     = "ru-central1"
-    key       = "vm/terraform.tfstate"
+    key       = "vpc/terraform.tfstate"
     
     skip_region_validation      = true
     skip_credentials_validation = true
-    skip_requesting_account_id  = true 
+    skip_requesting_account_id  = true  
     skip_s3_checksum            = true
     skip_metadata_api_check     = true
 
@@ -33,3 +31,22 @@ provider "yandex" {
   zone      = var.default_zone
 }
 
+module "vpc_develop" {
+  source       = "../modules/vpc"
+  network_name = "dev-network"
+  subnet_name  = "dev-subnet"
+  
+  subnets = [
+    { zone = "ru-central1-a", cidr = "10.0.1.0/24" },
+    { zone = "ru-central1-b", cidr = "10.0.2.0/24" },
+    { zone = "ru-central1-d", cidr = "10.0.3.0/24" },
+  ]
+}
+
+output "network_id" {
+  value = module.vpc_develop.network.id
+}
+
+output "subnet_ids" {
+  value = module.vpc_develop.subnet_ids
+}

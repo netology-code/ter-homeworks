@@ -1,9 +1,28 @@
+data "terraform_remote_state" "vpc" {
+  backend = "s3"
+  
+  config = {
+    endpoints = {
+      s3 = "https://storage.yandexcloud.net"
+    } 
+    bucket     = "netology-bucket-04"
+    region     = "ru-central1"
+    key       = "vpc/terraform.tfstate"
+    
+    skip_region_validation      = true
+    skip_credentials_validation = true
+    skip_requesting_account_id  = true
+    skip_s3_checksum            = true
+    skip_metadata_api_check     = true
+  }
+}
+
 module "marketing-vm" {
   source         = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=main"
   env_name       = "develop" 
-  network_id     = module.vpc_develop.network.id
+  network_id     = data.terraform_remote_state.vpc.outputs.network_id
   subnet_zones   = ["ru-central1-a"]
-  subnet_ids     = [module.vpc_develop.subnet_ids["ru-central1-a"]]
+  subnet_ids     = [data.terraform_remote_state.vpc.outputs.subnet_ids["ru-central1-a"]]
   instance_count = 1
   instance_name  = "marketing-vm"
   image_family   = "ubuntu-2004-lts"
@@ -24,9 +43,9 @@ module "marketing-vm" {
 module "analytics-vm" {
   source         = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=main"
   env_name       = "develop" 
-  network_id     = module.vpc_develop.network.id
+  network_id     = data.terraform_remote_state.vpc.outputs.network_id
   subnet_zones   = ["ru-central1-a"]
-  subnet_ids     = [module.vpc_develop.subnet_ids["ru-central1-a"]]
+  subnet_ids     = [data.terraform_remote_state.vpc.outputs.subnet_ids["ru-central1-a"]]
   instance_count = 1
   instance_name  = "analytics-vm"
   image_family   = "ubuntu-2004-lts"
@@ -56,9 +75,10 @@ data "template_file" "cloudinit" {
 module "mysql-managed" {
     source = "./modules/mysql"
     cluster_name = "example"
-    network_id = module.vpc_develop.network.id
-    subnet_ids = module.vpc_develop.subnet_ids
-    HA = true
+    network_id = data.terraform_remote_state.vpc.outputs.network_id
+    #subnet_ids = module.vpc_develop.subnet_ids
+    subnet_ids = data.terraform_remote_state.vpc.outputs.subnet_ids
+    HA = false
 }
 
 module "mysql_db" {
