@@ -7,7 +7,7 @@ terraform {
   backend "s3" {
     endpoints = {
       s3 = "https://storage.yandexcloud.net"
-      dynamodb = "https://docapi.serverless.yandexcloud.net/ru-central1/b1gt80gaili3c9dsg6oe/etnkifqvr09s2al3snta"
+      dynamodb = "https://docapi.serverless.yandexcloud.net/ru-central1/b1gt80gaili3c9dsg6oe/etnkic6v51149s4gtv47"
     }   
     bucket     = "netology-bucket-04"
     region     = "ru-central1"
@@ -38,8 +38,8 @@ module "vpc_develop" {
   
   subnets = [
     { zone = "ru-central1-a", cidr = "10.0.1.0/24" },
-    { zone = "ru-central1-b", cidr = "10.0.2.0/24" },
-    { zone = "ru-central1-d", cidr = "10.0.3.0/24" },
+    # { zone = "ru-central1-b", cidr = "10.0.2.0/24" },
+    # { zone = "ru-central1-d", cidr = "10.0.3.0/24" },
   ]
 }
 

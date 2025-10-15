@@ -101,8 +101,8 @@ data "vault_generic_secret" "vault_example"{
  path = "secret/example"
 }
 
-resource "vault_generic_secret" "vault_my_example"{
- path = "secret/my_example"
+resource "vault_generic_secret" "vault_example"{
+ path = "secret/example"
 
  data_json = jsonencode({
     username = "admin"

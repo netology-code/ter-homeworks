@@ -9,7 +9,7 @@ terraform {
   backend "s3" {
     endpoints = {
       s3 = "https://storage.yandexcloud.net"
-      dynamodb = "https://docapi.serverless.yandexcloud.net/ru-central1/b1gt80gaili3c9dsg6oe/etnkifqvr09s2al3snta"
+      dynamodb = "https://docapi.serverless.yandexcloud.net/ru-central1/b1gt80gaili3c9dsg6oe/etnkic6v51149s4gtv47"
     }  
     bucket     = "netology-bucket-04"
     region     = "ru-central1"
