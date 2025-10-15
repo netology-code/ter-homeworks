@@ -106,7 +106,8 @@ resource "vault_generic_secret" "vault_example"{
 
  data_json = jsonencode({
     username = "admin"
-    password = var.mysql_db_user_password
+    #password = var.mysql_db_user_password
+    password = "myPass"
   })
 }
 
