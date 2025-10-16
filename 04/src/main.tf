@@ -18,7 +18,7 @@ data "terraform_remote_state" "vpc" {
 }
 
 module "marketing-vm" {
-  source         = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=main"
+  source         = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=1.0.0"
   env_name       = "develop" 
   network_id     = data.terraform_remote_state.vpc.outputs.network_id
   subnet_zones   = ["ru-central1-a"]
@@ -41,7 +41,7 @@ module "marketing-vm" {
 }
 
 module "analytics-vm" {
-  source         = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=main"
+  source         = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=1.0.0"
   env_name       = "develop" 
   network_id     = data.terraform_remote_state.vpc.outputs.network_id
   subnet_zones   = ["ru-central1-a"]
@@ -96,9 +96,11 @@ provider "vault" {
  address = "http://127.0.0.1:8200"
  skip_tls_verify = true
  token = "education"
+
 }
-data "vault_generic_secret" "vault_example"{
- path = "secret/example"
+
+data "vault_generic_secret" "vault_example" {
+  path = "secret/example"
 }
 
 resource "vault_generic_secret" "vault_example"{
