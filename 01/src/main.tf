@@ -8,31 +8,42 @@ terraform {
   required_version = ">=1.8.4" /*Многострочный комментарий.
  Требуемая версия terraform */
 }
-provider "docker" {}
 
-#однострочный комментарий
-
-resource "random_password" "random_string" {
-  length      = 16
-  special     = false
-  min_upper   = 1
-  min_lower   = 1
-  min_numeric = 1
+provider "docker" {
+  host = "ssh://wqtr@89.169.167.232:22"
 }
 
-/*
-resource "docker_image" {
-  name         = "nginx:latest"
-  keep_locally = true
+resource "random_password" "mysql_root" {
+  length  = 16
+  upper   = true
+  lower   = true
+  numeric  = true
+  special = false
 }
 
-resource "docker_container" "1nginx" {
-  image = docker_image.nginx.image_id
-  name  = "example_${random_password.random_string_FAKE.resulT}"
+resource "random_password" "mysql_user" {
+  length  = 16
+  upper   = true
+  lower   = true
+  numeric  = true
+  special = false
+}
+
+resource "docker_container" "mysql" {
+  image = "mysql:8"
+  name  = "example_${random_password.mysql_root.result}"
 
   ports {
-    internal = 80
-    external = 9090
+    internal = 3306
+    external = 3306
   }
+
+  env = [
+    "MYSQL_ROOT_PASSWORD=${random_password.mysql_root.result}",
+    "MYSQL_DATABASE=wordpress",
+    "MYSQL_USER=wordpress",
+    "MYSQL_PASSWORD=${random_password.mysql_user.result}",
+    "MYSQL_ROOT_HOST=%"
+  ]
 }
-*/
+
