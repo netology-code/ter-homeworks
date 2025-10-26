@@ -1,5 +1,4 @@
-###cloud vars
-
+# cloud vars
 
 variable "cloud_id" {
   type        = string
@@ -29,10 +28,43 @@ variable "vpc_name" {
 }
 
 
-###ssh vars
+# ssh vars
 
-variable "vms_ssh_root_key" {
+variable "service_account_key_file" {
   type        = string
-  default     = "<your_ssh_ed25519_key>"
-  description = "ssh-keygen -t ed25519"
+  description = "Путь к ключу яндекса"
 }
+
+variable "vms_ssh_public_root_key" {
+  type        = string
+  description = "Публичный ключ SSH для root-пользователя"
+}
+
+# name vars
+
+variable "environment" {
+  type    = string
+  default = "env"
+}
+
+variable "role_web" {
+  type    = string
+  default = "web"
+}
+
+variable "role_db" {
+  type    = string
+  default = "db"
+}
+
+# new "test" var
+
+variable "test" {
+  description = "тестовая переменная для получения строки SSH подключения"
+  type = list(
+    map(
+      list(string)
+    )
+  )
+}
+ 
