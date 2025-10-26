@@ -11,7 +11,13 @@
 # own secret vars store.
 personal.auto.tfvars
 
+# в этом файле ничег осекретного, поэтому добавляю в гит без опасений
+#terraform.tfvars
 
-terraform.tfvars
+# а вот тут секретики, поэтому не показываю
+personal.auto.tfvars
 
 tfplan
+
+# тут ключ от квартиры, где деньги лежат
+yc-terraform-training-acc-key.json
