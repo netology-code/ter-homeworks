@@ -2,12 +2,32 @@ resource "yandex_vpc_network" "develop" {
   name = var.vpc_name
 }
 
+# NAT-шлюз
+resource "yandex_vpc_gateway" "nat_gateway" {
+  name      = "${var.vpc_name}-nat-gateway"
+  folder_id = var.folder_id
+  shared_egress_gateway {}
+}
+
+# Таблица маршрутизации для NAT
+resource "yandex_vpc_route_table" "nat_route" {
+  name       = "${var.vpc_name}-route-table"
+  folder_id  = var.folder_id
+  network_id = yandex_vpc_network.develop.id
+
+  static_route {
+    destination_prefix = "0.0.0.0/0"
+    gateway_id         = yandex_vpc_gateway.nat_gateway.id
+  }
+}
+
 # Первая подсеть для первой ВМ
 resource "yandex_vpc_subnet" "develop" {
   name           = var.vpc_name
   zone           = var.default_zone
   network_id     = yandex_vpc_network.develop.id
   v4_cidr_blocks = var.default_cidr
+  route_table_id = yandex_vpc_route_table.nat_route.id
 }
 
 # Вторая подсеть для второй ВМ
@@ -16,6 +36,7 @@ resource "yandex_vpc_subnet" "develop_b" {
   zone           = var.vm_db_zone
   network_id     = yandex_vpc_network.develop.id
   v4_cidr_blocks = var.vm_db_cidr
+  route_table_id = yandex_vpc_route_table.nat_route.id
 }
 
 # Первая ВМ
@@ -99,4 +120,5 @@ resource "yandex_compute_instance" "platform_db" {
 
   metadata = var.vms_metadata
 }
+
 
