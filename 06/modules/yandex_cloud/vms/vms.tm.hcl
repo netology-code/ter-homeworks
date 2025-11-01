@@ -6,14 +6,14 @@ generate_hcl "providers.tf" {
           source = "yandex-cloud/yandex"
         }
       }
-      required_version = "~>1.12.0"
+      required_version = global.terraform_version
     }
 
     provider "yandex" {
-      cloud_id                 = "b1gn3ndpua1j6jaabf79"
-      folder_id                = "b1gfu61oc15cb99nqmfe"
-      service_account_key_file = file("~/.netology-authorized_key.json")
-      zone                     = "ru-central1-a"
+      cloud_id                 = global.yc_cloud_id
+      folder_id                = global.yc_folder_id
+      service_account_key_file = file(global.yc_key_file)
+      zone                     = global.yc_zone
     }
   }
 }
