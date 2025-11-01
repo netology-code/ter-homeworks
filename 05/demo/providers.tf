@@ -21,7 +21,7 @@ terraform {
     region                   = "ru-central1"
 
     bucket  = "tfstate-develop" # FIO-netology-tfstate
-    key     = "production/terraform.tfstate"
+    key     = "dev1/dev1-terraform.tfstate"
     encrypt = false
 
     # НОВОЕ: Встроенный механизм блокировок (Terraform >= 1.6)
