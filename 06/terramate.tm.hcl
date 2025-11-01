@@ -10,7 +10,7 @@ globals {
   yc_zone      = "ru-central1-a"
   
   # Путь к ключу авторизации
-  yc_key_file = "~/.netology-authorized_key.json"
+  yc_key_file = "~/.authorized_key.json"
   
   # Terraform версия
   terraform_version = "~>1.12.0"
