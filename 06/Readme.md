@@ -19,9 +19,10 @@ terramate generate
 terramate list
 
 # Выполнить команду во всех стеках
-terramate run terraform init
-terramate run terraform plan
-terramate run terraform apply
+# Если backend изменился, используй -migrate-state
+terramate run --disable-safeguards=all terraform init
+terramate run --disable-safeguards=all terraform plan
+terramate run --disable-safeguards=all terraform apply
 
 # Если Terramate ругается на untracked files, используй один из вариантов:
 # Вариант 1: Обойти проверку (для тестирования)
