@@ -42,6 +42,8 @@ resource "yandex_compute_instance" "database_vm" {
   platform_id = "standard-v3"
   zone        = each.value.zone
 
+  allow_stopping_for_update = true
+
   resources {
     cores         = each.value.cpu
     memory        = each.value.ram
