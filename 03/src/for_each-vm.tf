@@ -1,3 +1,8 @@
+# Локальная переменная для считывания SSH-ключа
+locals {
+  ssh_public_key = file("~/.ssh/id_rsa.pub")
+}
+
 # Переменная для ВМ баз данных
 variable "each_vm" {
   type = list(object({
@@ -58,7 +63,7 @@ resource "yandex_compute_instance" "database_vm" {
   }
 
   metadata = {
-    ssh-keys = "ubuntu:${file("~/.ssh/terraform_key.pub")}"
+    ssh-keys = "ubuntu:${local.ssh_public_key}"
   }
 
   scheduling_policy {
