@@ -8,7 +8,7 @@ ${vm.name} ansible_host=${vm.ip} fqdn=${vm.fqdn}
 ${vm.name} ansible_host=${vm.ip} fqdn=${vm.fqdn}
 %{ endfor ~}
 
-[storage]
+[storage_servers]
 %{ for vm in storage_instances ~}
 ${vm.name} ansible_host=${vm.ip} fqdn=${vm.fqdn}
 %{ endfor ~}
