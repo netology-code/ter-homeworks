@@ -1,4 +1,3 @@
-
 terraform {
   required_providers {
     yandex = {
@@ -78,5 +77,36 @@ module "analytics_vm" {
     project    = "analytics"
     department = "analytics"
     environment = "production"
+  }
+}
+# Отдельные data sources для каждого шаблона
+data "template_file" "cloud_init_marketing" {
+  template = file("${path.module}/templates/cloud-init-marketing.yml")
+  vars = {
+    ssh_public_key = var.vms_ssh_root_key
+  }
+}
+
+data "template_file" "cloud_init_analytics" {
+  template = file("${path.module}/templates/cloud-init-analytics.yml")
+  vars = {
+    ssh_public_key = var.vms_ssh_root_key
+  }
+}
+
+# Обновляем ВМ чтобы использовать соответствующие шаблоны
+resource "yandex_compute_instance" "marketing_vm" {
+  # ... остальная конфигурация ...
+  metadata = {
+    ssh-keys = "ubuntu:${var.vms_ssh_root_key}"
+    user-data = data.template_file.cloud_init_marketing.rendered
+  }
+}
+
+resource "yandex_compute_instance" "analytics_vm" {
+  # ... остальная конфигурация ...
+  metadata = {
+    ssh-keys = "ubuntu:${var.vms_ssh_root_key}"
+    user-data = data.template_file.cloud_init_analytics.rendered
   }
 }
