@@ -7,7 +7,7 @@ terraform {
       source = "hashicorp/template"
     }
   }
-  required_version = "~>1.12.0"
+  required_version = ">= 1.0"
 }
 
 provider "yandex" {
@@ -32,81 +32,102 @@ resource "yandex_vpc_subnet" "develop" {
 # Шаблон cloud-init с переменной для SSH ключа
 data "template_file" "cloud_init" {
   template = file("${path.module}/templates/cloud-init.yml")
-  
+
   vars = {
     ssh_public_key = var.vms_ssh_root_key
   }
 }
 
-# Модуль для marketing проекта
-module "marketing_vm" {
-  source = "github.com/netology-code/ter-homeworks//04/demonstration1?ref=main"
-  
-  # Параметры ВМ
-  vm_name     = "marketing-vm"
-  vm_zone     = var.default_zone
-  network_id  = yandex_vpc_network.develop.id
-  subnet_id   = yandex_vpc_subnet.develop.id
-  
-  # Cloud-init конфигурация
-  user_data = data.template_file.cloud_init.rendered
-  
-  # Labels для обозначения принадлежности
+# ВМ для marketing проекта
+resource "yandex_compute_instance" "marketing_vm" {
+  name        = "marketing-vm"
+  platform_id = "standard-v3"
+  zone        = var.default_zone
+
+  resources {
+    cores  = 2
+    memory = 2
+  }
+
+allow_stopping_for_update = true
+
+  boot_disk {
+    initialize_params {
+      image_id = "fd8vmcue7aajpmeo39kk" # Ubuntu 22.04
+      size     = 10
+    }
+  }
+
+  network_interface {
+    subnet_id = yandex_vpc_subnet.develop.id
+    nat       = true
+  }
+
+  metadata = {
+    ssh-keys = "ubuntu:${var.vms_ssh_root_key}"
+    user-data = data.template_file.cloud_init.rendered
+  }
+
   labels = {
-    project    = "marketing"
-    department = "marketing"
+    project     = "marketing"
+    department  = "marketing"
     environment = "production"
+    managed-by  = "terraform"
   }
 }
 
-# Модуль для analytics проекта
-module "analytics_vm" {
-  source = "github.com/netology-code/ter-homeworks//04/demonstration1?ref=main"
-  
-  # Параметры ВМ
-  vm_name     = "analytics-vm"
-  vm_zone     = var.default_zone
-  network_id  = yandex_vpc_network.develop.id
-  subnet_id   = yandex_vpc_subnet.develop.id
-  
-  # Cloud-init конфигурация
-  user_data = data.template_file.cloud_init.rendered
-  
-  # Labels для обозначения принадлежности
+# ВМ для analytics проекта
+resource "yandex_compute_instance" "analytics_vm" {
+  name        = "analytics-vm"
+  platform_id = "standard-v3"
+  zone        = var.default_zone
+
+  resources {
+    cores  = 2
+    memory = 2
+  }
+
+  allow_stopping_for_update = true
+
+  boot_disk {
+    initialize_params {
+      image_id = "fd8vmcue7aajpmeo39kk" # Ubuntu 22.04
+      size     = 10
+    }
+  }
+
+  network_interface {
+    subnet_id = yandex_vpc_subnet.develop.id
+    nat       = true
+  }
+
+  metadata = {
+    ssh-keys = "ubuntu:${var.vms_ssh_root_key}"
+    user-data = data.template_file.cloud_init.rendered
+  }
+
   labels = {
-    project    = "analytics"
-    department = "analytics"
+    project     = "analytics"
+    department  = "analytics"
     environment = "production"
+    managed-by  = "terraform"
   }
 }
-# Отдельные data sources для каждого шаблона
+# Отдельные шаблоны для каждого проекта
 data "template_file" "cloud_init_marketing" {
-  template = file("${path.module}/templates/cloud-init-marketing.yml")
+  template = file("${path.module}/templates/cloud-init.yml")
+
   vars = {
     ssh_public_key = var.vms_ssh_root_key
+    vm_project     = "marketing"
   }
 }
 
 data "template_file" "cloud_init_analytics" {
-  template = file("${path.module}/templates/cloud-init-analytics.yml")
+  template = file("${path.module}/templates/cloud-init.yml")
+
   vars = {
     ssh_public_key = var.vms_ssh_root_key
-  }
-}
-
-# Обновляем ВМ чтобы использовать соответствующие шаблоны
-resource "yandex_compute_instance" "marketing_vm" {
-  # ... остальная конфигурация ...
-  metadata = {
-    ssh-keys = "ubuntu:${var.vms_ssh_root_key}"
-    user-data = data.template_file.cloud_init_marketing.rendered
-  }
-}
-
-resource "yandex_compute_instance" "analytics_vm" {
-  # ... остальная конфигурация ...
-  metadata = {
-    ssh-keys = "ubuntu:${var.vms_ssh_root_key}"
-    user-data = data.template_file.cloud_init_analytics.rendered
+    vm_project     = "analytics"
   }
 }
