@@ -1,45 +1,128 @@
-resource "yandex_mdb_mysql_cluster" "mysql_cluster" {
-  name        = var.cluster_name
-  environment = var.environment
-  network_id  = var.network_id
-  version     = var.mysql_version
+terraform {
+  required_providers {
+    yandex = {
+      source  = "yandex-cloud/yandex"
+      version = "0.171.0"
+    }
+  }
+}
+
+provider "yandex" {
+  zone = "ru-central1-a"
+}
+
+# VPC Resources
+resource "yandex_vpc_network" "vpc_prod" {
+  name = "vpc-prod"
+}
+
+resource "yandex_vpc_subnet" "vpc_prod_subnets" {
+  count          = 3
+  name           = "prod-subnet-${count.index}"
+  zone           = element(["ru-central1-a", "ru-central1-b", "ru-central1-c"], count.index)
+  network_id     = yandex_vpc_network.vpc_prod.id
+  v4_cidr_blocks = [element(["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"], count.index)]
+}
+
+resource "yandex_vpc_network" "vpc_dev" {
+  name = "vpc-dev"
+}
+
+resource "yandex_vpc_subnet" "vpc_dev_subnets" {
+  name           = "dev-subnet"
+  zone           = "ru-central1-a"
+  network_id     = yandex_vpc_network.vpc_dev.id
+  v4_cidr_blocks = ["10.10.1.0/24"]
+}
+
+# Compute Instances (минимальная конфигурация для проверки)
+resource "yandex_compute_instance" "marketing_vm" {
+  name        = "marketing-vm"
+  platform_id = "standard-v3"
+  zone        = "ru-central1-a"
 
   resources {
-    resource_preset_id = var.resource_preset_id
-    disk_type_id       = var.disk_type_id
-    disk_size          = var.disk_size
+    cores  = 2
+    memory = 2
   }
 
-  # Динамическое создание хостов в зависимости от HA режима
-  dynamic "host" {
-    for_each = var.ha ? range(var.host_count) : range(1)
-    
-    content {
-      zone      = var.zones[host.key % length(var.zones)]
-      subnet_id = var.subnet_ids[host.key % length(var.subnet_ids)]
+  boot_disk {
+    initialize_params {
+      image_id = "fd8vmcue7aajpmeo39kk" # Ubuntu 20.04
     }
   }
 
-  database {
-    name = "default_db"
+  network_interface {
+    subnet_id = yandex_vpc_subnet.vpc_dev_subnets.id
+    nat       = true
   }
 
-  user {
-    name     = var.username
-    password = var.password
-    permission {
-      database_name = "default_db"
-      roles         = ["ALL"]
+  metadata = {
+    ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
+  }
+}
+
+resource "yandex_compute_instance" "analytics_vm" {
+  name        = "analytics-vm"
+  platform_id = "standard-v3"
+  zone        = "ru-central1-a"
+
+  resources {
+    cores  = 2
+    memory = 2
+  }
+
+  boot_disk {
+    initialize_params {
+      image_id = "fd8vmcue7aajpmeo39kk" # Ubuntu 20.04
     }
   }
 
-  # Настройки HA
-  backup_window_start {
-    hours   = 23
-    minutes = 59
+  network_interface {
+    subnet_id = yandex_vpc_subnet.vpc_prod_subnets[0].id
+    nat       = true
   }
 
-  maintenance_window {
-    type = "ANYTIME"
+  metadata = {
+    ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
   }
+}
+
+# Modules
+module "vpc_dev" {
+  source   = "./modules/vpc"
+  env_name = "develop"
+  subnets = [
+    { zone = "ru-central1-a", cidr = "10.10.1.0/24" }
+  ]
+}
+
+module "vpc_prod" {
+  source   = "./modules/vpc"
+  env_name = "production"
+  subnets = [
+    { zone = "ru-central1-a", cidr = "10.0.1.0/24" },
+    { zone = "ru-central1-b", cidr = "10.0.2.0/24" },
+    { zone = "ru-central1-c", cidr = "10.0.3.0/24" }
+  ]
+}
+
+module "mysql_example_single" {
+  source = "./modules/mysql-cluster"
+  # Добавьте необходимые параметры
+}
+
+module "example_database" {
+  source = "./modules/mysql-database"
+  # Добавьте необходимые параметры
+}
+
+module "mysql_example_ha" {
+  source = "./modules/mysql-cluster"
+  # Добавьте необходимые параметры
+}
+
+module "example_ha_database" {
+  source = "./modules/mysql-database"
+  # Добавьте необходимые параметры
 }
