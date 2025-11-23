@@ -20,20 +20,26 @@ provider "yandex" {
 # Модуль VPC (заменяет прямые ресурсы yandex_vpc_network и yandex_vpc_subnet)
 module "vpc" {
   source = "./modules/vpc"
+  env_name = "production"
+ 
+  subnets = [
+    { zone = "ru-central1-a", cidr = "192.168.100.0/24" }
+  ]
+}
 
   # Передаем параметры сети
-  network_name = "production-network"
-  subnet_name  = "production-subnet"
-  zone         = "ru-central1-a"
-  cidr_blocks  = "192.168.100.0/24"
-}
+  #network_name = "production-network"
+  #subnet_name  = "production-subnet"
+  #zone         = "ru-central1-a"
+  #cidr_blocks  = "192.168.100.0/24"
+#}
 
 # Модуль marketing_vm с передачей параметров из модуля VPC
 module "marketing_vm" {
   source = "./modules/marketing_vm"
 
   # Передаем subnet_id из модуля VPC
-  subnet_id      = module.vpc.subnet_id
+  subnet_id      = module.vpc.subnet_id ["ru-central1-a"]
   ssh_public_key = var.vms_ssh_root_key
   zone           = module.vpc.zone  # передаем zone из модуля VPC
 }
