@@ -15,6 +15,11 @@ output "network_name" {
   value       = yandex_vpc_network.network.name
 }
 
+output "zone" {
+  description = "Availability zone of the subnet"
+  value       = yandex_vpc_subnet.subnet.zone
+}
+
 output "subnet_cidr_blocks" {
   description = "CIDR blocks of the created subnet"
   value       = yandex_vpc_subnet.subnet.v4_cidr_blocks
