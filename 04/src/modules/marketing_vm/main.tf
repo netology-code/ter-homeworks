@@ -1,4 +1,13 @@
 # Создайте файл modules/marketing_vm/main.tf
+
+terraform {
+  required_providers {
+    yandex = {
+      source  = "yandex-cloud/yandex"
+      version = ">= 0.171.0"
+    }
+  }
+}
 resource "yandex_compute_instance" "marketing_vm" {
   name        = "marketing-vm"
   platform_id = "standard-v3"
