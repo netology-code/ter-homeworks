@@ -1,133 +1,99 @@
+# main.tf
+
 terraform {
+  required_version = ">= 1.0"
+
   required_providers {
     yandex = {
-      source = "yandex-cloud/yandex"
-    }
-    template = {
-      source = "hashicorp/template"
+      source  = "yandex-cloud/yandex"
+      version = ">= 0.171.0"
     }
   }
-  required_version = ">= 1.0"
 }
 
+# Настройка провайдера Yandex.Cloud
 provider "yandex" {
-  token     = var.token
-  cloud_id  = var.cloud_id
-  folder_id = var.folder_id
-  zone      = var.default_zone
+  token     = var.yc_token
+  cloud_id  = var.yc_cloud_id
+  folder_id = var.yc_folder_id
+  zone      = "ru-central1-a"
 }
 
-# Создание VPC
-resource "yandex_vpc_network" "develop" {
-  name = var.vpc_name
+# УДАЛИТЕ эти ресурсы - они дублируют модуль VPC
+# resource "yandex_vpc_network" "network" {
+#   name = "marketing-network"
+# }
+#
+# resource "yandex_vpc_subnet" "subnet" {
+#   name           = "marketing-subnet"
+#   zone           = "ru-central1-a"
+#   network_id     = yandex_vpc_network.network.id
+#   v4_cidr_blocks = ["192.168.60.0/24"]
+# }
+
+# Модуль VPC (создает сеть и подсеть)
+module "vpc" {
+  source = "./modules/vpc"
+
+  network_name = "terraform-network"
+  subnet_name  = "terraform-subnet"
+  zone         = "ru-central1-a"
+  cidr_blocks  = "192.168.60.0/24"
 }
 
-resource "yandex_vpc_subnet" "develop" {
-  name           = var.vpc_name
-  zone           = var.default_zone
-  network_id     = yandex_vpc_network.develop.id
-  v4_cidr_blocks = var.default_cidr
+# Вызов модуля marketing_vm
+module "marketing_vm" {
+  source = "./modules/marketing_vm"
+
+  # Передача переменных в модуль
+  subnet_id      = module.vpc.subnet_id  # ИСПРАВЛЕНО: subnet_id, а не subnet.id
+  ssh_public_key = var.vms_ssh_root_key
+  zone           = "ru-central1-a"
 }
 
-# Шаблон cloud-init с переменной для SSH ключа
-data "template_file" "cloud_init" {
-  template = file("${path.module}/templates/cloud-init.yml")
-
-  vars = {
-    ssh_public_key = var.vms_ssh_root_key
-  }
-}
-
-# ВМ для marketing проекта
-resource "yandex_compute_instance" "marketing_vm" {
-  name        = "marketing-vm"
-  platform_id = "standard-v3"
-  zone        = var.default_zone
-
-  resources {
-    cores  = 2
-    memory = 2
-  }
-
-allow_stopping_for_update = true
-
-  boot_disk {
-    initialize_params {
-      image_id = "fd8vmcue7aajpmeo39kk" # Ubuntu 22.04
-      size     = 10
-    }
-  }
-
-  network_interface {
-    subnet_id = yandex_vpc_subnet.develop.id
-    nat       = true
-  }
-
-  metadata = {
-    ssh-keys = "ubuntu:${var.vms_ssh_root_key}"
-    user-data = data.template_file.cloud_init.rendered
-  }
-
-  labels = {
-    project     = "marketing"
-    department  = "marketing"
-    environment = "production"
-    managed-by  = "terraform"
-  }
-}
-
-# ВМ для analytics проекта
+# Ресурс analytics_vm
 resource "yandex_compute_instance" "analytics_vm" {
   name        = "analytics-vm"
   platform_id = "standard-v3"
-  zone        = var.default_zone
+  zone        = "ru-central1-a"
+
+  allow_stopping_for_update = true
 
   resources {
     cores  = 2
     memory = 2
   }
 
-  allow_stopping_for_update = true
-
   boot_disk {
     initialize_params {
-      image_id = "fd8vmcue7aajpmeo39kk" # Ubuntu 22.04
-      size     = 10
+      image_id = "fd84nt41ssoaapgql97p" # Ubuntu 22.04 - ваш образ
+      size     = 20
     }
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.develop.id
+    subnet_id = module.vpc.subnet_id  # ИСПРАВЛЕНО: subnet_id, а не subnet.id
     nat       = true
   }
 
   metadata = {
     ssh-keys = "ubuntu:${var.vms_ssh_root_key}"
-    user-data = data.template_file.cloud_init.rendered
   }
 
   labels = {
-    project     = "analytics"
-    department  = "analytics"
-    environment = "production"
-    managed-by  = "terraform"
-  }
-}
-# Отдельные шаблоны для каждого проекта
-data "template_file" "cloud_init_marketing" {
-  template = file("${path.module}/templates/cloud-init.yml")
-
-  vars = {
-    ssh_public_key = var.vms_ssh_root_key
-    vm_project     = "marketing"
+    environment = "analytics"
+    owner       = "analytics-team"
+    project     = "terraform"
   }
 }
 
-data "template_file" "cloud_init_analytics" {
-  template = file("${path.module}/templates/cloud-init.yml")
+# Вывод информации о созданных VM
+output "marketing_vm_ip" {
+  description = "External IP address of the marketing VM"
+  value       = module.marketing_vm.external_ip
+}
 
-  vars = {
-    ssh_public_key = var.vms_ssh_root_key
-    vm_project     = "analytics"
-  }
+output "analytics_vm_ip" {
+  description = "External IP address of the analytics VM"
+  value       = yandex_compute_instance.analytics_vm.network_interface[0].nat_ip_address
 }
