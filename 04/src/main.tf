@@ -2,7 +2,6 @@
 
 terraform {
   required_version = ">= 1.0"
-
   required_providers {
     yandex = {
       source  = "yandex-cloud/yandex"
@@ -11,7 +10,6 @@ terraform {
   }
 }
 
-# Настройка провайдера Yandex.Cloud
 provider "yandex" {
   token     = var.yc_token
   cloud_id  = var.yc_cloud_id
@@ -19,31 +17,32 @@ provider "yandex" {
   zone      = "ru-central1-a"
 }
 
-# Модуль VPC (создает сеть и подсеть)
+# Модуль VPC (заменяет прямые ресурсы yandex_vpc_network и yandex_vpc_subnet)
 module "vpc" {
   source = "./modules/vpc"
 
-  network_name = "my-vpc-network"
-  subnet_name  = "new-vpc-subnet"
+  # Передаем параметры сети
+  network_name = "production-network"
+  subnet_name  = "production-subnet"
   zone         = "ru-central1-a"
   cidr_blocks  = "192.168.100.0/24"
 }
 
-# Вызов модуля marketing_vm
+# Модуль marketing_vm с передачей параметров из модуля VPC
 module "marketing_vm" {
   source = "./modules/marketing_vm"
 
-  # Передача переменных в модуль
-  subnet_id      = module.vpc.subnet_id  # ИСПРАВЛЕНО: subnet_id, а не subnet.id
+  # Передаем subnet_id из модуля VPC
+  subnet_id      = module.vpc.subnet_id
   ssh_public_key = var.vms_ssh_root_key
-  zone           = "ru-central1-a"
+  zone           = module.vpc.zone  # передаем zone из модуля VPC
 }
 
-# Ресурс analytics_vm
+# Ресурс analytics_vm с передачей параметров из модуля VPC
 resource "yandex_compute_instance" "analytics_vm" {
   name        = "analytics-vm"
   platform_id = "standard-v3"
-  zone        = "ru-central1-a"
+  zone        = module.vpc.zone  # используем zone из модуля VPC
 
   allow_stopping_for_update = true
 
@@ -54,13 +53,13 @@ resource "yandex_compute_instance" "analytics_vm" {
 
   boot_disk {
     initialize_params {
-      image_id = "fd84nt41ssoaapgql97p" # Ubuntu 22.04 - ваш образ
+      image_id = "fd84nt41ssoaapgql97p"
       size     = 20
     }
   }
 
   network_interface {
-    subnet_id = module.vpc.subnet_id  # ИСПРАВЛЕНО: subnet_id, а не subnet.id
+    subnet_id = module.vpc.subnet_id  # используем subnet_id из модуля VPC
     nat       = true
   }
 
@@ -75,7 +74,7 @@ resource "yandex_compute_instance" "analytics_vm" {
   }
 }
 
-# Вывод информации о созданных VM
+# Вывод информации
 output "marketing_vm_ip" {
   description = "External IP address of the marketing VM"
   value       = module.marketing_vm.external_ip
