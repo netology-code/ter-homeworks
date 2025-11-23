@@ -23,10 +23,9 @@ provider "yandex" {
 module "vpc" {
   source = "./modules/vpc"
 
-  network_name = "terraform-network"
-  subnet_name  = "vpc-module-subnet"
+  network_name = "my-vpc-network"
   zone         = "ru-central1-a"
-  cidr_blocks  = "192.168.200.0/24"
+  cidr_blocks  = "192.168.100.0/24"
 }
 
 # Вызов модуля marketing_vm
