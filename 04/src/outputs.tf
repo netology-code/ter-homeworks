@@ -1,35 +1,20 @@
-output "prod_network" {
-  value = module.vpc_prod.network_name
+output "cluster_id" {
+  value = yandex_mdb_mysql_cluster.mysql_cluster.id
 }
 
-output "prod_subnets" {
-  value = module.vpc_prod.subnet_ids
+output "cluster_name" {
+  value = yandex_mdb_mysql_cluster.mysql_cluster.name
 }
 
-output "dev_network" {
-  value = module.vpc_dev.network_name
+output "hosts" {
+  value = yandex_mdb_mysql_cluster.mysql_cluster.host
 }
 
-output "dev_subnets" {
-  value = module.vpc_dev.subnet_ids
+output "fqdn" {
+  value = yandex_mdb_mysql_cluster.mysql_cluster.host[0].fqdn
 }
 
-# Outputs для виртуальных машин
-output "analytics_vm_ip" {
-  value = yandex_compute_instance.analytics_vm.network_interface[0].nat_ip_address
-}
-
-output "marketing_vm_ip" {
-  value = yandex_compute_instance.marketing_vm.network_interface[0].nat_ip_address
-}
-
-output "marketing_vm_internal_ip" {
-  value = yandex_compute_instance.marketing_vm.network_interface[0].ip_address
-}
-
-output "ssh_connection_commands" {
-  value = {
-    analytics = "ssh -i ~/.ssh/terraform_rsa ubuntu@${yandex_compute_instance.analytics_vm.network_interface[0].nat_ip_address}"
-    marketing = "ssh -i ~/.ssh/terraform_rsa ubuntu@${yandex_compute_instance.marketing_vm.network_interface[0].nat_ip_address}"
-  }
+output "connection_string" {
+  value = "mysql -h ${yandex_mdb_mysql_cluster.mysql_cluster.host[0].fqdn} -u ${var.username} -p"
+  sensitive = true
 }
