@@ -1,11 +1,7 @@
-# main.tf
-
 terraform {
-  required_version = ">= 1.0"
   required_providers {
     yandex = {
-      source  = "yandex-cloud/yandex"
-      version = ">= 0.171.0"
+      source = "yandex-cloud/yandex"
     }
   }
 }
@@ -17,17 +13,7 @@ provider "yandex" {
   zone      = "ru-central1-a"
 }
 
-# Модуль VPC (заменяет прямые ресурсы yandex_vpc_network и yandex_vpc_subnet)
-module "vpc" {
-  source = "./modules/vpc"
-  env_name = "production"
- 
-  subnets = [
-    { zone = "ru-central1-a", cidr = "192.168.100.0/24" }
-  ]
-}
-
-# Модуль VPC для production во всех зонах
+# Production VPC с подсетями во всех зонах
 module "vpc_prod" {
   source   = "./modules/vpc"
   env_name = "production"
@@ -39,7 +25,7 @@ module "vpc_prod" {
   ]
 }
 
-# Модуль VPC для development в одной зоне
+# Development VPC с одной подсетью
 module "vpc_dev" {
   source   = "./modules/vpc"
   env_name = "develop"
@@ -49,30 +35,11 @@ module "vpc_dev" {
   ]
 }
 
-  # Передаем параметры сети
-  #network_name = "production-network"
-  #subnet_name  = "production-subnet"
-  #zone         = "ru-central1-a"
-  #cidr_blocks  = "192.168.100.0/24"
-#}
-
-# Модуль marketing_vm с передачей параметров из модуля VPC
-module "marketing_vm" {
-  source = "./modules/marketing_vm"
-
-  # Передаем subnet_id из модуля VPC
-  subnet_id      = module.vpc.subnet_id ["ru-central1-a"]
-  ssh_public_key = var.vms_ssh_root_key
-  zone           = module.vpc.zone  # передаем zone из модуля VPC
-}
-
-# Ресурс analytics_vm с передачей параметров из модуля VPC
-resource "yandex_compute_instance" "analytics_vm" {
-  name        = "analytics-vm"
+# Виртуальные машины используют подсети из production VPC
+resource "yandex_compute_instance" "marketing_vm" {
+  name        = "marketing-vm"
   platform_id = "standard-v3"
-  zone        = module.vpc.zone  # используем zone из модуля VPC
-
-  allow_stopping_for_update = true
+  zone        = "ru-central1-a"
 
   resources {
     cores  = 2
@@ -81,34 +48,44 @@ resource "yandex_compute_instance" "analytics_vm" {
 
   boot_disk {
     initialize_params {
-      image_id = "fd84nt41ssoaapgql97p"
+      image_id = "fd8vmcue7aajpmeo39kk"
       size     = 20
     }
   }
 
   network_interface {
-    subnet_id = module.vpc.subnet_id  # используем subnet_id из модуля VPC
+    subnet_id = module.vpc_prod.subnet_ids["ru-central1-a"]
     nat       = true
   }
 
   metadata = {
-    ssh-keys = "ubuntu:${var.vms_ssh_root_key}"
-  }
-
-  labels = {
-    environment = "analytics"
-    owner       = "analytics-team"
-    project     = "terraform"
+    ssh-keys = "ubuntu:${file("~/.ssh/terraform_rsa.pub")}"
   }
 }
 
-# Вывод информации
-#output "marketing_vm_ip" {
-  #description = "External IP address of the marketing VM"
-  #value       = module.marketing_vm.external_ip
-#}
+resource "yandex_compute_instance" "analytics_vm" {
+  name        = "analytics-vm"
+  platform_id = "standard-v3"
+  zone        = "ru-central1-a"
 
-#output "analytics_vm_ip" {
-  #description = "External IP address of the analytics VM"
-  #value       = yandex_compute_instance.analytics_vm.network_interface[0].nat_ip_address
-#}
+  resources {
+    cores  = 2
+    memory = 2
+  }
+
+  boot_disk {
+    initialize_params {
+      image_id = "fd8vmcue7aajpmeo39kk"
+      size     = 20
+    }
+  }
+
+  network_interface {
+    subnet_id = module.vpc_prod.subnet_ids["ru-central1-a"]
+    nat       = true
+  }
+
+  metadata = {
+    ssh-keys = "ubuntu:${file("~/.ssh/terraform_rsa.pub")}"
+  }
+}
