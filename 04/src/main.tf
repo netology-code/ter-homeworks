@@ -28,7 +28,7 @@ provider "yandex" {
 #   name           = "marketing-subnet"
 #   zone           = "ru-central1-a"
 #   network_id     = yandex_vpc_network.network.id
-#   v4_cidr_blocks = ["192.168.60.0/24"]
+#   v4_cidr_blocks = ["192.168.100.0/24"]
 # }
 
 # Модуль VPC (создает сеть и подсеть)
