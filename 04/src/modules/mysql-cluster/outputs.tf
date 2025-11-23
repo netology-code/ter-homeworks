@@ -1,20 +1,15 @@
-output "cluster_id" {
-  value = yandex_mdb_mysql_cluster.mysql_cluster.id
+output "database_name" {
+  value = yandex_mdb_mysql_database.database.name
 }
 
-output "cluster_name" {
-  value = yandex_mdb_mysql_cluster.mysql_cluster.name
+output "username" {
+  value = yandex_mdb_mysql_user.user.name
 }
 
-output "hosts" {
-  value = yandex_mdb_mysql_cluster.mysql_cluster.host
+output "user_connection_limit" {
+  value = yandex_mdb_mysql_user.user.connection_limit
 }
 
-output "fqdn" {
-  value = yandex_mdb_mysql_cluster.mysql_cluster.host[0].fqdn
-}
-
-output "connection_string" {
-  value = "mysql -h ${yandex_mdb_mysql_cluster.mysql_cluster.host[0].fqdn} -u ${var.username} -p"
-  sensitive = true
+output "user_permissions" {
+  value = yandex_mdb_mysql_user.user.permission
 }
