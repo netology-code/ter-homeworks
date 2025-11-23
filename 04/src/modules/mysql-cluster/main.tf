@@ -10,7 +10,9 @@ resource "yandex_mdb_mysql_cluster" "mysql_cluster" {
     disk_size          = var.disk_size
   }
 
-  # Динамическое создание хостов в зависимости от HA режима
+  # ДИНАМИЧЕСКОЕ СОЗДАНИЕ ХОСТОВ В ЗАВИСИМОСТИ ОТ HA
+  # Если HA=true - создаем var.host_count хостов
+  # Если HA=false - создаем 1 хост
   dynamic "host" {
     for_each = var.ha ? range(var.host_count) : range(1)
     
@@ -33,7 +35,6 @@ resource "yandex_mdb_mysql_cluster" "mysql_cluster" {
     }
   }
 
-  # Настройки HA
   backup_window_start {
     hours   = 23
     minutes = 59
