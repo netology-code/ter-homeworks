@@ -24,6 +24,7 @@ module "vpc" {
   source = "./modules/vpc"
 
   network_name = "my-vpc-network"
+  subnet_name  = "new-vpc-subnet"
   zone         = "ru-central1-a"
   cidr_blocks  = "192.168.100.0/24"
 }
