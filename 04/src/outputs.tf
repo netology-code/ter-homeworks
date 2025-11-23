@@ -27,11 +27,18 @@ output "marketing_vm_info" {
 output "vpc_network_info" {
   description = "Information about VPC network"
   value = {
-    network_id    = module.vpc.network_id      # ИСПРАВЛЕНО: модуль VPC
-    subnet_id     = module.vpc.subnet_id       # ИСПРАВЛЕНО: модуль VPC
-    network_name  = module.vpc.network_name    # ИСПРАВЛЕНО: модуль VPC
-    cidr_blocks   = module.vpc.subnet_cidr_blocks # ИСПРАВЛЕНО: модуль VPC
+    network_id    = module.vpc.network_id
+    subnet_id     = module.vpc.subnet_id
+    network_name  = module.vpc.network_name
+    subnet_name   = module.vpc.subnet_name
+    cidr_blocks   = module.vpc.subnet_cidr_blocks
+    zone          = module.vpc.zone
   }
+}
+
+output "subnet_complete_info" {
+  description = "Complete information about subnet from VPC module"
+  value       = module.vpc.subnet_info
 }
 
 output "ssh_connection_commands" {
