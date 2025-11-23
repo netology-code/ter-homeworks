@@ -22,3 +22,15 @@ variable "cidr_blocks" {
   type        = string
   default     = "192.168.10.0/24"
 }
+variable "env_name" {
+  type        = string
+  description = "Environment name"
+}
+
+variable "subnets" {
+  type = list(object({
+    zone = string
+    cidr = string
+  }))
+  description = "List of subnets to create"
+}
