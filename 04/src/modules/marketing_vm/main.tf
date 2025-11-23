@@ -8,6 +8,11 @@ terraform {
     }
   }
 }
+variable "subnet_id" {
+  type        = string
+  description = "Subnet ID for the VM"
+}
+
 resource "yandex_compute_instance" "marketing_vm" {
   name        = "marketing-vm"
   platform_id = "standard-v3"
