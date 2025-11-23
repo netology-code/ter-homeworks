@@ -1,5 +1,13 @@
 # modules/vpc/main.tf
 
+terraform {
+  required_providers {
+    yandex = {
+      source  = "yandex-cloud/yandex"
+      version = ">= 0.171.0"
+    }
+  }
+}
 resource "yandex_vpc_network" "network" {
   name = var.network_name
 }
