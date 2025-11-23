@@ -1,46 +1,30 @@
-resource "yandex_mdb_mysql_cluster" "mysql_cluster" {
-  name        = var.cluster_name
-  environment = var.environment
-  network_id  = var.network_id
-  version     = var.mysql_version
+# Создание базы данных в кластере MySQL
+resource "yandex_mdb_mysql_database" "database" {
+  cluster_id = var.cluster_id
+  name       = var.database_name
+}
 
-  resources {
-    resource_preset_id = var.resource_preset_id
-    disk_type_id       = var.disk_type_id
-    disk_size          = var.disk_size
-  }
-
-  # ДИНАМИЧЕСКОЕ СОЗДАНИЕ ХОСТОВ В ЗАВИСИМОСТИ ОТ HA
-  # Если HA=true - создаем var.host_count хостов
-  # Если HA=false - создаем 1 хост
-  dynamic "host" {
-    for_each = var.ha ? range(var.host_count) : range(1)
-    
+# Создание пользователя с правами на базу данных
+resource "yandex_mdb_mysql_user" "user" {
+  cluster_id = var.cluster_id
+  name       = var.username
+  password   = var.password
+  
+  dynamic "permission" {
+    for_each = var.permissions
     content {
-      zone      = var.zones[host.key % length(var.zones)]
-      subnet_id = var.subnet_ids[host.key % length(var.subnet_ids)]
+      database_name = permission.value.database_name
+      roles         = permission.value.roles
     }
   }
 
-  database {
-    name = "default_db"
-  }
-
-  user {
-    name     = var.username
-    password = var.password
-    permission {
-      database_name = "default_db"
-      roles         = ["ALL"]
+  dynamic "permission" {
+    for_each = length(var.global_permissions) > 0 ? [1] : []
+    content {
+      database_name = "*"  # Глобальные права
+      roles         = var.global_permissions
     }
   }
 
-  backup_window_start {
-    hours   = 23
-    minutes = 59
-  }
-
-  maintenance_window {
-    type = "ANYTIME"
-  }
+  connection_limit = var.connection_limit
 }
