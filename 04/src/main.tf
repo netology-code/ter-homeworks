@@ -19,26 +19,14 @@ provider "yandex" {
   zone      = "ru-central1-a"
 }
 
-# УДАЛИТЕ эти ресурсы - они дублируют модуль VPC
-# resource "yandex_vpc_network" "network" {
-#   name = "marketing-network"
-# }
-#
-# resource "yandex_vpc_subnet" "subnet" {
-#   name           = "marketing-subnet"
-#   zone           = "ru-central1-a"
-#   network_id     = yandex_vpc_network.network.id
-#   v4_cidr_blocks = ["192.168.100.0/24"]
-# }
-
 # Модуль VPC (создает сеть и подсеть)
 module "vpc" {
   source = "./modules/vpc"
 
   network_name = "terraform-network"
-  subnet_name  = "terraform-subnet"
+  subnet_name  = "vpc-module-subnet"
   zone         = "ru-central1-a"
-  cidr_blocks  = "192.168.60.0/24"
+  cidr_blocks  = "192.168.200.0/24"
 }
 
 # Вызов модуля marketing_vm
