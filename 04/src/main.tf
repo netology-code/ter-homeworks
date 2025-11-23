@@ -75,12 +75,12 @@ resource "yandex_compute_instance" "analytics_vm" {
 }
 
 # Вывод информации
-output "marketing_vm_ip" {
-  description = "External IP address of the marketing VM"
-  value       = module.marketing_vm.external_ip
-}
+#output "marketing_vm_ip" {
+  #description = "External IP address of the marketing VM"
+  #value       = module.marketing_vm.external_ip
+#}
 
-output "analytics_vm_ip" {
-  description = "External IP address of the analytics VM"
-  value       = yandex_compute_instance.analytics_vm.network_interface[0].nat_ip_address
-}
+#output "analytics_vm_ip" {
+  #description = "External IP address of the analytics VM"
+  #value       = yandex_compute_instance.analytics_vm.network_interface[0].nat_ip_address
+#}
