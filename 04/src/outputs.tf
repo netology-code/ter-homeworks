@@ -5,18 +5,32 @@ output "marketing_vm_ip" {
   value       = module.marketing_vm.external_ip
 }
 
+output "marketing_vm_internal_ip" {
+  description = "Internal IP address of the marketing VM"
+  value       = module.marketing_vm.internal_ip
+}
+
 output "analytics_vm_ip" {
   description = "External IP address of the analytics VM"
   value       = yandex_compute_instance.analytics_vm.network_interface[0].nat_ip_address
 }
 
+output "marketing_vm_info" {
+  description = "Complete information about marketing VM"
+  value = {
+    name        = module.marketing_vm.name
+    external_ip = module.marketing_vm.external_ip
+    internal_ip = module.marketing_vm.internal_ip
+  }
+}
+
 output "vpc_network_info" {
   description = "Information about VPC network"
   value = {
-    network_id    = module.vpc.network_id
-    subnet_id     = module.vpc.subnet_id
-    network_name  = module.vpc.network_name
-    cidr_blocks   = module.vpc.subnet_cidr_blocks
+    network_id    = module.vpc.network_id      # ИСПРАВЛЕНО: модуль VPC
+    subnet_id     = module.vpc.subnet_id       # ИСПРАВЛЕНО: модуль VPC
+    network_name  = module.vpc.network_name    # ИСПРАВЛЕНО: модуль VPC
+    cidr_blocks   = module.vpc.subnet_cidr_blocks # ИСПРАВЛЕНО: модуль VPC
   }
 }
 
