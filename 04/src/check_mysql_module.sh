@@ -1,4 +1,3 @@
-cat > check_mysql_module.sh << 'EOF'
 #!/bin/bash
 
 echo "=========================================="
@@ -63,7 +62,7 @@ echo "   - Настройку количества хостов через host_
 echo "   - Динамическое размещение по зонам"
 echo ""
 echo "🚀 Модуль готов к использованию!"
-EOF
 
-chmod +x check_mysql_module.sh
-./check_mysql_module.sh
+
+#chmod +x check_mysql_module.sh
+#./check_mysql_module.sh
