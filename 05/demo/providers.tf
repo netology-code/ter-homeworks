@@ -1,14 +1,4 @@
 
-# cat ~/.aws/config 
-# [default]
-# region=ru-central1
-# cat ~/.aws/credentials 
-# [default]
-# aws_access_key_id = YCAJEK...
-# aws_secret_access_key = YCMBzZ3...
-
-
-# For terraform >=1.6.0
 # Новый подход: использование встроенных блокировок через use_lockfile
 terraform {
   required_version = "~>1.12.0"
@@ -24,7 +14,6 @@ terraform {
     key     = "dev1/dev1-terraform.tfstate"
     encrypt = false
 
-    # НОВОЕ: Встроенный механизм блокировок (Terraform >= 1.6)
     # Не требует отдельной базы данных (DynamoDB/YDB)!
     use_lockfile = true
 
@@ -55,31 +44,3 @@ provider "yandex" {
 }
 
 
-
-# УСТАРЕВШИЙ ПОДХОД - для справки
-# For terraform <1.6.0
-# terraform {
-#   required_providers {
-#   }
-#   backend "s3" {
-#     bucket   = "...."
-#     endpoint = "storage.yandexcloud.net"
-#     key      = "..../terraform.tfstate"
-#     region   = "ru-central1"
-#     # access_key                  = "..."          #Только для примера! Не хардкодим секретные данные!
-#     # secret_key                  = "..."          #Только для примера! Не хардкодим секретные данные!
-#
-#     # СТАРЫЙ СПОСОБ: требовал создания YDB в режиме DynamoDB
-#     dynamodb_table    = "tfstate-lock-develop" # таблица блокировок
-#     dynamodb_endpoint = "https://docapi.serverless.yandexcloud.net/ru-central1/........."
-#
-#     endpoints = {
-#       dynamodb = "https://docapi.serverless.yandexcloud.net/ru-central1/..."
-#       s3       = "https://storage.yandexcloud.net"
-#     }
-#
-#     skip_region_validation      = true
-#     skip_credentials_validation = true
-#   }
-#   required_version = "~>1.8.4"
-# }

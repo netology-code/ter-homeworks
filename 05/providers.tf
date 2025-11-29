@@ -13,8 +13,6 @@ terraform {
     bucket  = "terraform-state-bucket-1764042687"
     key     = "terraform.tfstate"
     region  = "ru-central1"
-    access_key = "YCAJ****DZTlb9N8M0qmEe"
-    secret_key = "YCMvh*****0zOQHeyxrTWU"
     endpoints = { s3 = "https://storage.yandexcloud.net" }
     skip_region_validation      = true
     skip_credentials_validation = true
