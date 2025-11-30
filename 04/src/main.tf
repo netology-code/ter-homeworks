@@ -1,7 +1,3 @@
-  }
-}
-
-
 # Создаем сервисный аккаунт для бакета
 resource "yandex_iam_service_account" "s3_sa" {
   name        = "s3-bucket-sa"
@@ -34,7 +30,4 @@ resource "yandex_storage_bucket" "homework_bucket" {
     read = false
     list = false
   }
-
-  # Пропускаем versioning чтобы избежать ошибок прав доступа
-  # Бакет будет создан успешно без versioning
 }
