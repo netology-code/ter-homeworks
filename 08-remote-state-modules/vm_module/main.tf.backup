@@ -8,9 +8,7 @@ terraform {
   }
 
   backend "s3" {
-    endpoints = {
-      s3 = "storage.yandexcloud.net"
-    }
+    endpoint   = "https://storage.yandexcloud.net"
     bucket     = "tf-homework-b1gokds3ue11292eobjh-001"
     key        = "vm/terraform.tfstate"
     access_key = "YCAJE9v1zXNMiZAKk0b77Gx3i"

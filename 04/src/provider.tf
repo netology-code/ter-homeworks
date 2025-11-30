@@ -9,6 +9,6 @@ terraform {
 
 provider "yandex" {
   cloud_id  = "fake-cloud-id"
-  folder_id = "fake-folder-id" 
+  folder_id = "fake-folder-id"
   zone      = "ru-central1-a"
 }
