@@ -16,8 +16,8 @@ resource "yandex_compute_instance" "marketing_vm" {
   }
 
   network_interface {
-    subnet_id = var.subnet_id
-    nat       = true
+    subnet_id          = var.subnet_id
+    nat                = true
     security_group_ids = var.security_group_ids
   }
 

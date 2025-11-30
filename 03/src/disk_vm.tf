@@ -2,10 +2,10 @@
 resource "yandex_compute_disk" "storage" {
   count = 3
 
-  name     = "storage-disk-${count.index}"
-  type     = "network-hdd"
-  zone     = "ru-central1-a"
-  size     = 1
+  name = "storage-disk-${count.index}"
+  type = "network-hdd"
+  zone = "ru-central1-a"
+  size = 1
 }
 
 # Одиночная ВМ "storage" с подключением дисков через dynamic block
@@ -36,8 +36,8 @@ resource "yandex_compute_instance" "storage" {
   }
 
   network_interface {
-    subnet_id = "e9bproja629hr9doud9c" # Ваша подсеть
-    nat       = true
+    subnet_id          = "e9bproja629hr9doud9c" # Ваша подсеть
+    nat                = true
     security_group_ids = ["enpcf56b6oforfoso9vb"] # Ваша группа безопасности
   }
 

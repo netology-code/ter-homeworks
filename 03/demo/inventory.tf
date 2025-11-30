@@ -8,10 +8,10 @@ resource "local_file" "hosts_templatefile" {
 
 
 resource "local_file" "hosts_for" {
-  content =  <<-EOT
+  content  = <<-EOT
   %{if length(yandex_compute_instance.example) > 0}
   [webservers]
-  %{for i in yandex_compute_instance.example }
+  %{for i in yandex_compute_instance.example}
   %{if length(yandex_compute_instance.bastion) > 0}
   ${i["name"]}   ansible_host=${i["network_interface"][0]["ip_address"]}
   %{else}
@@ -21,7 +21,7 @@ resource "local_file" "hosts_for" {
   %{endif}
   %{if length(yandex_compute_instance.bastion) > 0}
   [bastion]
-  %{for i in yandex_compute_instance.bastion }
+  %{for i in yandex_compute_instance.bastion}
   ${i["name"]}   ansible_host=${i["network_interface"][0]["nat_ip_address"]}
 
   [all:vars]
@@ -34,21 +34,21 @@ resource "local_file" "hosts_for" {
 
 
 
-locals{
+locals {
 
-instances_yaml= concat(yandex_compute_instance.example,yandex_compute_instance.bastion)
+  instances_yaml = concat(yandex_compute_instance.example, yandex_compute_instance.bastion)
 
 }
 
 resource "local_file" "hosts_yaml" {
-  content =  <<-EOT
+  content  = <<-EOT
   all:
     hosts:
-    %{ for i in local.instances_yaml ~}
+    %{for i in local.instances_yaml~}
   ${i["name"]}:
           ansible_host: ${i["network_interface"][0]["nat_ip_address"]}
           ansible_user: ubuntu
-    %{ endfor ~}
+    %{endfor~}
   EOT
   filename = "${abspath(path.module)}/hosts.yaml"
 }
