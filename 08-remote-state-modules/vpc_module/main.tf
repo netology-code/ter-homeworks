@@ -15,6 +15,7 @@ terraform {
     secret_key = "YCPM2JXbXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" # Ваш secret key
 
     skip_region_validation      = true
+    region                      = "ru-central1"
     skip_credentials_validation = true
   }
 }
