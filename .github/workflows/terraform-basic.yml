@@ -1,0 +1,57 @@
+name: Terraform Basic Validation
+
+on:
+  push:
+    branches: [ main, terraform-hotfix-final ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Terraform Validation
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: 1.9.0
+
+    - name: Terraform Format Check
+      run: terraform fmt -check -recursive
+      working-directory: 04/src
+
+    - name: Create mock providers.tf for testing
+      run: |
+        cat > 04/src/providers_test.tf << EOF
+        terraform {
+          required_version = ">= 1.6.0"
+          required_providers {
+            yandex = {
+              source  = "yandex-cloud/yandex"
+              version = "0.172.0"
+            }
+          }
+        }
+
+        provider "yandex" {
+          zone = "ru-central1-a"
+        }
+        EOF
+      working-directory: ./
+
+    - name: Terraform Init (Test)
+      run: terraform init
+      working-directory: 04/src
+
+    - name: Terraform Validate (Test)
+      run: terraform validate
+      working-directory: 04/src
+
+    - name: Cleanup test files
+      run: rm -f 04/src/providers_test.tf 04/src/.terraform.lock.hcl
+      working-directory: ./
