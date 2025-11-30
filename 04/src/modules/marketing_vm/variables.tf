@@ -1,3 +1,9 @@
+variable "security_group_ids" {
+  type        = list(string)
+  description = "A list of security group IDs to associate with the instance."
+  default     = []
+}
+
 variable "subnet_id" {
   type        = string
   description = "Subnet ID for the VM"

@@ -1,74 +1,57 @@
-variable "cluster_name" {
+###cloud vars
+variable "token" {
   type        = string
-  description = "Name of the MySQL cluster"
+  description = "OAuth-token; https://cloud.yandex.ru/docs/iam/concepts/authorization/oauth-token"
 }
 
-variable "network_id" {
+variable "cloud_id" {
   type        = string
-  description = "Network ID where the cluster will be created"
+  description = "https://cloud.yandex.ru/docs/resource-manager/operations/cloud/get-id"
 }
 
-variable "ha" {
-  type        = bool
-  description = "High Availability mode (true for multi-host, false for single host)"
-  default     = false
-}
-
-variable "host_count" {
-  type        = number
-  description = "Number of hosts in the cluster"
-  default     = 2
-}
-
-variable "environment" {
+variable "folder_id" {
   type        = string
-  description = "Environment (production, staging, development)"
-  default     = "production"
+  description = "https://cloud.yandex.ru/docs/resource-manager/operations/folder/get-id"
 }
 
-variable "mysql_version" {
+variable "default_zone" {
   type        = string
-  description = "MySQL version"
-  default     = "8.0"
+  default     = "ru-central1-a"
+  description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
 }
-
-variable "resource_preset_id" {
-  type        = string
-  description = "Resource preset ID for hosts"
-  default     = "s2.micro"
-}
-
-variable "disk_size" {
-  type        = number
-  description = "Disk size in GB"
-  default     = 20
-}
-
-variable "disk_type_id" {
-  type        = string
-  description = "Disk type ID"
-  default     = "network-ssd"
-}
-
-variable "zones" {
+variable "default_cidr" {
   type        = list(string)
-  description = "List of availability zones for hosts"
-  default     = ["ru-central1-a", "ru-central1-b", "ru-central1-c"]
+  default     = ["10.0.1.0/24"]
+  description = "https://cloud.yandex.ru/docs/vpc/operations/subnet-create"
 }
 
-variable "subnet_ids" {
-  type        = list(string)
-  description = "List of subnet IDs for hosts (must match zones)"
-}
-
-variable "username" {
+variable "vpc_name" {
   type        = string
-  description = "MySQL admin username"
-  default     = "admin"
+  default     = "develop"
+  description = "VPC network&subnet name"
 }
 
-variable "password" {
-  type        = string
-  description = "MySQL admin password"
-  sensitive   = true
-}
+###common vars
+
+#variable "vms_ssh_root_key" {
+ # type        = string
+  #default     = "your_ssh_ed25519_key"
+  #description = "ssh-keygen -t ed25519"
+#}
+
+###example vm_web var
+#variable "vm_web_name" {
+ # type        = string
+  #default     = "netology-develop-platform-web"
+  #description = "example vm_web_ prefix"
+#}
+
+###example vm_db var
+#variable "vm_db_name" {
+ # type        = string
+  #default     = "netology-develop-platform-db"
+  #description = "example vm_db_ prefix"
+#}
+
+
+
