@@ -9,7 +9,7 @@ resource "yandex_mdb_mysql_user" "user" {
   cluster_id = var.cluster_id
   name       = var.username
   password   = var.password
-  
+
   dynamic "permission" {
     for_each = var.permissions
     content {
@@ -21,7 +21,7 @@ resource "yandex_mdb_mysql_user" "user" {
   dynamic "permission" {
     for_each = length(var.global_permissions) > 0 ? [1] : []
     content {
-      database_name = "*"  # Глобальные права
+      database_name = "*" # Глобальные права
       roles         = var.global_permissions
     }
   }
