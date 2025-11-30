@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  vault:
+    image: vault:1.13.3
+    container_name: vault
+    ports:
+      - "8200:8200"
+    environment:
+      - VAULT_DEV_ROOT_TOKEN_ID=education
+      - VAULT_DEV_LISTEN_ADDRESS=0.0.0.0:8200
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - ./vault_data:/vault/data
+    restart: unless-stopped
+
+  # Добавим контейнер с Terraform для удобства
+  terraform:
+    image: hashicorp/terraform:1.5
+    container_name: terraform-vault
+    volumes:
+      - .:/workspace
+    working_dir: /workspace
+    depends_on:
+      - vault
+    stdin_open: true
+    tty: true
+    command: ["sleep", "infinity"]
