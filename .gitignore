@@ -14,4 +14,6 @@ personal.auto.tfvars
 
 terraform.tfvars
 
-tfplan
+tfplan06-s3-bucket/*_secret_key.txt
+06-s3-bucket/*.token
+06-s3-bucket/terraform.tfvars
