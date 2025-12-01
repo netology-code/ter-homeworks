@@ -1,0 +1,85 @@
+name: Terraform CI/CD
+
+on:
+  push:
+    branches: [ main, terraform-hotfix-final ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:  # Позволяет запускать вручную
+
+env:
+  TERRAFORM_VERSION: 1.9.0
+
+jobs:
+  terraform:
+    name: Terraform Plan and Apply
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: ${{ env.TERRAFORM_VERSION }}
+
+    - name: Terraform Format
+      id: fmt
+      run: |
+        terraform fmt -check -recursive
+      working-directory: 04/src
+
+    - name: Terraform Init
+      id: init
+      run: |
+        terraform init
+      working-directory: 04/src
+      continue-on-error: true
+
+    - name: Terraform Validate
+      id: validate
+      run: |
+        terraform validate
+      working-directory: 04/src
+      continue-on-error: true
+
+    - name: Terraform Plan
+      id: plan
+      if: github.event_name == 'push'
+      run: |
+        terraform plan -input=false
+      working-directory: 04/src
+      continue-on-error: true
+
+    - name: Terraform Apply
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: |
+        terraform apply -auto-approve -input=false
+      working-directory: 04/src
+      continue-on-error: true
+
+  destroy:
+    name: Terraform Destroy
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch'  # Только ручной запуск
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: ${{ env.TERRAFORM_VERSION }}
+
+    - name: Terraform Init
+      run: |
+        terraform init
+      working-directory: 04/src
+
+    - name: Terraform Destroy
+      run: |
+        terraform destroy -auto-approve -input=false
+      working-directory: 04/src
+      continue-on-error: true
