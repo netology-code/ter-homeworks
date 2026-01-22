@@ -12,7 +12,6 @@ provider "yandex" {
   cloud_id                 = "b1gn3ndpua1j6jaabf79"
   folder_id                = "b1gfu61oc15cb99nqmfe"
   service_account_key_file = file("~/.authorized_key.json")
-  zone                     = "ru-central1-a" #(Optional) 
 }
 
 # You can set TF_LOG to one of the log levels (in order of decreasing verbosity) TRACE, DEBUG, INFO, WARN or ERROR to change the verbosity of the logs.
