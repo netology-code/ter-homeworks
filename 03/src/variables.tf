@@ -19,6 +19,16 @@ variable "default_zone" {
   default     = "ru-central1-a"
   description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
 }
+
+variable "each_vm" {
+  type = list(object({
+    vm_name     = string
+    cpu         = number
+    ram         = number
+    disk_volume = number
+  }))
+}
+
 variable "default_cidr" {
   type        = list(string)
   default     = ["10.0.1.0/24"]
