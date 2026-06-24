@@ -28,11 +28,39 @@ variable "vpc_name" {
   description = "VPC network & subnet name"
 }
 
+variable "subnet_b_zone" {
+  type    = string
+  default = "ru-central1-b"
+}
+
+variable "subnet_b_cidr" {
+  type    = list(string)
+  default = ["10.0.2.0/24"]
+}
+
+variable "subnet_b_name" {
+  type    = string
+  default = "develop-b"
+}
 
 ###ssh vars
 
-variable "vms_ssh_root_key" {
-  type        = string
-  default     = "<your_ssh_ed25519_key>"
-  description = "ssh-keygen -t ed25519"
+#variable "vms_ssh_public_root_key" {
+#  type        = string
+#  description = "ssh-keygen -t ed25519"
+#}
+
+
+variable "vms_resources" {
+  type = map(object({
+    cores         = number
+    memory        = number
+    core_fraction = number
+    hdd_size      = number
+    hdd_type      = string
+  }))
+}
+
+variable "metadata" {
+  type = map(string)
 }
