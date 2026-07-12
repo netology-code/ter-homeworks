@@ -1,0 +1,163 @@
+﻿{
+  "all" = [
+    {
+      "allow_recreate" = tobool(null)
+      "allow_stopping_for_update" = true
+      "boot_disk" = tolist([
+        {
+          "auto_delete" = true
+          "device_name" = "fhmc5k9ano88ok2c8nq4"
+          "disk_id" = "fhmc5k9ano88ok2c8nq4"
+          "initialize_params" = tolist([
+            {
+              "block_size" = 4096
+              "description" = ""
+              "image_id" = "fd8ioru6shrp7380rikc"
+              "kms_key_id" = ""
+              "name" = ""
+              "size" = 10
+              "snapshot_id" = ""
+              "type" = "network-hdd"
+            },
+          ])
+          "mode" = "READ_WRITE"
+        },
+      ])
+      "created_at" = "2026-07-12T08:40:17Z"
+      "description" = "TODO: description; {{terraform yyy managed}}"
+      "filesystem" = toset([])
+      "folder_id" = "b1gjhs34qnbifephn412"
+      "fqdn" = "develop-marketing-0.ru-central1.internal"
+      "gpu_cluster_id" = ""
+      "hardware_generation" = tolist([
+        {
+          "generation2_features" = tolist([])
+          "legacy_features" = tolist([
+            {
+              "pci_topology" = "PCI_TOPOLOGY_V2"
+            },
+          ])
+        },
+      ])
+      "hostname" = "develop-marketing-0"
+      "id" = "fhmfnmhp7ojvmg77jjmr"
+      "labels" = tomap({
+        "project" = "marketing"
+      })
+      "local_disk" = tolist([])
+      "maintenance_grace_period" = ""
+      "maintenance_policy" = tostring(null)
+      "metadata" = tomap({
+        "serial-port-enable" = "1"
+        "user-data" = <<-EOT
+        #cloud-config
+        users:
+          - name: ubuntu
+            groups: sudo
+            shell: /bin/bash
+            sudo: ["ALL=(ALL) NOPASSWD:ALL"]
+            ssh_authorized_keys:
+              - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCmsGsSVyr0oLq9oDOTjk8UL/Gf1WI/6d722iyCpOQozuVFhZn5OS/GBaDNUImX0/CwCn8Z8uS0yK0uDC5stHUa4+oRxb9xfkhE82ZSCDAPQccxAGEyZ9vvW9KCY9uMTVzVT1Z4i/sYA2kpI6/FJIqEZK/+LB3O90Z55ydBincgH6BwfUZfG2t7yy3g/Mi0DvyjjYzjE+HYsGI/49rz2UdEMLlpc0PXr/vEa6ElZroEVUH9TXt4cR7/g+aDQDqC7qxUJDAK/1UQD5L/+T3HbU4RDo8jfjP4jf97cj97K4QtLVzl8hxdBSsh2j0BgsMTIss8EBfEIXfB4VJPV2AhkvpamwkUnap7rtQzSpTtgakbkFbQTQhIWzWEm6TTQT7uB4t5WdqyBbkxZoya7YHgTxYBsfJaqz2olT4nxgrRA7PzAKvBA+RIMFfsmeN8fCCuoiTkwbgxP9+Syn/KKrWnRL6zwyqJUFB5eXZce5fxaV8NY3+U2BZGI8sB+qDO8DxUYtU= paranoiak@prn-ws-01
+        
+        package_update: true
+        package_upgrade: false
+        packages:
+          - nginx
+        runcmd:
+          - systemctl enable nginx
+          - systemctl start nginx
+        EOT
+      })
+      "metadata_options" = tolist([
+        {
+          "aws_v1_http_endpoint" = 1
+          "aws_v1_http_token" = 2
+          "aws_v2_http_endpoint" = 1
+          "aws_v2_http_token" = 1
+          "gce_http_endpoint" = 1
+          "gce_http_token" = 1
+        },
+      ])
+      "name" = "develop-marketing-0"
+      "network_acceleration_type" = "standard"
+      "network_interface" = tolist([
+        {
+          "dns_record" = tolist([])
+          "index" = 0
+          "ip_address" = "10.0.1.9"
+          "ipv4" = true
+          "ipv6" = false
+          "ipv6_address" = ""
+          "ipv6_dns_record" = tolist([])
+          "mac_address" = "d0:0d:fb:da:39:3e"
+          "nat" = true
+          "nat_dns_record" = tolist([])
+          "nat_ip_address" = "111.88.242.163"
+          "nat_ip_version" = "IPV4"
+          "security_group_ids" = toset(null) /* of string */
+          "subnet_id" = "e9biusep8nmdjqrlvtph"
+        },
+      ])
+      "placement_policy" = tolist([
+        {
+          "host_affinity_rules" = tolist([])
+          "placement_group_id" = ""
+          "placement_group_partition" = 0
+        },
+      ])
+      "platform_id" = "standard-v1"
+      "resources" = tolist([
+        {
+          "core_fraction" = 5
+          "cores" = 2
+          "gpus" = 0
+          "memory" = 1
+        },
+      ])
+      "scheduling_policy" = tolist([
+        {
+          "preemptible" = true
+        },
+      ])
+      "secondary_disk" = toset([])
+      "service_account_id" = ""
+      "status" = "running"
+      "timeouts" = null /* object */
+      "zone" = "ru-central1-a"
+    },
+  ]
+  "external_ip_address" = [
+    "111.88.242.163",
+  ]
+  "fqdn" = [
+    "develop-marketing-0.ru-central1.internal",
+  ]
+  "internal_ip_address" = [
+    "10.0.1.9",
+  ]
+  "labels" = [
+    tomap({
+      "project" = "marketing"
+    }),
+  ]
+  "network_interface" = [
+    tolist([
+      {
+        "dns_record" = tolist([])
+        "index" = 0
+        "ip_address" = "10.0.1.9"
+        "ipv4" = true
+        "ipv6" = false
+        "ipv6_address" = ""
+        "ipv6_dns_record" = tolist([])
+        "mac_address" = "d0:0d:fb:da:39:3e"
+        "nat" = true
+        "nat_dns_record" = tolist([])
+        "nat_ip_address" = "111.88.242.163"
+        "nat_ip_version" = "IPV4"
+        "security_group_ids" = toset(null) /* of string */
+        "subnet_id" = "e9biusep8nmdjqrlvtph"
+      },
+    ]),
+  ]
+}
