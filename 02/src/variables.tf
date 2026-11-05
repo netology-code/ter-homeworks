@@ -28,11 +28,34 @@ variable "vpc_name" {
   description = "VPC network & subnet name"
 }
 
+variable "project_prefix" {
+  type        = string
+  default     = "netology"
+  description = "Префикс проекта для именования ресурсов"
+}
 
 ###ssh vars
 
-variable "vms_ssh_root_key" {
-  type        = string
-  default     = "<your_ssh_ed25519_key>"
-  description = "ssh-keygen -t ed25519"
+#variable "vms_ssh_root_key" {
+#  type        = string
+#  default     = "<your_ssh_ed25519_key>"
+#  description = "ssh-keygen -t ed25519"
+#}
+
+### Объединённые ресурсы для ВМ
+
+variable "vms_resources" {
+  type = map(object({
+    cores         = number
+    memory        = number
+    core_fraction = number
+  }))
+  description = "Параметры ресурсов для каждой ВМ (web и db)"
+}
+
+### Общие метаданные для всех ВМ
+
+variable "metadata" {
+  type        = map(string)
+  description = "Метаданные для всех виртуальных машин"
 }
