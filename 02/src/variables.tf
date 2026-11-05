@@ -28,6 +28,11 @@ variable "vpc_name" {
   description = "VPC network & subnet name"
 }
 
+variable "project_prefix" {
+  type        = string
+  default     = "netology"
+  description = "Префикс проекта для именования ресурсов"
+}
 
 ###ssh vars
 

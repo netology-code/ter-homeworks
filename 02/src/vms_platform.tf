@@ -1,11 +1,5 @@
 ### Переменные для ВМ (vm_web_)
 
-variable "vm_web_name" {
-  type        = string
-  default     = "netology-develop-platform-web"
-  description = "Имя виртуальной машины"
-}
-
 variable "vm_web_platform_id" {
   type        = string
   default     = "standard-v3"
@@ -49,12 +43,6 @@ variable "vm_web_zone" {
 }
 
 ### Переменные для БД-ВМ (vm_db_)
-
-variable "vm_db_name" {
-  type        = string
-  default     = "netology-develop-platform-db"
-  description = "Имя БД-виртуальной машины"
-}
 
 variable "vm_db_platform_id" {
   type        = string
