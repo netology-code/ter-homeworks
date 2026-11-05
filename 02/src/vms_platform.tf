@@ -6,23 +6,23 @@ variable "vm_web_platform_id" {
   description = "Платформа виртуальной машины"
 }
 
-variable "vm_web_cores" {
-  type        = number
-  default     = 2
-  description = "Количество ядер vCPU"
-}
-
-variable "vm_web_memory" {
-  type        = number
-  default     = 1
-  description = "Объем оперативной памяти в ГБ"
-}
-
-variable "vm_web_core_fraction" {
-  type        = number
-  default     = 20
-  description = "Гарантированная доля vCPU"
-}
+#variable "vm_web_cores" {
+#  type        = number
+#  default     = 2
+#  description = "Количество ядер vCPU"
+#}
+#
+#variable "vm_web_memory" {
+#  type        = number
+#  default     = 1
+#  description = "Объем оперативной памяти в ГБ"
+#}
+#
+#variable "vm_web_core_fraction" {
+#  type        = number
+#  default     = 20
+#  description = "Гарантированная доля vCPU"
+#}
 
 variable "vm_web_preemptible" {
   type        = bool
@@ -50,23 +50,23 @@ variable "vm_db_platform_id" {
   description = "Платформа БД-ВМ"
 }
 
-variable "vm_db_cores" {
-  type        = number
-  default     = 2
-  description = "Количество ядер vCPU БД-ВМ"
-}
-
-variable "vm_db_memory" {
-  type        = number
-  default     = 2
-  description = "Объем оперативной памяти в ГБ БД-ВМ"
-}
-
-variable "vm_db_core_fraction" {
-  type        = number
-  default     = 20
-  description = "Гарантированная доля vCPU"
-}
+#variable "vm_db_cores" {
+#  type        = number
+#  default     = 2
+#  description = "Количество ядер vCPU БД-ВМ"
+#}
+#
+#variable "vm_db_memory" {
+#  type        = number
+#  default     = 2
+#  description = "Объем оперативной памяти в ГБ БД-ВМ"
+#}
+#
+#variable "vm_db_core_fraction" {
+#  type        = number
+#  default     = 20
+#  description = "Гарантированная доля vCPU"
+#}
 
 variable "vm_db_preemptible" {
   type        = bool
